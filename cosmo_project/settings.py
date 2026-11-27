@@ -150,3 +150,23 @@ RAZORPAY_KEY_ID = os.environ.get('rzp_test_Tvy5FW3VIPRDFF')
 RAZORPAY_KEY_SECRET = os.environ.get('4Kkh80lvYeGk6NEFOJ3guqg3')
 # RAZORPAY_KEY_ID = "rzp_test_Tvy5FW3VIPRDFF"
 # RAZORPAY_KEY_SECRET = "4Kkh80lvYeGk6NEFOJ3guqg3" 
+
+import dj_database_url
+
+DATABASE_URL = os.environ.get('postgresql://jd_elegance_user:1z1zeh7KooirItkpwBDje0PTeLwarKWz@dpg-dc4j1p49v7es73f5k240-a/jd_elegance')
+
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
