@@ -1,0 +1,1332 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JD Elegance | Business Reports</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --purple: #563176;
+    --dark-purple: #32164d;
+    --light-purple: #eee5f6;
+    --lavender: #f7f3fa;
+    --gold: #d0a35c;
+    --text: #30243b;
+    --muted: #95899f;
+    --border: #f0eaf4;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f7f4fa;
+    color: var(--text);
+}
+
+.reports-page {
+    max-width: 1550px;
+    margin: auto;
+    padding: 35px;
+}
+
+/* HEADER */
+
+.report-header {
+    background: linear-gradient(120deg, #32164d, #68428a);
+    border-radius: 25px;
+    padding: 42px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 35px rgba(50, 22, 77, .16);
+}
+
+.report-header::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 50%;
+    right: -80px;
+    top: -130px;
+}
+
+.report-header::after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 50%;
+    right: 100px;
+    bottom: -150px;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.header-tag {
+    color: #e5c58e;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.report-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    margin: 13px 0 8px;
+}
+
+.report-header p {
+    color: #e5d9ed;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.header-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.15);
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-size: 11px;
+    color: #fff;
+}
+
+.header-badge i {
+    color: #e5c58e;
+}
+
+/* KPI CARDS */
+
+.kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.kpi {
+    background: white;
+    padding: 23px;
+    border-radius: 18px;
+    box-shadow: 0 5px 25px rgba(54, 30, 75, .045);
+    border: 1px solid #f2edf5;
+    transition: .3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(54, 30, 75, .10);
+}
+
+.kpi::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: #f8f3fb;
+    border-radius: 50%;
+    right: -30px;
+    top: -30px;
+}
+
+.kpi-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kpi-label {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.kpi-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    background: var(--light-purple);
+    color: var(--purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+}
+
+.kpi:nth-child(1) .kpi-icon {
+    background: #fff4df;
+    color: #c18b38;
+}
+
+.kpi:nth-child(2) .kpi-icon {
+    background: #eee5f6;
+    color: #68428a;
+}
+
+.kpi:nth-child(3) .kpi-icon {
+    background: #e8f5ef;
+    color: #3c9a70;
+}
+
+.kpi:nth-child(4) .kpi-icon {
+    background: #e9efff;
+    color: #5578c8;
+}
+
+.kpi-value {
+    font-size: 29px;
+    font-weight: 800;
+    color: var(--dark-purple);
+    margin-top: 18px;
+    overflow-wrap: anywhere;
+}
+
+.kpi-note {
+    font-size: 11px;
+    color: #a49aaa;
+    margin-top: 6px;
+}
+
+/* GRID */
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+}
+
+.lower-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+}
+
+/* PANELS */
+
+.report-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 27px;
+    box-shadow: 0 5px 25px rgba(54, 30, 75, .045);
+    border: 1px solid #f1ebf4;
+    min-width: 0;
+    transition: .3s ease;
+}
+
+.report-panel:hover {
+    box-shadow: 0 10px 30px rgba(54, 30, 75, .08);
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 12px;
+}
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.panel-icon {
+    width: 39px;
+    height: 39px;
+    border-radius: 12px;
+    background: #f2eaf8;
+    color: var(--purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: #43245d;
+}
+
+.panel-heading span {
+    color: #a397ac;
+    font-size: 10px;
+    background: #faf7fc;
+    padding: 8px 11px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+/* CHARTS */
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* TOP PRODUCTS */
+
+.product-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 17px 0;
+    border-bottom: 1px solid #f0ebf3;
+    transition: .2s ease;
+}
+
+.product-row:last-child {
+    border-bottom: none;
+}
+
+.product-row:hover {
+    padding-left: 6px;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+}
+
+.product-rank {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 12px;
+    background: #eee5f6;
+    color: #67418a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+.product-row:nth-child(3) .product-rank {
+    background: #fff4df;
+    color: #c18b38;
+}
+
+.product-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #44364f;
+    overflow-wrap: anywhere;
+}
+
+.product-sold {
+    font-size: 10px;
+    color: #9d91a5;
+    margin-top: 5px;
+}
+
+.sold-count {
+    background: #f5effa;
+    color: #68428a;
+    padding: 8px 11px;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+/* ORDER STATUS */
+
+.status-row {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0ebf3;
+}
+
+.status-row:last-child {
+    border-bottom: none;
+}
+
+.status-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #51435c;
+}
+
+.status-count {
+    font-size: 12px;
+    font-weight: 800;
+    color: #67418a;
+}
+
+.status-bar {
+    width: 100%;
+    height: 8px;
+    background: #f0eaf4;
+    border-radius: 20px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.status-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #68428a, #c09bd9);
+    border-radius: 20px;
+    transition: width 1s ease;
+}
+
+/* PAYMENT */
+
+.payment-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid #f0ebf3;
+    gap: 12px;
+}
+
+.payment-row:last-child {
+    border-bottom: none;
+}
+
+.payment-left {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.payment-icon {
+    width: 40px;
+    height: 40px;
+    background: #f3edf8;
+    color: #68428a;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #44364f;
+}
+
+.payment-orders {
+    font-size: 10px;
+    color: #a397ac;
+    margin-top: 5px;
+}
+
+.payment-revenue {
+    font-size: 13px;
+    font-weight: 800;
+    color: #68428a;
+    white-space: nowrap;
+}
+
+/* CUSTOMER */
+
+.customer-panel {
+    margin-bottom: 22px;
+}
+
+/* EMPTY DATA */
+
+.empty-data {
+    text-align: center;
+    padding: 35px 10px;
+    color: #a397ac;
+    font-size: 12px;
+}
+
+.empty-data i {
+    display: block;
+    font-size: 25px;
+    color: #c6b2d5;
+    margin-bottom: 12px;
+}
+
+/* FOOTER */
+
+.report-footer {
+    text-align: center;
+    color: #a397ac;
+    font-size: 10px;
+    padding: 20px 0 5px;
+    letter-spacing: .5px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 1050px) {
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .kpi-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 700px) {
+    .reports-page {
+        padding: 18px;
+    }
+
+    .lower-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .report-header {
+        padding: 28px;
+    }
+
+    .report-header h1 {
+        font-size: 29px;
+    }
+
+    .report-panel {
+        padding: 20px;
+    }
+}
+
+@media(max-width: 480px) {
+    .kpi-strip {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .kpi {
+        padding: 16px;
+    }
+
+    .kpi-value {
+        font-size: 21px;
+    }
+
+    .kpi-label {
+        font-size: 9px;
+    }
+
+    .kpi-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .report-header h1 {
+        font-size: 25px;
+    }
+
+    .panel-heading h2 {
+        font-size: 16px;
+    }
+
+    .panel-heading span {
+        font-size: 9px;
+    }
+
+    .chart-container {
+        height: 240px;
+    }
+
+    .header-bottom {
+        align-items: flex-start;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="reports-page">
+
+<!-- HEADER -->
+
+<section class="report-header">
+
+    <div class="header-content">
+
+        <span class="header-tag">
+            JD ELEGANCE / BUSINESS INTELLIGENCE
+        </span>
+
+        <h1>Business Reports</h1>
+
+        <p>
+            Every number tells a story. Track your sales,
+            understand your customers and grow your business.
+        </p>
+
+        <div class="header-bottom">
+
+            <div class="header-badge">
+                <i class="fa-solid fa-chart-line"></i>
+                Business Performance Overview
+            </div>
+
+            <div class="header-badge">
+                <i class="fa-solid fa-crown"></i>
+                JD Elegance Analytics
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- KPI CARDS -->
+
+<section class="kpi-strip">
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+
+            <span class="kpi-label">TOTAL REVENUE</span>
+
+            <div class="kpi-icon">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+            </div>
+
+        </div>
+
+        <div class="kpi-value">
+            ₹{{ total_revenue|floatformat:2 }}
+        </div>
+
+        <div class="kpi-note">
+            Revenue from all orders
+        </div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+
+            <span class="kpi-label">TOTAL ORDERS</span>
+
+            <div class="kpi-icon">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+
+        </div>
+
+        <div class="kpi-value">
+            {{ total_orders }}
+        </div>
+
+        <div class="kpi-note">
+            Orders received
+        </div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+
+            <span class="kpi-label">TOTAL CUSTOMERS</span>
+
+            <div class="kpi-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+        </div>
+
+        <div class="kpi-value">
+            {{ total_customers }}
+        </div>
+
+        <div class="kpi-note">
+            Registered customers
+        </div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+
+            <span class="kpi-label">TOTAL PRODUCTS</span>
+
+            <div class="kpi-icon">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+
+        </div>
+
+        <div class="kpi-value">
+            {{ total_products }}
+        </div>
+
+        <div class="kpi-note">
+            Products in catalogue
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- REVENUE + TOP PRODUCTS -->
+
+<section class="analytics-grid">
+
+    <!-- REVENUE -->
+
+    <div class="report-panel">
+
+        <div class="panel-heading">
+
+            <div class="panel-title">
+
+                <div class="panel-icon">
+                    <i class="fa-solid fa-chart-column"></i>
+                </div>
+
+                <h2>Revenue Overview</h2>
+
+            </div>
+
+            <span>Last 6 months</span>
+
+        </div>
+
+        <div class="chart-container">
+            <canvas id="revenueChart"></canvas>
+        </div>
+
+    </div>
+
+
+    <!-- TOP PRODUCTS -->
+
+    <div class="report-panel">
+
+        <div class="panel-heading">
+
+            <div class="panel-title">
+
+                <div class="panel-icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <h2>Top Products</h2>
+
+            </div>
+
+            <span>Top 5</span>
+
+        </div>
+
+
+        {% for product in top_products %}
+
+        <div class="product-row">
+
+            <div class="product-info">
+
+                <div class="product-rank">
+                    {{ forloop.counter }}
+                </div>
+
+                <div>
+
+                    <div class="product-name">
+                        {{ product.name }}
+                    </div>
+
+                    <div class="product-sold">
+                        Best selling product
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="sold-count">
+                {{ product.quantity_sold }} Sold
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-data">
+            <i class="fa-solid fa-box-open"></i>
+            No sales data available yet.
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- ORDER STATUS + PAYMENT -->
+
+<section class="lower-grid">
+
+    <!-- ORDER STATUS -->
+
+    <div class="report-panel">
+
+        <div class="panel-heading">
+
+            <div class="panel-title">
+
+                <div class="panel-icon">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+
+                <h2>Order Status</h2>
+
+            </div>
+
+            <span>Distribution</span>
+
+        </div>
+
+
+        {% for status in order_status_data %}
+
+        <div class="status-row">
+
+            <div class="status-details">
+
+                <span class="status-name">
+                    {{ status.delivery_status }}
+                </span>
+
+                <span class="status-count">
+                    {{ status.count }} Orders
+                </span>
+
+            </div>
+
+            <div class="status-bar">
+
+                <div
+                    class="status-fill"
+                    data-width="{{ status.percentage|floatformat:0 }}">
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-data">
+            <i class="fa-solid fa-chart-pie"></i>
+            No order status data available.
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- PAYMENT ANALYSIS -->
+
+    <div class="report-panel">
+
+        <div class="panel-heading">
+
+            <div class="panel-title">
+
+                <div class="panel-icon">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+
+                <h2>Payment Analysis</h2>
+
+            </div>
+
+            <span>Payment methods</span>
+
+        </div>
+
+
+        {% for payment in payment_summary %}
+
+        <div class="payment-row">
+
+            <div class="payment-left">
+
+                <div class="payment-icon">
+                    <i class="fa-solid fa-credit-card"></i>
+                </div>
+
+                <div>
+
+                    <div class="payment-name">
+                        {{ payment.payment }}
+                    </div>
+
+                    <div class="payment-orders">
+                        {{ payment.count }} Orders
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="payment-revenue">
+                ₹{{ payment.revenue|floatformat:2 }}
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-data">
+            <i class="fa-solid fa-wallet"></i>
+            No payment data available.
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- CUSTOMER GROWTH -->
+
+<section class="report-panel customer-panel">
+
+    <div class="panel-heading">
+
+        <div class="panel-title">
+
+            <div class="panel-icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+
+            <h2>Customer Growth</h2>
+
+        </div>
+
+        <span>Registration overview</span>
+
+    </div>
+
+    <div class="chart-container">
+        <canvas id="customerChart"></canvas>
+    </div>
+
+</section>
+
+
+<!-- DAILY REVENUE -->
+
+<section class="report-panel">
+
+    <div class="panel-heading">
+
+        <div class="panel-title">
+
+            <div class="panel-icon">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <h2>Daily Revenue</h2>
+
+        </div>
+
+        <span>Last 7 days</span>
+
+    </div>
+
+    <div class="chart-container">
+        <canvas id="dailyChart"></canvas>
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<div class="report-footer">
+    © JD ELEGANCE · BUSINESS ANALYTICS
+</div>
+
+</div>
+
+
+<!-- JSON DATA -->
+
+{{ monthly_labels_json|json_script:"monthly-labels-data" }}
+{{ monthly_values_json|json_script:"monthly-values-data" }}
+
+{{ customer_labels_json|json_script:"customer-labels-data" }}
+{{ customer_values_json|json_script:"customer-values-data" }}
+
+{{ daily_labels_json|json_script:"daily-labels-data" }}
+{{ daily_values_json|json_script:"daily-values-data" }}
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // GET JSON DATA
+
+    const monthlyLabels = JSON.parse(
+        document.getElementById("monthly-labels-data").textContent
+    );
+
+    const monthlyValues = JSON.parse(
+        document.getElementById("monthly-values-data").textContent
+    );
+
+    const customerLabels = JSON.parse(
+        document.getElementById("customer-labels-data").textContent
+    );
+
+    const customerValues = JSON.parse(
+        document.getElementById("customer-values-data").textContent
+    );
+
+    const dailyLabels = JSON.parse(
+        document.getElementById("daily-labels-data").textContent
+    );
+
+    const dailyValues = JSON.parse(
+        document.getElementById("daily-values-data").textContent
+    );
+
+
+    // COMMON CHART SETTINGS
+
+    Chart.defaults.font.family = "'DM Sans', sans-serif";
+    Chart.defaults.color = "#95899f";
+
+
+    // REVENUE CHART
+
+    const revenueCanvas = document.getElementById("revenueChart");
+
+    if (revenueCanvas && typeof Chart !== "undefined") {
+
+        new Chart(revenueCanvas, {
+
+            type: "bar",
+
+            data: {
+
+                labels: monthlyLabels,
+
+                datasets: [{
+
+                    label: "Revenue",
+
+                    data: monthlyValues,
+
+                    backgroundColor: "#8c64aa",
+
+                    hoverBackgroundColor: "#563176",
+
+                    borderRadius: 8,
+
+                    barThickness: 28
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            callback: function(value) {
+                                return "₹" + value;
+                            }
+
+                        },
+
+                        grid: {
+                            color: "#f1edf4"
+                        }
+
+                    },
+
+                    x: {
+
+                        grid: {
+                            display: false
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+
+    // CUSTOMER GROWTH CHART
+
+    const customerCanvas = document.getElementById("customerChart");
+
+    if (customerCanvas && typeof Chart !== "undefined") {
+
+        new Chart(customerCanvas, {
+
+            type: "line",
+
+            data: {
+
+                labels: customerLabels,
+
+                datasets: [{
+
+                    label: "New Customers",
+
+                    data: customerValues,
+
+                    borderColor: "#68428a",
+
+                    backgroundColor: "rgba(140, 100, 170, 0.15)",
+
+                    fill: true,
+
+                    tension: 0.4,
+
+                    pointRadius: 5,
+
+                    pointHoverRadius: 8,
+
+                    pointBackgroundColor: "#d0a35c"
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+                            precision: 0
+                        }
+
+                    },
+
+                    x: {
+
+                        grid: {
+                            display: false
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+
+    // DAILY REVENUE CHART
+
+    const dailyCanvas = document.getElementById("dailyChart");
+
+    if (dailyCanvas && typeof Chart !== "undefined") {
+
+        new Chart(dailyCanvas, {
+
+            type: "line",
+
+            data: {
+
+                labels: dailyLabels,
+
+                datasets: [{
+
+                    label: "Daily Revenue",
+
+                    data: dailyValues,
+
+                    borderColor: "#c09a5b",
+
+                    backgroundColor: "rgba(208, 163, 92, 0.15)",
+
+                    fill: true,
+
+                    tension: 0.35,
+
+                    pointRadius: 5,
+
+                    pointHoverRadius: 8,
+
+                    pointBackgroundColor: "#c09a5b"
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            callback: function(value) {
+                                return "₹" + value;
+                            }
+
+                        }
+
+                    },
+
+                    x: {
+
+                        grid: {
+                            display: false
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+
+    // ANIMATED ORDER STATUS BARS
+
+    document.querySelectorAll(".status-fill").forEach(function(bar) {
+
+        let percentage = Number(bar.dataset.width) || 0;
+
+        percentage = Math.max(0, Math.min(100, percentage));
+
+        setTimeout(function() {
+            bar.style.width = percentage + "%";
+        }, 200);
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+from django.urls import path,reverse_lazy
+from .views import *
+from django.contrib.auth import views as auth_views
+urlpatterns = [
+    path('',home, name='home'),
+    path('add_product/',add_product, name='add_product'),
+    path('purchase/<int:product_id>/',purchase_product,name='purchase_product'),
+    path("checkout/",checkout,name="checkout"),
+    path("verify-payment/", verify_payment, name="verify_payment"),
+    path("payment-failed/", payment_failed, name="payment_failed"),
+    path("order-success/<int:order_id>/",order_success,name="order_success"),
+    path('order-details/<int:order_id>/',order_details,name='order_details'),
+    path("dashboard/",dashboard,name="dashboard"),
+    path("admin-login/",admin_login,name="admin_login"),
+    path("admin-profile/", admin_profile, name="admin_profile"),
+    path("admin-logout/", admin_logout, name="admin_logout"),
+    path("categories/", categories, name="categories"),
+    path("category/<int:category_id>/",category_products,name="category_products"),
+    path("add-category/", add_category, name="add_category"),
+    path("edit-category/<int:category_id>/", edit_category, name="edit_category"),
+    path("delete-category/<int:category_id>/", delete_category, name="delete_category"),
+    path(
+    "forgot-password/",
+    auth_views.PasswordResetView.as_view(
+        template_name="password_reset.html",
+        email_template_name="password_reset_email.txt",
+        html_email_template_name="password_reset_email.html",
+        success_url=reverse_lazy("password_reset_done")
+    ),
+    name="password_reset"
+),
+    path("forgot-password/done/",auth_views.PasswordResetDoneView.as_view(template_name="password_reset_done.html"
+        ),name="password_reset_done"
+    ),
+
+path(
+    "reset/<uidb64>/<token>/",
+    auth_views.PasswordResetConfirmView.as_view(
+        template_name="password_reset_confirm.html",
+        success_url=reverse_lazy("password_reset_done")
+    ),name="password_reset_confirm"),
+path("restock/",restock_page,name="restock_page"),
+path("restock/update/",restock_product,name="restock_product"),
+path('skin/', skin, name='skin'),
+path("product-order/<int:product_id>/",product_order,name="product_order"),
+path('product-variants/',product_variants,name='product_variants'), 
+path("hair/", hair, name="hair_page"),
+path('fragrance/', fragrance, name='fragrance'),
+path('gifts-combos/',gifts_combos,name='gifts_combos'),
+path('new-arrivals/',new_arrivals,name='new_arrivals'),
+path("customer-login/",customer_login,name="customer_login"),
+path("customer-register/",customer_register,name="customer_register"),
+path('delivery-tracking/<int:order_id>/',delivery_tracking,name='delivery_tracking'),
+path("track-order/",track_order,name="track_order"),
+path("my-orders/",my_orders,name="my-orders"),
+path('login/', customer_login, name='customer_login'),
+path('search/',search_products,name='search_products'),
+path('login/', customer_login, name='customer_login'),
+path('profile/',customer_profile, name='customer_profile'),
+path('logout/', customer_logout, name='customer_logout'),
+path('customer-dashboard/',customer_dashboard,name='customer_dashboard'),
+path('edit-profile/',edit_profile,name='edit_profile'),
+path('track-latest-order/',track_latest_order,name='track_latest_order'),
+path( "order-details/<int:order_id>/", order_details, name="order_details" ), 
+path( "cancel-order/<int:order_id>/", cancel_order, name="cancel_order" ),
+path("bridal-bundle/",bridal_bundle,name="bridal_bundle"),
+path('all-offers/', all_offers, name='all_offers'),
+path('brushes-tools/',brushes_tools,name='brushes_tools'),
+path("admin-profile/",admin_profile,name="admin_profile"),
+path("admin-change-password/",admin_change_password,name="admin_change_password"),
+path("admin-orders/", admin_orders, name="admin_orders"),
+path('admin-payments/',admin_payments,name='admin_payments'),
+path('admin-coupons/',coupons, name='coupons'), 
+path('admin-coupons/add/',add_coupon, name='add_coupon'), 
+path( 'admin-coupons/edit/<int:coupon_id>/',edit_coupon, name='edit_coupon' ), 
+path( 'admin-coupons/delete/<int:coupon_id>/', delete_coupon, name='delete_coupon' ),
+path('lip/', lip, name='lip'),
+path("admin-customers/", admin_customers, name="admin_customers"),
+path("admin-reports/", admin_reports, name="admin_reports"),
+path("admin-users/", admin_users, name="admin_users"),
+    ]

@@ -1,0 +1,830 @@
+
+{% extends 'nav_bar.html' %}
+{% load static %}
+
+{% block title %}Bridal Collection | JD Elegance{% endblock %}
+
+{% block extra_css %}
+<style>
+/* All styles are limited to the bridal page */
+.bridal-page {
+    background: #fffaf6;
+    color: #3d2924;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.bridal-page * {
+    box-sizing: border-box;
+}
+
+.bridal-hero {
+    min-height: 470px;
+    display: flex;
+    align-items: center;
+    padding: 60px 7%;
+    background:
+        linear-gradient(90deg,
+        rgba(224, 221, 217, 0.98) 0%,
+        
+        rgba(255, 246, 237, .05) 100%),
+        url("{% static 'image/bridal_banner.jpg' %}")
+        center/cover no-repeat;
+}
+
+.bridal-hero-content {
+    max-width: 520px;
+}
+
+.bridal-eyebrow {
+    color: #b56a60;
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.bridal-hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.08;
+    font-weight: 400;
+    margin: 20px 0;
+}
+
+.bridal-hero h1 span {
+    color: #b17b37;
+    font-style: italic;
+}
+
+.bridal-hero p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #68534b;
+    max-width: 410px;
+}
+
+.bridal-button {
+    display: inline-block;
+    padding: 14px 25px;
+    margin-top: 16px;
+    background: #bd414c;
+    color: #fff;
+    border: 1px solid #bd414c;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+.bridal-button:hover {
+    background: #8e2937;
+    color: white;
+}
+
+.bridal-benefit-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 25px 7%;
+    background: #fff;
+    border-bottom: 1px solid #f0dfd1;
+}
+
+.bridal-benefit {
+    text-align: center;
+    font-size: 12px;
+    color: #634c40;
+}
+
+.bridal-benefit span {
+    display: block;
+    font-size: 25px;
+    color: #b9804c;
+    margin-bottom: 7px;
+}
+
+.bridal-section {
+    padding: 55px 5%;
+}
+
+.bridal-heading {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.bridal-heading small {
+    color: #b17b37;
+    letter-spacing: 3px;
+    font-size: 11px;
+}
+
+.bridal-heading h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(29px, 4vw, 40px);
+    font-weight: 400;
+    margin: 12px 0;
+}
+
+.bridal-heading p {
+    color: #856e63;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.bridal-occasion-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 1250px;
+    margin: auto;
+}
+
+.bridal-occasion {
+    text-align: center;
+    text-decoration: none;
+    color: #4d3930;
+}
+
+.bridal-occasion-circle {
+    width: 110px;
+    height: 110px;
+    max-width: 100%;
+    margin: auto auto 15px;
+    border-radius: 50%;
+    border: 2px solid #d7b47e;
+    background: linear-gradient(135deg, #f6dfd4, #fff5e9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    color: #a36f43;
+    transition: .3s;
+}
+
+.bridal-occasion:hover .bridal-occasion-circle {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px #b9804c25;
+}
+
+.bridal-occasion strong {
+    display: block;
+    font-family: Georgia, serif;
+    font-size: 16px;
+}
+
+.bridal-occasion small {
+    display: block;
+    margin-top: 5px;
+    color: #917b6e;
+}
+
+.bridal-promo {
+    max-width: 1250px;
+    margin: 0 auto;
+    min-height: 220px;
+    padding: 35px 5%;
+    display: flex;
+    align-items: center;
+    background:
+        linear-gradient(90deg,
+        
+        rgba(255, 230, 220, .78)),
+        url("{% static 'image/bridal_hamper.jpg' %}")
+        center/cover no-repeat;
+}
+
+.bridal-promo-content {
+    max-width: 430px;
+}
+
+.bridal-promo h2 {
+    font-family: Georgia, serif;
+    font-size: 34px;
+    font-weight: 400;
+    color: #a83f43;
+}
+
+.bridal-promo p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #6e5147;
+}
+
+.bridal-bundle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 1250px;
+    margin: auto;
+}
+
+.bridal-bundle-card {
+    background: white;
+    border: 1px solid #ead8c9;
+    transition: .3s;
+    overflow: hidden;
+}
+
+.bridal-bundle-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px #65452a13;
+}
+
+.bridal-bundle-image {
+    height: 230px;
+    background: #f5e8df;
+    overflow: hidden;
+}
+
+.bridal-bundle-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: .4s;
+}
+
+.bridal-bundle-card:hover .bridal-bundle-image img {
+    transform: scale(1.05);
+}
+
+.bridal-bundle-info {
+    padding: 17px;
+}
+
+.bridal-badge {
+    display: inline-block;
+    background: #f6e6d7;
+    color: #9c6c3d;
+    padding: 6px 9px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.bridal-bundle-info h3 {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    margin: 4px 0 9px;
+}
+
+.bridal-bundle-info p {
+    color: #806e63;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.bridal-price {
+    color: #b83443;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 13px 0;
+}
+
+.bridal-stock {
+    color: #42804c;
+    font-size: 12px;
+}
+
+.bridal-stock.sold {
+    color: #b83443;
+}
+
+.bridal-product-link {
+    display: block;
+    text-align: center;
+    padding: 11px;
+    border: 1px solid #d8b58a;
+    color: #77502f;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.bridal-product-link:hover {
+    background: #8b613c;
+    color: #fff;
+}
+
+.bridal-empty {
+    grid-column: 1 / -1;
+    padding: 40px;
+    text-align: center;
+    background: #fff;
+    border: 1px dashed #d9b99b;
+}
+
+.bridal-promise {
+    padding: 45px 5%;
+    background: #f8ede2;
+    border-top: 1px solid #e6cfb7;
+    border-bottom: 1px solid #e6cfb7;
+}
+
+.bridal-promise-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    max-width: 1250px;
+    margin: auto;
+}
+
+.bridal-promise-item {
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.bridal-promise-item span {
+    display: block;
+    color: #b27c46;
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.bridal-guide {
+    padding: 70px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #f5e3d5, #fffaf5);
+}
+
+.bridal-guide h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: 400;
+}
+
+.bridal-guide p {
+    max-width: 650px;
+    margin: 15px auto;
+    line-height: 1.9;
+    color: #806a5e;
+}
+
+.bridal-faq {
+    max-width: 850px;
+    margin: auto;
+}
+
+.bridal-faq details {
+    padding: 18px;
+    margin: 12px 0;
+    border: 1px solid #ead8c9;
+    background: #fff;
+}
+
+.bridal-faq summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.bridal-faq details p {
+    color: #806e63;
+    line-height: 1.8;
+}
+
+.bridal-final {
+    padding: 60px 20px;
+    text-align: center;
+    background: #733d3b;
+    color: white;
+}
+
+.bridal-final h2 {
+    font-family: Georgia, serif;
+    font-weight: 400;
+    font-size: 36px;
+}
+
+.bridal-final p {
+    color: #f4dfd5;
+}
+
+@media(max-width: 1000px) {
+    .bridal-occasion-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .bridal-bundle-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bridal-promise-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media(max-width: 600px) {
+    .bridal-hero {
+        min-height: 440px;
+        padding: 45px 7%;
+        background-position: 62% center;
+    }
+
+    .bridal-benefit-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bridal-section {
+        padding: 40px 16px;
+    }
+
+    .bridal-occasion-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bridal-occasion-circle {
+        width: 95px;
+        height: 95px;
+    }
+
+    .bridal-bundle-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bridal-bundle-image {
+        height: 270px;
+    }
+
+    .bridal-promise-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bridal-promo {
+        min-height: 250px;
+        padding: 25px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="bridal-page">
+
+    <!-- HERO -->
+    <section class="bridal-hero">
+        <div class="bridal-hero-content">
+            <span class="bridal-eyebrow">
+                FOR YOUR BIG DAY & BEYOND ✧
+            </span>
+
+            <h1>
+                Bridal Beauty,<br>
+                <span>Timeless You</span>
+            </h1>
+
+            <p>
+                Discover beautiful beauty essentials for your
+                wedding celebrations. Find your favourites and
+                create a collection that feels uniquely yours.
+            </p>
+
+            <a href="#bridal-products" class="bridal-button">
+                SHOP BRIDAL COLLECTION →
+            </a>
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="bridal-benefit-strip">
+        <div class="bridal-benefit">
+            <span>♢</span>
+            Premium Products
+        </div>
+
+        <div class="bridal-benefit">
+            <span>❀</span>
+            Curated Collections
+        </div>
+
+        <div class="bridal-benefit">
+            <span>♔</span>
+            Beautiful Choices
+        </div>
+
+        <div class="bridal-benefit">
+            <span>♡</span>
+            Easy Shopping
+        </div>
+    </section>
+
+    <!-- SHOP BY OCCASION -->
+    <section class="bridal-section">
+        <div class="bridal-heading">
+            <small>EVERY CELEBRATION IS SPECIAL</small>
+            <h2>Shop by Occasion</h2>
+            <p>Find inspiration for every moment of your wedding journey.</p>
+        </div>
+
+       <div class="bridal-occasion-grid">
+
+    <a href="{% url 'bridal_bundle' %}?occasion=wedding_day"
+       class="bridal-occasion" 
+       data-occasion="wedding_day">
+        <div class="bridal-occasion-circle">♕</div>
+        <strong>Wedding Day</strong>
+        <small>Bridal Beauty</small>
+    </a>
+
+    <a href="{% url 'bridal_bundle' %}?occasion=mehendi"
+       class="bridal-occasion"
+       data-occasion="mehendi">
+        <div class="bridal-occasion-circle">❀</div>
+        <strong>Mehendi</strong>
+        <small>Fresh Favourites</small>
+    </a>
+
+    <a href="{% url 'bridal_bundle' %}?occasion=sangeet"
+       class="bridal-occasion"
+       data-occasion="sangeet">
+        <div class="bridal-occasion-circle">✧</div>
+        <strong>Sangeet</strong>
+        <small>Glam Looks</small>
+    </a>
+
+    <a href="{% url 'bridal_bundle' %}?occasion=reception"
+       class="bridal-occasion"
+       data-occasion="reception">
+        <div class="bridal-occasion-circle">♡</div>
+        <strong>Reception</strong>
+        <small>Radiance</small>
+    </a>
+
+    <a href="{% url 'bridal_bundle' %}?occasion=haldi"
+       class="bridal-occasion"
+       data-occasion="haldi">
+        <div class="bridal-occasion-circle">✿</div>
+        <strong>Haldi</strong>
+        <small>Natural Glow</small>
+    </a>
+
+    <a href="{% url 'bridal_bundle' %}?occasion=honeymoon"
+       class="bridal-occasion"
+       data-occasion="honeymoon">
+        <div class="bridal-occasion-circle">❋</div>
+        <strong>Honeymoon</strong>
+        <small>Beauty Care</small>
+    </a>
+
+</div>
+    </section>
+
+    <!-- PROMOTIONAL BANNER -->
+    <section class="bridal-promo">
+        <div class="bridal-promo-content">
+            <h2>Make Every Moment Magical!</h2>
+
+            <p>
+                Explore beauty favourites for your pre-wedding
+                celebrations and special occasions.
+            </p>
+
+            <a href="#bridal-products" class="bridal-button">
+                EXPLORE COLLECTION →
+            </a>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="bridal-promise">
+        <div class="bridal-heading">
+            <small>THE JD ELEGANCE EXPERIENCE</small>
+            <h2>Why Explore Our Collection?</h2>
+        </div>
+
+        <div class="bridal-promise-grid">
+            <div class="bridal-promise-item">
+                <span>✧</span>
+                <strong>Beauty Essentials</strong>
+            </div>
+
+            <div class="bridal-promise-item">
+                <span>❀</span>
+                <strong>Curated Choices</strong>
+            </div>
+
+            <div class="bridal-promise-item">
+                <span>♡</span>
+                <strong>Wishlist Favourites</strong>
+            </div>
+
+            <div class="bridal-promise-item">
+                <span>♢</span>
+                <strong>Easy Browsing</strong>
+            </div>
+
+            <div class="bridal-promise-item">
+                <span>✦</span>
+                <strong>Special Occasions</strong>
+            </div>
+
+            <div class="bridal-promise-item">
+                <span>♔</span>
+                <strong>Gift Inspiration</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- DYNAMIC DJANGO PRODUCTS -->
+    <section class="bridal-section" id="bridal-products">
+        <div class="bridal-heading">
+            <small>BEAUTY, BEAUTIFULLY CURATED</small>
+            <h2>{{ heading }}</h2>
+            <p>
+                Explore the products available in our
+                Bridal Bundle category.
+            </p>
+        </div>
+
+        <div class="bridal-bundle-grid" id="bridal-product-list">
+
+            {% for product in products %}
+            <article class="bridal-bundle-card">
+
+                <div class="bridal-bundle-image">
+                    {% if product.image %}
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        loading="lazy">
+                    {% else %}
+                    <div style="padding:70px 10px;text-align:center;">
+                        Beauty Product
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="bridal-bundle-info">
+                    <span class="bridal-badge">
+                        BRIDAL COLLECTION
+                    </span>
+
+                    <h3>{{ product.name }}</h3>
+
+                    <p>
+                        Discover this beauty favourite from
+                        JD Elegance.
+                    </p>
+
+                    <div class="bridal-price">
+                        ₹{{ product.price|floatformat:2 }}
+                    </div>
+
+                    {% if product.stock > 0 %}
+                        <p class="bridal-stock">✓ In Stock</p>
+
+                        {# Change product_detail to your actual URL name if different #}
+                        <a href="{% url 'product_order' product.id %}"
+                            class="bridal-product-link">
+                            BUY NOW →
+                        </a>
+                    {% else %}
+                        <p class="bridal-stock sold">
+                            Currently Sold Out
+                        </p>
+
+                        <span class="bridal-product-link">
+                            SOLD OUT
+                        </span>
+                    {% endif %}
+                </div>
+            </article>
+
+            {% empty %}
+            <div class="bridal-empty">
+                <h3>Your Bridal Collection Awaits</h3>
+                <p>
+                    Add products to the Bridal Bundle category
+                    through your Django admin page.
+                </p>
+            </div>
+            {% endfor %}
+
+        </div>
+        
+    </section>
+
+    <!-- BRIDAL BEAUTY GUIDE -->
+    <section class="bridal-guide">
+        <span class="bridal-eyebrow">
+            YOUR BEAUTY, YOUR WAY
+        </span>
+
+        <h2>Every Bride Deserves Her Own Kind of Glow</h2>
+
+        <p>
+            Discover makeup, skincare and beauty favourites
+            for your wedding journey. Create a collection
+            that celebrates your personal style.
+        </p>
+
+        <a href="#bridal-products" class="bridal-button">
+            DISCOVER YOUR FAVOURITES →
+        </a>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bridal-section">
+        <div class="bridal-heading">
+            <small>WE'RE HERE TO HELP</small>
+            <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <div class="bridal-faq">
+            <details>
+                <summary>What products are available?</summary>
+                <p>
+                    Products assigned to the Bridal Bundle
+                    category appear in the collection above.
+                </p>
+            </details>
+
+            <details>
+                <summary>How do I check product availability?</summary>
+                <p>
+                    Check the stock status displayed on each
+                    product card before ordering.
+                </p>
+            </details>
+
+            <details>
+                <summary>Can I save products for later?</summary>
+                <p>
+                    Use the wishlist feature available on your
+                    website if it is enabled for the product.
+                </p>
+            </details>
+
+            <details>
+                <summary>How can I place an order?</summary>
+                <p>
+                    Open a product and continue through your
+                    website's existing shopping and checkout flow.
+                </p>
+            </details>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="bridal-final">
+        <h2>Celebrate Your Beautiful Moments</h2>
+
+        <p>
+            Discover your next beauty favourite with JD Elegance.
+        </p>
+
+        <a href="#bridal-products" class="bridal-button">
+            SHOP THE COLLECTION →
+        </a>
+    </section>
+
+</div>
+<script>
+document.querySelectorAll('.bridal-occasion').forEach(link => {
+    link.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const occasion = this.dataset.occasion;
+
+        fetch("{% url 'bridal_bundle' %}?occasion=" + encodeURIComponent(occasion), {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Unable to load products");
+            }
+            return response.text();
+        })
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+
+            const newHeading = doc.querySelector("#bridal-products .bridal-heading h2");
+            const newProducts = doc.querySelector("#bridal-product-list");
+
+            if (!newHeading || !newProducts) {
+                throw new Error("Product section not found");
+            }
+
+            document.querySelector("#bridal-products .bridal-heading h2")
+                .textContent = newHeading.textContent;
+
+            document.querySelector("#bridal-product-list").innerHTML =
+                newProducts.innerHTML;
+
+            document.querySelector("#bridal-products").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+            history.replaceState({}, "", this.href);
+        })
+        .catch(error => {
+            console.error("Occasion filter error:", error);
+        });
+    });
+});
+</script>
+
+{% endblock %}

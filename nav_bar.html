@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <script src="bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+            <img src="image/logo_colour.jpeg" alt="Logo">
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation -->
+        <div class="collapse navbar-collapse" id="mainNav">
+
+            <ul class="navbar-nav mx-auto">
+
+                <li class="nav-item">
+                    <a href="#">All Offers</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">New Arrivals</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Brushes & Tools</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Skin</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Hair</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Fragrance</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Gifts & Combos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Bridal Bundle</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+        <div class="serach-login">
+        <div class="search-box">
+        <input type="text" id="search" placeholder="Search for toners">
+        <button><span class="search-icon">&#8981;</span></button>
+        </div>
+        </div> 
+         <button class="login-btn">&#128100;</button>
+         <button class="wishlist-btn" onclick="openWishlist()">♡ Wishlist
+            <span class="wishlist-badge" id="wishlistCount">0</span>
+         </button>
+         <button class="delivery-btn"><i class="fa-solid fa-truck"></i></button>
+<div class="overlay" id="overlay" onclick="closeWishlist()"></div>
+
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <h3>Your Wishlist</h3>
+        <button onclick="closeWishlist()">✕</button>
+    </div>
+
+    <div class="wishlist-content" id="wishlistContent">
+    </div>
+
+</div>
+        
+    </header>
+    <script>
+        const search = document.getElementById("search");
+const products = [
+    'Search for "toners"',
+    'Search for "lipsticks"',
+    'Search for "face wash"',
+    'Search for "serums"',
+    'Search for "moisturizers"'
+];
+let i = 0;
+setInterval(function () {
+    i++;
+    if (i >= products.length) {
+        i = 0;
+    }
+    search.placeholder = products[i];
+}, 1000);
+function openWishlist() {
+    document.getElementById("wishlistPanel")
+        .classList.add("active");
+     document.getElementById("overlay")
+        .classList.add("active");
+}
+function closeWishlist() {
+    document.getElementById("wishlistPanel")
+        .classList.remove("active");
+
+    document.getElementById("overlay")
+        .classList.remove("active");
+}
+function continueShopping() {
+     closeWishlist();
+}
+function slideLeft() {
+    document.getElementById("productContainer").scrollBy({
+        left: -500,
+        behavior: "smooth"
+    });
+}
+
+function slideRight() {
+    document.getElementById("productContainer").scrollBy({
+        left: 500,
+        behavior: "smooth"
+    });
+}
+
+
+function addWishlist(button, name, price, image) {
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let exists = wishlist.find(function(product) {
+        return product.name === name;
+    });
+
+    if (!exists) {
+
+        wishlist.push({
+            name: name,
+            price: price,
+            image: image
+        });
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+        // Heart change
+        button.innerHTML = "♥";
+        button.classList.add("liked");
+
+    } else {
+
+        // Already wishlist-la irundha remove
+        wishlist = wishlist.filter(function(product) {
+            return product.name !== name;
+        });
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+        // Heart back to normal
+        button.innerHTML = "♡";
+        button.classList.remove("liked");
+    }
+
+    showWishlist();
+    openWishlist();
+    updateWishlistCount();
+    updateWishlistHearts();
+}
+
+/* SHOW WISHLIST */
+
+function showWishlist() {
+
+    let wishlist = JSON.parse(
+        localStorage.getItem("wishlist")
+    ) || [];
+
+    let content = document.getElementById("wishlistContent");
+
+    if (!content) {
+        return;
+    }
+
+    content.innerHTML = "";
+
+
+    if (wishlist.length === 0) {
+
+        content.innerHTML = `
+            <div class="empty-wishlist">
+
+                <div class="heart" style="color: #ff2780;font-size: 70px;">♡</div>
+
+                <p>Your wishlist is currently empty</p>
+
+                <p>Add your favourite products here.</p>
+
+                <button
+                    class="continue-btn" style="background-color: #ff2780;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: bold;
+    cursor: pointer;"
+                    onclick="continueShopping()">
+
+                    CONTINUE SHOPPING
+
+                </button>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    wishlist.forEach(function(product, index) {
+
+        content.innerHTML += `
+
+            <div class="wishlist-product">
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
+
+                <div class="wishlist-product-info">
+
+                    <h4>${product.name}</h4>
+
+                    <p>₹${product.price}</p>
+
+                </div>
+
+                <button
+                    class="remove-wishlist"
+                    onclick="removeWishlist(${index})">
+
+                    ×
+
+                </button>
+
+            </div>
+
+        `;
+
+    });
+}
+
+
+/* REMOVE */
+
+function removeWishlist(index) {
+
+    let wishlist = JSON.parse(
+        localStorage.getItem("wishlist")
+    ) || [];
+
+    wishlist.splice(index, 1);
+
+    localStorage.setItem(
+        "wishlist",
+        JSON.stringify(wishlist)
+    );
+
+    showWishlist();
+}
+
+
+/* PAGE LOAD */
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    showWishlist();
+
+});
+function updateWishlistCount() {
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    document.getElementById("wishlistCount").innerText = wishlist.length;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    showWishlist();
+    updateWishlistCount();
+    updateWishlistHearts();
+});
+function updateWishlistHearts() {
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let buttons = document.querySelectorAll(".wishlist-add");
+
+    buttons.forEach(function(button) {
+
+        let productName = button.getAttribute("data-name");
+
+        let exists = wishlist.some(function(product) {
+            return product.name === productName;
+        });
+
+        if (exists) {
+            button.innerHTML = "♥";
+            button.classList.add("liked");
+        } else {
+            button.innerHTML = "♡";
+            button.classList.remove("liked");
+        }
+
+    });
+}
+    </script>
+    </body>
+    </html>

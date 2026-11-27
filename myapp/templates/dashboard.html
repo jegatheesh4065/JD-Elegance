@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+/* =================================
+   JD ELEGANCE - LUXURY DASHBOARD
+================================= */
+
+:root {
+    --purple: #563176;
+    --purple-dark: #38204f;
+    --purple-light: #eee5f6;
+    --gold: #c49a50;
+    --gold-light: #f7edd9;
+    --cream: #faf8f5;
+    --white: #ffffff;
+    --text: #292238;
+    --muted: #898397;
+    --border: #ece5f0;
+    --green: #238363;
+    --red: #d65367;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* =================================
+   NAVBAR
+================================= */
+
+.dashboard-navbar {
+    width: 100%;
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--border);
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 22px rgba(56, 32, 79, 0.06);
+}
+
+.dashboard-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--purple-dark);
+    white-space: nowrap;
+}
+
+.dashboard-logo span {
+    color: var(--gold);
+}
+
+.dashboard-menu {
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-left: 30px;
+}
+
+.nav-item {
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 12px;
+    color: #716a7c;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    color: var(--purple);
+    background: #faf7fd;
+}
+
+.nav-item.active {
+    color: var(--purple);
+    font-weight: 700;
+}
+
+.nav-item.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    right: 12px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), #e6c98e);
+    border-radius: 5px 5px 0 0;
+}
+
+.orders-link {
+    gap: 6px;
+}
+
+.order-badge {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--red);
+    color: white;
+    font-size: 10px;
+    border-radius: 20px;
+}
+
+/* =================================
+   CATEGORY DROPDOWN
+================================= */
+
+.nav-dropdown {
+    position: relative;
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-dropdown .nav-item {
+    gap: 7px;
+}
+
+.nav-dropdown .nav-item i,
+.admin-arrow {
+    font-size: 10px;
+    transition: transform 0.3s ease;
+}
+
+.category-dropdown {
+    position: absolute;
+    top: 74px;
+    left: 0;
+    width: 235px;
+    max-height: 350px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 0 0 13px 13px;
+    padding: 9px;
+    box-shadow: 0 18px 40px rgba(56, 32, 79, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all 0.25s ease;
+    z-index: 9999;
+}
+
+.nav-dropdown:hover .category-dropdown,
+.nav-dropdown:focus-within .category-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-dropdown:hover .nav-item i {
+    transform: rotate(180deg);
+}
+
+.category-dropdown a {
+    display: block;
+    padding: 12px 13px;
+    color: #51485f;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.category-dropdown a:hover {
+    background: var(--purple-light);
+    color: var(--purple);
+    padding-left: 19px;
+}
+
+/* =================================
+   ADMIN PROFILE
+================================= */
+
+.admin-menu {
+    position: relative;
+    margin-left: auto;
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+}
+
+.admin-user {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 10px;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 30px;
+    transition: background 0.25s ease;
+}
+
+.admin-user:hover {
+    background: var(--purple-light);
+}
+
+.admin-avatar,
+.dropdown-avatar {
+    width: 37px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gold-light);
+    color: var(--purple);
+    border: 1px solid #eadbc4;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+.admin-dropdown {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    width: 225px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    box-shadow: 0 18px 40px rgba(56, 32, 79, 0.15);
+    padding: 9px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all 0.25s ease;
+    z-index: 9999;
+}
+
+.admin-menu:hover .admin-dropdown,
+.admin-menu:focus-within .admin-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.admin-menu:hover .admin-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 9px;
+}
+
+.dropdown-header strong {
+    display: block;
+    font-size: 13px;
+    color: var(--purple-dark);
+    margin-bottom: 4px;
+}
+
+.dropdown-header small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.dropdown-line {
+    height: 1px;
+    background: var(--border);
+    margin: 4px;
+}
+
+.admin-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #514b5e;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.admin-dropdown a:hover {
+    background: var(--purple-light);
+    color: var(--purple);
+}
+
+.admin-dropdown .logout-link {
+    color: var(--red);
+}
+
+/* =================================
+   DASHBOARD MAIN
+================================= */
+
+.dashboard {
+    max-width: 1650px;
+    margin: auto;
+    padding: 38px 35px;
+}
+
+.dashboard h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 35px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+    color: var(--purple-dark);
+}
+
+.welcome-text {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 32px;
+    line-height: 1.7;
+}
+
+/* =================================
+   SUMMARY CARDS
+================================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 21px;
+    margin-bottom: 29px;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: white;
+    padding: 27px 25px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    box-shadow: 0 6px 24px rgba(56, 32, 79, 0.045);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(56, 32, 79, 0.12);
+}
+
+/* Decorative circle */
+
+.card::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    right: -35px;
+    top: -42px;
+    background: var(--purple-light);
+    opacity: 0.85;
+}
+
+/* Different card colours */
+
+.card:nth-child(1) {
+    border-top: 3px solid #a184c3;
+}
+
+.card:nth-child(1)::after {
+    background: #eee5f7;
+}
+
+.card:nth-child(2) {
+    border-top: 3px solid #d0a35c;
+}
+
+.card:nth-child(2)::after {
+    background: #f8edd8;
+}
+
+.card:nth-child(3) {
+    border-top: 3px solid #63a995;
+}
+
+.card:nth-child(3)::after {
+    background: #e1f2eb;
+}
+
+.card:nth-child(4) {
+    border-top: 3px solid #d9829c;
+}
+
+.card:nth-child(4)::after {
+    background: #fae6ec;
+}
+
+.card-title {
+    position: relative;
+    z-index: 1;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    color: var(--muted);
+    margin-bottom: 18px;
+}
+
+.card-value {
+    position: relative;
+    z-index: 1;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--purple-dark);
+    overflow-wrap: anywhere;
+}
+
+/* =================================
+   REVENUE AND STOCK LAYOUT
+================================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(280px, 1fr);
+    gap: 24px;
+    margin-bottom: 28px;
+    align-items: stretch;
+}
+
+.box,
+.orders-box {
+    min-width: 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 27px;
+    box-shadow: 0 6px 24px rgba(56, 32, 79, 0.04);
+    transition: box-shadow 0.3s ease;
+}
+
+.box:hover,
+.orders-box:hover {
+    box-shadow: 0 12px 32px rgba(56, 32, 79, 0.08);
+}
+
+.box h2,
+.orders-box h2 {
+    color: var(--purple-dark);
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.box h2::after,
+.orders-box h2::after {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), #e8cf9b);
+    border-radius: 5px;
+    margin-top: 12px;
+}
+
+/* =================================
+   REVENUE CHART
+================================= */
+
+.revenue-list {
+    display: flex;
+    align-items: stretch;
+    gap: 17px;
+    height: 260px;
+    border-bottom: 1px solid var(--border);
+    padding: 18px 5px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.revenue-item {
+    flex: 1 0 48px;
+    min-width: 48px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.revenue-bar {
+    width: min(45px, 75%);
+    height: 5px;
+    min-height: 5px;
+    background: linear-gradient(180deg, #a985c8, #563176);
+    border-radius: 8px 8px 2px 2px;
+    box-shadow: 0 3px 10px rgba(86, 49, 118, 0.18);
+    transition: height 0.6s ease, filter 0.3s ease;
+}
+
+.revenue-item:hover .revenue-bar {
+    filter: brightness(1.15);
+}
+
+.revenue-amount {
+    font-size: 10px;
+    margin-bottom: 7px;
+    color: var(--purple);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.revenue-date {
+    font-size: 10px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+/* =================================
+   PRODUCT STOCK
+================================= */
+
+.stock-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0eaf4;
+    transition: padding 0.2s ease;
+}
+
+.stock-row:hover {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.stock-name {
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    overflow-wrap: anywhere;
+}
+
+.stock-number {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    padding: 7px 11px;
+    border-radius: 20px;
+}
+
+.sold-out {
+    color: #b62e45;
+    background: #ffe9ed;
+}
+
+.low-stock {
+    color: #97641c;
+    background: #fff1d5;
+}
+
+/* Add product button */
+
+.add-product {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--purple), #79509a);
+    color: white;
+    text-decoration: none;
+    padding: 13px 20px;
+    border-radius: 9px;
+    margin-top: 22px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 5px 13px rgba(86, 49, 118, 0.15);
+    transition: all 0.3s ease;
+}
+
+.add-product:hover {
+    background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(86, 49, 118, 0.23);
+}
+
+/* =================================
+   RECENT ORDERS TABLE
+================================= */
+
+.orders-box {
+    overflow: hidden;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+}
+
+.recent-orders-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: auto;
+}
+
+.orders-box th,
+.recent-orders-table th {
+    text-align: left;
+    padding: 16px 13px;
+    background: #f3edf8;
+    color: var(--purple);
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.orders-box td,
+.recent-orders-table td {
+    text-align: left;
+    padding: 17px 13px;
+    border-bottom: 1px solid #f0eaf4;
+    color: #51485f;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.recent-orders-table tbody tr {
+    transition: background 0.25s ease;
+}
+
+.recent-orders-table tbody tr:nth-child(even) {
+    background: #fdfbff;
+}
+
+.recent-orders-table tbody tr:hover {
+    background: #f1e9f8;
+}
+
+.recent-orders-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.order-date {
+    min-width: 170px;
+}
+
+/* =================================
+   SCROLLBAR
+================================= */
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f5f0f8;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c6b2d8;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--purple);
+}
+
+/* =================================
+   RESPONSIVE DESIGN
+================================= */
+
+@media (max-width: 1250px) {
+
+    .dashboard-navbar {
+        padding: 0 16px;
+        flex-wrap: wrap;
+    }
+
+    .dashboard-menu {
+        margin-left: 12px;
+        overflow-x: auto;
+        max-width: 70%;
+    }
+
+    .nav-item {
+        padding: 0 9px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 850px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-menu {
+        order: 3;
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+    }
+
+    .dashboard-menu .nav-item,
+    .nav-dropdown {
+        min-height: 55px;
+    }
+
+    .category-dropdown {
+        top: 55px;
+    }
+
+    .admin-menu {
+        min-height: 60px;
+    }
+
+    .dashboard {
+        padding: 25px 18px;
+    }
+
+    .dashboard h1 {
+        font-size: 29px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .dashboard h1 {
+        font-size: 26px;
+    }
+
+    .dashboard-navbar {
+        padding: 0 12px;
+    }
+
+    .dashboard-logo {
+        font-size: 18px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .card {
+        padding: 22px;
+    }
+
+    .card-value {
+        font-size: 28px;
+    }
+
+    .box,
+    .orders-box {
+        padding: 17px;
+    }
+
+    .orders-box {
+        overflow: hidden;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .admin-name {
+        max-width: 90px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .revenue-list {
+        height: 230px;
+    }
+}
+/* =========================================
+   JD ELEGANCE - LUXURY COLOURFUL BACKGROUND
+========================================= */
+
+/* Main Background */
+body {
+    background:
+        radial-gradient(
+            circle at 5% 5%,
+            rgba(224, 198, 245, 0.55),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 95% 15%,
+            rgba(255, 215, 226, 0.55),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(248, 225, 184, 0.45),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #faf6ff,
+            #fff8f5,
+            #f7f4ff
+        );
+
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* Dashboard Heading */
+.dashboard h1 {
+    background: linear-gradient(
+        100deg,
+        #44205f,
+        #8652a8,
+        #b38a49
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Welcome Text */
+.welcome-text {
+    color: #81718f;
+}
+
+/* Navbar */
+.dashboard-navbar {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(198, 169, 220, 0.35);
+
+    box-shadow:
+        0 5px 25px rgba(86, 49, 118, 0.08);
+}
+
+/* Dashboard Cards */
+.card {
+    background: linear-gradient(
+        145deg,
+        #ffffff,
+        #fcf8ff
+    );
+
+    border: 1px solid rgba(207, 185, 224, 0.55);
+
+    box-shadow:
+        0 8px 25px rgba(86, 49, 118, 0.07);
+}
+
+.card:nth-child(1) {
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #f1e6ff
+    );
+}
+
+.card:nth-child(2) {
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #fff0d8
+    );
+}
+
+.card:nth-child(3) {
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #e5f7ef
+    );
+}
+
+.card:nth-child(4) {
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #ffe9f0
+    );
+}
+
+/* Card Numbers */
+.card-value {
+    color: #563176;
+}
+
+/* Card Hover Effect */
+.card:hover {
+    transform: translateY(-7px) scale(1.015);
+
+    box-shadow:
+        0 16px 35px rgba(86, 49, 118, 0.15);
+}
+
+/* Revenue and Stock Sections */
+.box {
+    background: linear-gradient(
+        145deg,
+        #ffffff,
+        #fcf9ff
+    );
+
+    border: 1px solid rgba(207, 185, 224, 0.5);
+
+    box-shadow:
+        0 8px 28px rgba(86, 49, 118, 0.06);
+}
+
+/* Section Titles */
+.box h2,
+.orders-box h2 {
+    color: #563176;
+}
+
+/* Revenue Background */
+.revenue-list {
+    background: linear-gradient(
+        180deg,
+        #fcf8ff,
+        #f5edfc
+    );
+
+    border-radius: 14px;
+    border-bottom: 2px solid #e4d3f1;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+/* Revenue Bars */
+.revenue-bar {
+    background: linear-gradient(
+        180deg,
+        #c5a3e6,
+        #79509f,
+        #563176
+    );
+
+    box-shadow:
+        0 4px 12px rgba(86, 49, 118, 0.2);
+}
+
+/* Stock Section */
+.stock-row {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 15px 12px;
+    margin-bottom: 7px;
+    transition: all 0.25s ease;
+}
+
+.stock-row:hover {
+    background: #f3eafa;
+    transform: translateX(4px);
+}
+
+/* Add Product Button */
+.add-product {
+    background: linear-gradient(
+        120deg,
+        #563176,
+        #8652a8,
+        #b38a49
+    );
+
+    box-shadow:
+        0 7px 18px rgba(86, 49, 118, 0.2);
+}
+
+.add-product:hover {
+    background: linear-gradient(
+        120deg,
+        #38204f,
+        #68408b
+    );
+}
+
+/* Recent Orders */
+.orders-box {
+    background: linear-gradient(
+        145deg,
+        #ffffff,
+        #fbf7ff
+    );
+
+    border: 1px solid rgba(207, 185, 224, 0.5);
+
+    box-shadow:
+        0 8px 28px rgba(86, 49, 118, 0.07);
+}
+
+/* Table Heading */
+.recent-orders-table th {
+    background: linear-gradient(
+        100deg,
+        #563176,
+        #76509b
+    );
+
+    color: #ffffff;
+    padding-top: 17px;
+    padding-bottom: 17px;
+}
+
+/* Table Rows */
+.recent-orders-table tbody tr:nth-child(odd) {
+    background: #ffffff;
+}
+
+.recent-orders-table tbody tr:nth-child(even) {
+    background: #faf5ff;
+}
+
+.recent-orders-table tbody tr:hover {
+    background: #eee3f8;
+}
+
+.recent-orders-table td {
+    border-bottom: 1px solid #eee5f5;
+}
+
+/* Category Dropdown */
+.category-dropdown {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid #e5d6f0;
+
+    box-shadow:
+        0 18px 40px rgba(86, 49, 118, 0.16);
+}
+
+/* Admin Profile */
+.admin-user:hover {
+    background: #f0e6fa;
+}
+
+/* Smooth Page Appearance */
+.dashboard {
+    animation: dashboardAppear 0.6s ease;
+}
+
+@keyframes dashboardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Selection Colour */
+::selection {
+    background: #d9c1ef;
+    color: #38204f;
+}
+
+/* Mobile Background */
+@media (max-width: 600px) {
+    body {
+        background:
+            linear-gradient(
+                145deg,
+                #faf6ff,
+                #fff8f5,
+                #f5efff
+            );
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+    }
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="dashboard-navbar">
+
+    <!-- Logo -->
+    <div class="dashboard-logo">
+        <span>JD</span> ELEGANCE
+    </div>
+
+    <!-- Menu -->
+    <div class="dashboard-menu">
+
+        <a href="{% url 'dashboard' %}" class="nav-item active">
+            Dashboard
+        </a>
+
+       <div class="nav-dropdown">
+
+    <a href="{% url 'categories' %}" class="nav-item">
+        Categories
+        <i class="fa-solid fa-chevron-down"></i>
+    </a>
+
+    <div class="category-dropdown">
+
+        <a href="{% url 'categories' %}">
+            All Categories
+        </a>
+
+        {% for category in nav_categories %}
+            <a href="{% url 'category_products' category.id %}">
+                {{ category.name }}
+            </a>
+        {% empty %}
+            <a href="{% url 'categories' %}">
+                No categories available
+            </a>
+        {% endfor %}
+
+    </div>
+
+</div>
+        <a href="{% url 'coupons' %}" class="nav-item">Coupans</a>
+        <!-- PRODUCTS DROPDOWN -->
+<div class="nav-dropdown">
+
+    <a href="#" class="nav-item">
+        Products
+        <i class="fa-solid fa-chevron-down"></i>
+    </a>
+
+    <div class="category-dropdown">
+
+        <a href="{% url 'add_product' %}">
+            <i class="fa-solid fa-plus"></i>
+            &nbsp; Add Product
+        </a>
+
+        <a href="{% url 'restock_page' %}">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            &nbsp; Restock Product
+        </a>
+        <a href="{% url 'product_variants' %}">
+    Product Variants
+</a>
+    </div>
+
+</div>
+
+        <a href="{% url 'admin_orders' %}" class="nav-item orders-link">
+
+    Orders
+
+   {% if total_orders > 0 %}
+    <span class="order-badge">
+        {{ total_orders }}
+    </span>
+{% endif %}
+</a>
+
+        <a href="{% url 'admin_payments' %}" class="nav-item">Payments</a>
+        <a href="{% url 'admin_customers' %}" class="nav-item">
+                Customers
+            </a>
+
+            <a href="{% url 'admin_reports' %}" class="nav-item">
+                Reports
+            </a>
+
+            <a href="{% url 'admin_users' %}" class="nav-item">
+                Users
+            </a>
+
+    </div>
+
+
+    <!-- Admin -->
+    <div class="admin-menu">
+
+        <div class="admin-user">
+
+            <div class="admin-avatar">
+                <b class="fa-solid fa-user">👤&nbsp;</b>
+            </div>
+
+            <div class="admin-name">
+                {{ request.user.username }}
+            </div>
+
+            <i class="fa-solid fa-chevron-down admin-arrow"></i>
+
+        </div>
+
+
+        <!-- Dropdown -->
+        <div class="admin-dropdown">
+
+            <div class="dropdown-header">
+                <div class="dropdown-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div>
+                    <strong>👤{{ request.user.username }}</strong>
+                    <small>Administrator</small>
+                </div>
+            </div>
+
+            <div class="dropdown-line"></div>
+
+            <a href="{% url 'admin_profile' %}">
+                <i class="fa-regular fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <a href="{% url 'admin_logout' %}" class="logout-link">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- DASHBOARD -->
+
+<div class="dashboard">
+
+    <h1>Welcome to JD ELEGANCE</h1>
+
+    <p class="welcome-text">
+        Manage products, orders, stock and revenue
+    </p>
+
+
+    <!-- TOP CARDS -->
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-title">
+                TOTAL PRODUCTS
+            </div>
+
+            <div class="card-value">
+                {{ total_products }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                TOTAL ORDERS
+            </div>
+
+            <div class="card-value">
+                {{ total_orders }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                TODAY'S ORDERS
+            </div>
+
+            <div class="card-value">
+                {{ today_orders }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                TODAY'S REVENUE
+            </div>
+
+            <div class="card-value">
+                ₹{{ today_revenue }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- REVENUE + STOCK -->
+
+    <div class="dashboard-grid">
+
+
+        <!-- REVENUE -->
+
+        <div class="box">
+
+            <h2>
+                Revenue Per Day
+            </h2>
+
+           <div class="revenue-list">
+
+    {% for day in daily_revenue %}
+
+        <div class="revenue-item">
+
+            <div class="revenue-amount">
+                ₹{{ day.revenue }}
+            </div>
+
+            <div class="revenue-bar"
+                 data-height="{{ day.percent }}">
+            </div>
+
+            <div class="revenue-date">
+                {{ day.day|date:"d M" }}
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <p>No revenue yet.</p>
+
+    {% endfor %}
+
+</div>
+
+
+        <!-- STOCK -->
+
+       <!-- PRODUCT STOCK -->
+
+<div class="box">
+    <h2>Product Stock</h2>
+
+    {% for product in all_products %}
+
+        <div class="stock-row">
+
+            <div class="stock-name">
+                {{ product.name }}
+            </div>
+
+            {% if product.stock == 0 %}
+
+                <div class="stock-number sold-out">
+                    SOLD OUT
+                </div>
+
+            {% elif product.stock <= 5 %}
+
+                <div class="stock-number low-stock">
+                    LOW STOCK: {{ product.stock }}
+                </div>
+
+            {% else %}
+
+                <div class="stock-number"
+                     style="background:#e1f7e9;color:#197343;">
+                    IN STOCK: {{ product.stock }}
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    {% empty %}
+
+        <p>No products available.</p>
+
+    {% endfor %}
+
+    <a href="{% url 'add_product' %}" class="add-product">
+        + ADD PRODUCT
+    </a>
+
+</div>
+
+    </div>
+
+
+    <!-- RECENT ORDERS -->
+
+    <div class="orders-box">
+
+        <h2>
+            Recent Orders
+        </h2>
+        <div class="table-responsive">
+    <table class="recent-orders-table">
+         <thead>
+
+                <tr>
+
+                    <th>
+                        Order
+                    </th>
+
+                    <th>
+                        Customer
+                    </th>
+
+                    <th>
+                        Amount
+                    </th>
+
+                    <th>
+                        Payment
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for order in recent_orders %}
+
+                <tr>
+
+                    <td>
+                        #{{ order.id }}
+                    </td>
+
+                    <td>
+                        {{ order.full_name }}
+                    </td>
+
+                    <td>
+                        ₹{{ order.total_amount }}
+                    </td>
+
+                    <td>
+                        {{ order.payment }}
+                    </td>
+
+                    <td class="order-date">
+                         {{ order.order_date|date:"d M Y, h:i A" }}
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5">
+                        No orders yet.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+    </table>
+</div>
+
+
+    </div>
+
+</div>
+<script>
+document.querySelectorAll(".revenue-item").forEach(function (item) {
+    let bar = item.querySelector(".revenue-bar");
+    let amount = item.querySelector(".revenue-amount");
+
+    let value = Number(bar.dataset.height) || 0;
+    value = Math.max(0, Math.min(100, value));
+
+    bar.style.height = value + "%";
+});
+</script>
+</body>
+
+</html>

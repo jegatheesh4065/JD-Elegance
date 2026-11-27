@@ -1,0 +1,951 @@
+{% extends 'nav_bar.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+/* ===== NEW ARRIVALS PAGE ===== */
+
+.new-arrivals-page {
+    background: #fffaf8;
+    padding: 25px 5%;
+    color: #513a40;
+}
+
+/* ===== HERO BANNER ===== */
+
+.arrival-hero {
+    min-height: 370px;
+    padding: 65px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(115deg, #f7e0e7, #fff4ec 60%, #ead6c8);
+    border-radius: 15px;
+    margin-bottom: 60px;
+}
+
+.arrival-hero-content {
+    max-width: 570px;
+    position: relative;
+    z-index: 1;
+}
+
+.arrival-eyebrow {
+    font-size: 11px;
+    color: #a45c76;
+    letter-spacing: 4px;
+}
+
+.arrival-hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.15;
+    color: #623b4b;
+    margin: 22px 0;
+}
+
+.arrival-hero p {
+    max-width: 470px;
+    color: #866975;
+    line-height: 1.9;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+.arrival-hero-btn {
+    display: inline-block;
+    background: #a64f70;
+    color: #fff;
+    padding: 14px 28px;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    transition: 0.3s;
+}
+
+.arrival-hero-btn:hover {
+    background: #713b51;
+    color: white;
+}
+
+.arrival-hero-art {
+    width: 250px;
+    height: 290px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.arrival-art-circle {
+    width: 235px;
+    height: 235px;
+    border-radius: 50%;
+    border: 1px solid #d8a8b7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.25);
+}
+
+.arrival-art-inner {
+    width: 175px;
+    height: 205px;
+    border: 1px solid rgba(164,79,112,0.45);
+    border-radius: 85px 85px 15px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #9d5771;
+}
+
+.arrival-art-inner span {
+    font-family: Georgia, serif;
+    font-size: 45px;
+}
+
+.arrival-art-inner small {
+    font-size: 9px;
+    letter-spacing: 4px;
+}
+
+.arrival-art-star {
+    position: absolute;
+    font-size: 30px;
+    color: #b7788d;
+}
+
+.arrival-star-one {
+    top: 10px;
+    right: 15px;
+}
+
+.arrival-star-two {
+    bottom: 15px;
+    left: 5px;
+}
+
+/* ===== HEADINGS ===== */
+
+.arrival-heading {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.arrival-heading span {
+    color: #b17b8e;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.arrival-heading h2 {
+    font-family: Georgia, serif;
+    color: #623b4b;
+    font-size: 34px;
+    margin: 12px 0;
+}
+
+.arrival-heading p {
+    color: #927d84;
+    font-size: 13px;
+}
+
+/* ===== CATEGORY CARDS ===== */
+
+.arrival-categories {
+    margin-bottom: 65px;
+}
+
+.arrival-category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.arrival-category-card {
+    min-height: 170px;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #f0dce3;
+    transition: 0.3s;
+}
+
+.arrival-category-card:nth-child(1) {
+    background: #f8e5eb;
+}
+
+.arrival-category-card:nth-child(2) {
+    background: #f6e9dc;
+}
+
+.arrival-category-card:nth-child(3) {
+    background: #f0e8f4;
+}
+
+.arrival-category-card:nth-child(4) {
+    background: #e9eadd;
+}
+
+.arrival-category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(100, 55, 75, 0.09);
+}
+
+.arrival-category-icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.arrival-category-card h3 {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: #623b4b;
+    margin-bottom: 7px;
+}
+
+.arrival-category-card p {
+    font-size: 12px;
+    color: #927d84;
+    margin: 0;
+}
+
+/* ===== PRODUCT GRID ===== */
+
+.arrival-products {
+    margin-bottom: 70px;
+}
+
+.arrival-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.arrival-product-card {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #f0e2e5;
+    border-radius: 10px;
+    padding: 13px;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.arrival-product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(100, 55, 75, 0.12);
+    border-color: #e2bac7;
+}
+
+.arrival-product-image {
+    height: 235px;
+    background: #fff6f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 7px;
+}
+
+.arrival-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px;
+    transition: transform 0.4s;
+}
+
+.arrival-product-card:hover .arrival-product-image img {
+    transform: scale(1.06);
+}
+
+.arrival-new-tag {
+    position: absolute;
+    top: 23px;
+    left: 23px;
+    z-index: 1;
+    background: #a64f70;
+    color: #fff;
+    padding: 7px 10px;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.arrival-wishlist {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    color: #bc6483;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #00000010;
+}
+
+.arrival-wishlist:hover {
+    background: #bc6483;
+    color: white;
+}
+
+.arrival-product-card h3 {
+    min-height: 38px;
+    margin: 16px 0 9px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #593d47;
+}
+
+.arrival-price {
+    font-size: 19px;
+    font-weight: 700;
+    color: #a64f70;
+    margin-bottom: 12px;
+}
+
+.arrival-stock {
+    display: inline-block;
+    padding: 5px 12px;
+    margin-bottom: 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    background: #edf5e9;
+    color: #52784a;
+}
+
+.arrival-stock.out {
+    background: #fce7eb;
+    color: #b34360;
+}
+
+.arrival-buy {
+    display: block;
+    padding: 12px 8px;
+    background: #a64f70;
+    color: #fff;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.arrival-buy:hover {
+    background: #713b51;
+    color: white;
+}
+
+.arrival-buy.disabled {
+    background: #d9cbd0;
+    pointer-events: none;
+}
+
+/* ===== PROMO BANNER ===== */
+
+.arrival-promo {
+    padding: 55px 30px;
+    margin: 65px 0;
+    text-align: center;
+    background: linear-gradient(120deg, #623b4b, #945d72);
+    color: white;
+    border-radius: 12px;
+}
+
+.arrival-promo span {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #f4d5df;
+}
+
+.arrival-promo h2 {
+    font-family: Georgia, serif;
+    font-size: 38px;
+    margin: 18px 0;
+}
+
+.arrival-promo p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #f3e3e8;
+    margin-bottom: 25px;
+}
+
+.arrival-promo a {
+    display: inline-block;
+    padding: 13px 25px;
+    background: #f6e1e7;
+    color: #623b4b;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.arrival-promo a:hover {
+    background: white;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 992px) {
+    .arrival-product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .arrival-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .new-arrivals-page {
+        padding: 18px 4%;
+    }
+
+    .arrival-hero {
+        padding: 40px 22px;
+    }
+
+    .arrival-hero-art {
+        display: none;
+    }
+
+    .arrival-hero h1 {
+        font-size: 37px;
+    }
+
+    .arrival-heading h2 {
+        font-size: 28px;
+    }
+
+    .arrival-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .arrival-product-card {
+        padding: 9px;
+    }
+
+    .arrival-product-image {
+        height: 165px;
+    }
+
+    .arrival-product-card h3 {
+        font-size: 13px;
+    }
+
+    .arrival-price {
+        font-size: 16px;
+    }
+
+    .arrival-promo {
+        padding: 40px 20px;
+    }
+
+    .arrival-promo h2 {
+        font-size: 29px;
+    }
+}
+.arrival-categories {
+    padding: 85px 7%;
+    background: #fffaf7;
+    font-family: 'Poppins', sans-serif;
+}
+
+.arrival-heading {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.arrival-heading > span {
+    color: #a47c68;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 5px;
+}
+
+.arrival-heading h2 {
+    margin: 17px 0 12px;
+    font-family: Georgia, serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 400;
+    color: #382820;
+}
+
+.arrival-heading p {
+    color: #88766c;
+    font-size: 14px;
+}
+
+.arrival-category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.arrival-category-card {
+    position: relative;
+    min-height: 340px;
+    padding: 25px 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    color: #392920;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.skincare-card {
+    background: linear-gradient(150deg, #f4e8dc, #e6cdbb);
+}
+
+.makeup-card {
+    background: linear-gradient(150deg, #f8e4e5, #e9c5ca);
+}
+
+.haircare-card {
+    background: linear-gradient(150deg, #eae8db, #d0ceb8);
+}
+
+.fragrance-card {
+    background: linear-gradient(150deg, #f1e5d2, #ddc4a0);
+}
+
+.arrival-category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 35px rgba(65, 43, 31, 0.13);
+}
+
+.arrival-number {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #786456;
+}
+
+.arrival-category-icon {
+    position: absolute;
+    top: 45px;
+    right: 20px;
+    font-size: 75px;
+    line-height: 1;
+    color: rgba(104, 75, 57, 0.32);
+    transition: transform 0.5s ease;
+}
+
+.arrival-category-card:hover .arrival-category-icon {
+    transform: rotate(12deg) scale(1.12);
+}
+
+.arrival-card-content {
+    position: relative;
+    z-index: 1;
+}
+
+.arrival-subtitle {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #806656;
+}
+
+.arrival-card-content h3 {
+    margin: 0 0 10px;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: #382820;
+}
+
+.arrival-card-content p {
+    margin: 0 0 25px;
+    font-size: 12px;
+    color: #6f5b50;
+    line-height: 1.7;
+}
+
+.arrival-explore {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(77, 53, 40, 0.25);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
+.arrival-explore span {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.arrival-category-card:hover .arrival-explore span {
+    transform: translate(4px, -4px);
+}
+
+.arrival-bottom-note {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    color: #a18472;
+}
+
+.arrival-bottom-note p {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.arrival-bottom-note strong {
+    color: #694738;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+    .arrival-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+    .arrival-categories {
+        padding: 55px 5%;
+    }
+
+    .arrival-category-grid {
+        gap: 13px;
+    }
+
+    .arrival-category-card {
+        min-height: 285px;
+        padding: 18px 14px;
+    }
+
+    .arrival-category-icon {
+        top: 42px;
+        right: 13px;
+        font-size: 55px;
+    }
+
+    .arrival-card-content h3 {
+        font-size: 24px;
+    }
+
+    .arrival-card-content p {
+        font-size: 11px;
+    }
+
+    .arrival-subtitle {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .arrival-explore {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .arrival-bottom-note {
+        gap: 8px;
+    }
+
+    .arrival-bottom-note p {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+}
+/* PRODUCT ACTION BUTTONS */
+
+.arrival-product-actions {
+    display: flex;
+    gap: 9px;
+    margin-top: 15px;
+}
+
+.arrival-buy {
+    flex: 1;
+    display: block;
+    padding: 12px 5px;
+    background: #a64f70;
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: 1px solid #a64f70;
+    transition: 0.3s;
+}
+
+.arrival-buy:hover {
+    background: #713b51;
+    color: white;
+}
+
+.arrival-wishlist {
+    width: 43px;
+    height: 43px;
+    border: 1px solid #a64f70;
+    background: white;
+    color: #a64f70;
+    font-size: 19px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.arrival-wishlist:hover {
+    background: #a64f70;
+    color: white;
+}
+
+.arrival-product-actions button:active {
+    transform: scale(0.95);
+}
+
+</style>
+
+
+<div class="new-arrivals-page">
+
+    <!-- HERO -->
+
+    <section class="arrival-hero">
+
+        <div class="arrival-hero-content">
+
+            <span class="arrival-eyebrow">
+                JUST ARRIVED AT JD ELEGANCE
+            </span>
+
+            <h1>New Beauty.<br>New Obsession.</h1>
+
+            <p>
+                Discover the latest beauty favourites, fresh finds
+                and little luxuries selected just for you.
+            </p>
+
+            <a href="#just-dropped" class="arrival-hero-btn">
+                EXPLORE NEW ARRIVALS ↗
+            </a>
+
+        </div>
+
+        <div class="arrival-hero-art">
+
+            <div class="arrival-art-circle">
+
+                <div class="arrival-art-inner">
+                    <span>JD</span>
+                    <small>ELEGANCE</small>
+                </div>
+
+            </div>
+
+            <div class="arrival-art-star arrival-star-one">✦</div>
+            <div class="arrival-art-star arrival-star-two">✧</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SHOP BY CATEGORY -->
+
+    <section class="arrival-categories">
+
+    <div class="arrival-heading">
+        <span>✦ DISCOVER YOUR BEAUTY ✦</span>
+        <h2>Fresh Finds for Every You</h2>
+        <p>A little luxury, a little magic, a lot of you.</p>
+    </div>
+
+    <div class="arrival-category-grid">
+
+        <!-- Skincare -->
+        <a href="?category=Skincare" class="arrival-category-card skincare-card">
+            <span class="arrival-number">01 / BEAUTY</span>
+            <div class="arrival-category-icon">❀</div>
+            <div class="arrival-card-content">
+                <span class="arrival-subtitle">YOUR DAILY RITUAL</span>
+                <h3>Skincare</h3>
+                <p>Your daily glow essentials.</p>
+                <span class="arrival-explore">DISCOVER MORE <span>↗</span></span>
+            </div>
+        </a>
+
+        <!-- Makeup -->
+        <a href="?category=Makeup" class="arrival-category-card makeup-card">
+            <span class="arrival-number">02 / BEAUTY</span>
+            <div class="arrival-category-icon">✧</div>
+            <div class="arrival-card-content">
+                <span class="arrival-subtitle">EXPRESS YOURSELF</span>
+                <h3>Makeup</h3>
+                <p>New ways to express yourself.</p>
+                <span class="arrival-explore">DISCOVER MORE <span>↗</span></span>
+            </div>
+        </a>
+
+        <!-- Haircare -->
+        <a href="?category=Haircare" class="arrival-category-card haircare-card">
+            <span class="arrival-number">03 / BEAUTY</span>
+            <div class="arrival-category-icon">♡</div>
+            <div class="arrival-card-content">
+                <span class="arrival-subtitle">LOVE YOUR HAIR</span>
+                <h3>Haircare</h3>
+                <p>Care and confidence in every strand.</p>
+                <span class="arrival-explore">DISCOVER MORE <span>↗</span></span>
+            </div>
+        </a>
+
+        <!-- Fragrance -->
+        <a href="?category=Fragrance" class="arrival-category-card fragrance-card">
+            <span class="arrival-number">04 / BEAUTY</span>
+            <div class="arrival-category-icon">♢</div>
+            <div class="arrival-card-content">
+                <span class="arrival-subtitle">YOUR SIGNATURE SCENT</span>
+                <h3>Fragrance</h3>
+                <p>Make every moment unforgettable.</p>
+                <span class="arrival-explore">DISCOVER MORE <span>↗</span></span>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="arrival-bottom-note">
+        <span>✧</span>
+        <p>BEAUTY IS YOURS TO DEFINE — <strong>JD ELEGANCE</strong></p>
+        <span>✧</span>
+    </div>
+
+</section>
+
+
+    <!-- NEW PRODUCTS -->
+
+    <section class="arrival-products" id="just-dropped">
+
+        <div class="arrival-heading">
+            <span>THE LATEST EDIT</span>
+            <h2>Just Dropped</h2>
+            <p>Explore the newest additions to JD Elegance.</p>
+        </div>
+
+        <div class="arrival-product-grid">
+
+    {% for product in new_arrivals %}
+
+    <div class="arrival-product-card">
+
+        <!-- PRODUCT IMAGE -->
+
+        <div class="arrival-product-image">
+
+            <img src="{{ product.image.url }}"
+                 alt="{{ product.name }}">
+
+        </div>
+
+        <!-- PRODUCT NAME -->
+
+        <h3>{{ product.name }}</h3>
+
+        <!-- PRODUCT PRICE -->
+
+        <p class="arrival-price">
+            ₹{{ product.price }}
+        </p>
+
+        <!-- BUTTONS -->
+
+        <div class="arrival-product-actions">
+
+            {% if product.stock > 0 %}
+
+            <!-- BUY NOW -->
+
+            <a href="{% url 'product_order' product.id %}"
+               class="arrival-buy">
+
+                <i class="fas fa-shopping-bag"></i>
+                BUY NOW
+
+            </a>
+
+            {% else %}
+
+            <button class="arrival-buy disabled" disabled>
+                SOLD OUT
+            </button>
+
+            {% endif %}
+
+            <!-- WISHLIST -->
+
+            <button class="arrival-wishlist"
+                    onclick="addWishlist(this, '{{ product.name|escapejs }}', '{{ product.price }}', '{{ product.image.url|escapejs }}')"
+                    title="Add to Wishlist">
+
+                <i class="far fa-heart"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p>No products found in this category.</p>
+
+    {% endfor %}
+
+</div>
+
+    </section>
+
+
+    <!-- PROMOTIONAL BANNER -->
+
+    <section class="arrival-promo">
+
+        <span>YOUR NEXT BEAUTY FAVOURITE</span>
+
+        <h2>A Little Something New</h2>
+
+        <p>
+            Explore new additions across skincare, makeup,
+            haircare and fragrance.
+        </p>
+
+        <a href="#just-dropped">SHOP THE LATEST EDIT</a>
+
+    </section>
+
+</div>
+
+{% endblock %}

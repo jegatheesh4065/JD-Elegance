@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coupons | JD Elegance</title>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+   * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #f4e8fa, #fff5f4, #fde9f0);
+    color: #493064;
+}
+
+.coupon-page {
+    padding: 35px;
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+.coupon-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.coupon-header h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #542d75;
+    font-family: Georgia, serif;
+}
+
+.coupon-header p {
+    color: #81718f;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+/* CREATE COUPON BUTTON */
+
+.add-coupon-btn {
+    background: linear-gradient(135deg, #754494, #542d75);
+    color: white;
+    padding: 13px 23px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(84,45,117,0.18);
+    transition: 0.3s;
+}
+
+.add-coupon-btn:hover {
+    background: linear-gradient(135deg, #a477bd, #754494);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* INFO CARD */
+
+.coupon-info-card {
+    background: linear-gradient(120deg, #f0e4fa, #fde9f0);
+    border: 1px solid #e6d3ee;
+    border-left: 5px solid #a77bc5;
+    border-radius: 13px;
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.coupon-info-card h3 {
+    color: #593477;
+    font-size: 20px;
+    margin: 0 0 8px;
+}
+
+.coupon-info-card p {
+    color: #81718f;
+    font-size: 14px;
+    margin: 0;
+}
+
+.coupon-info-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    background: white;
+    color: #9464b3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    box-shadow: 0 4px 12px rgba(84,45,117,0.08);
+}
+
+/* MESSAGES */
+
+.coupon-message {
+    padding: 13px 17px;
+    background: #e8f7ef;
+    color: #25804b;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* TABLE CONTAINER */
+
+.coupon-table-wrapper {
+    background: rgba(255,255,255,0.92);
+    border: 1px solid #e8d9ef;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 22px rgba(85,50,110,0.07);
+}
+
+.table-heading {
+    margin-bottom: 22px;
+}
+
+.table-heading h3 {
+    font-size: 20px;
+    color: #593477;
+    margin: 0;
+}
+
+.table-heading p {
+    color: #92849b;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+/* TABLE */
+
+.coupon-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+.coupon-table th {
+    background: linear-gradient(120deg, #754494, #593477);
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 17px 15px;
+    text-align: left;
+}
+
+.coupon-table th:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.coupon-table th:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.coupon-table td {
+    padding: 18px 15px;
+    border-bottom: 1px solid #eee5f1;
+    font-size: 14px;
+    color: #665775;
+}
+
+.coupon-table tbody tr {
+    transition: 0.2s;
+}
+
+.coupon-table tbody tr:hover {
+    background: #faf5fd;
+}
+
+.coupon-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* COUPON CODE */
+
+.coupon-code {
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #70428c !important;
+}
+
+/* DISCOUNT */
+
+.discount-badge {
+    background: #f4eafa;
+    color: #754494;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+/* STATUS */
+
+.status-active,
+.status-inactive {
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-active {
+    color: #218653;
+    background: #e4f6ec;
+}
+
+.status-inactive {
+    color: #bd5555;
+    background: #fdeaea;
+}
+
+/* ACTION BUTTONS */
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.edit-btn {
+    background: #eee7fa;
+    color: #704494;
+}
+
+.edit-btn:hover {
+    background: #dcd0f1;
+}
+
+.delete-btn {
+    background: #fdebed;
+    color: #d34f68;
+}
+
+.delete-btn:hover {
+    background: #f8d4dc;
+}
+
+/* EMPTY STATE */
+
+.empty-coupons {
+    text-align: center;
+    padding: 55px 20px !important;
+    color: #92849b !important;
+}
+
+.empty-coupons h3 {
+    color: #593477;
+    margin: 12px 0;
+}
+
+.empty-coupons i {
+    font-size: 40px;
+    color: #a77bc5;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 768px) {
+    .coupon-page {
+        padding: 18px;
+    }
+
+    .coupon-header h2 {
+        font-size: 25px;
+    }
+
+    .coupon-table-wrapper {
+        padding: 15px;
+        overflow-x: auto;
+    }
+
+    .coupon-info-card {
+        padding: 18px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+<div class="coupon-page">
+
+    <!-- HEADER -->
+
+    <div class="coupon-header">
+
+        <div class="coupon-heading">
+            <h2>Coupons <span>.</span></h2>
+            <p>Manage your discount offers and promotional codes.</p>
+        </div>
+
+        <a href="{% url 'add_coupon' %}" class="add-coupon-btn">
+            <i class="fa-solid fa-plus"></i>
+            Create Coupon
+        </a>
+
+    </div>
+
+
+    <!-- INFO CARD -->
+
+    <div class="coupon-info-card">
+
+        <div>
+            <h3>Special Offers & Discounts</h3>
+            <p>Create exclusive offers and reward your customers with special savings.</p>
+        </div>
+
+        <div class="coupon-info-icon">
+            <i class="fa-solid fa-ticket"></i>
+        </div>
+
+    </div>
+
+
+    <!-- MESSAGES -->
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="coupon-message">
+                <i class="fa-solid fa-circle-check"></i>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+    <!-- COUPON TABLE -->
+
+    <div class="coupon-table-wrapper">
+
+        <div class="table-heading">
+            <h3>All Coupons</h3>
+            <p>View and manage your available coupon codes.</p>
+        </div>
+
+        <table class="coupon-table">
+
+            <thead>
+                <tr>
+                    <th>Coupon Code</th>
+                    <th>Discount</th>
+                    <th>Minimum Amount</th>
+                    <th>Expiry Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for coupon in coupons %}
+
+                <tr>
+
+                    <td class="coupon-code">
+                        <span>{{ coupon.code }}</span>
+                    </td>
+
+                    <td>
+                        <span class="discount-badge">
+                            {{ coupon.discount_percentage }}%
+                        </span>
+                    </td>
+
+                    <td>₹{{ coupon.minimum_amount }}</td>
+
+                    <td>
+                        {{ coupon.valid_to|date:"d M Y" }}
+                    </td>
+
+                    <td>
+                        {% if coupon.active %}
+                            <span class="status-active">
+                                <i class="fa-solid fa-circle-check"></i>
+                                Active
+                            </span>
+                        {% else %}
+                            <span class="status-inactive">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                                Inactive
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+
+                        <div class="action-buttons">
+
+                            <a href="{% url 'edit_coupon' coupon.id %}"
+                               class="edit-btn"
+                               title="Edit Coupon">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+
+                            <form method="POST"
+                                  action="{% url 'delete_coupon' coupon.id %}"
+                                  style="display:inline;">
+
+                                {% csrf_token %}
+
+                                <button type="submit"
+                                        class="delete-btn"
+                                        title="Delete Coupon">
+
+                                    <i class="fa-solid fa-trash"></i>
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="6" class="empty-coupons">
+
+                        <i class="fa-solid fa-ticket"></i>
+
+                        <h3>No Coupons Yet</h3>
+
+                        <p>Create your first coupon and start offering discounts.</p>
+
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

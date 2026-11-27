@@ -1,0 +1,638 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- <script src="{% static 'js/home.js' %}"></script>  -->
+     {% block extra_css %}{% endblock %}
+     <style>
+        header{
+            height: 200px;
+        }
+        a{
+            text-decoration: none;
+        }
+        
+     </style>
+</head>
+<body>
+   <header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="{% static 'image/logo_colour.jpeg' %}" alt="logo"></a>
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+
+            <ul class="navbar-nav mx-auto">
+
+                <li class="nav-item">
+                    <a href="{% url 'all_offers' %}">All Offers</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'new_arrivals' %}">New Arrivals</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'brushes_tools' %}">Brushes &amp; Tools</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'skin' %}">Skin</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'hair_page' %}">Hair</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'fragrance' %}">Fragrance</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'gifts_combos' %}">Gifts & Combos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'bridal_bundle' %}">Bridal Bundle</a>
+                </li>
+
+            </ul>
+
+        </div>
+        </div>
+    </nav>
+        <div class="serach-login">
+    <form action="{% url 'search_products' %}" method="GET" class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            name="q"
+            placeholder="Search for toners, lipstick..."
+            value="{{ request.GET.q|default:'' }}"
+        >
+
+        <button type="submit">
+            <span class="search-icon">&#8981;</span>
+        </button>
+
+    </form>
+</div>
+    
+{% if user.is_authenticated %}
+<div class="customer-profile">
+
+    <button type="button"
+            class="profile-icon"
+            onclick="toggleProfileMenu()">
+
+        {% with profile=user.customerprofile %}
+            {% if profile.profile_photo %}
+                <img src="{{ profile.profile_photo.url }}"
+                     alt="Profile Photo"
+                     class="profile-photo">
+            {% else %}
+                <i class="fa-solid fa-user"></i>
+            {% endif %}
+        {% endwith %}
+
+    </button>
+
+    <div class="profile-dropdown" id="profileDropdown">
+        <div class="profile-header">
+            <h3>{{ user.get_full_name|default:user.username }}</h3>
+            <p>{{ user.email }}</p>
+        </div>
+
+        <a href="{% url 'customer_dashboard' %}">
+            <i class="fa-solid fa-gauge"></i>
+            My Dashboard
+        </a>
+
+        <a href="{% url 'customer_logout' %}">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+    </div>
+
+</div>
+{% else %}
+<a href="{% url 'customer_login' %}" class="login-btn">
+    <i class="fa-solid fa-user"></i>
+    Login
+</a>
+{% endif %}
+
+
+         <button class="wishlist-btn" onclick="openWishlist()">♡ Wishlist
+            <span class="wishlist-badge" id="wishlistCount">0</span>
+         </button>
+         <a href="{% url 'track_order' %}" class="delivery-btn"><i class="fa-solid fa-truck"></i></a>
+         <a href="{% url 'my-orders' %}" class="my-orders-btn" title="My Orders">
+    <i class="fa-solid fa-box"></i>
+    <span>My Orders</span>
+</a>
+<div class="overlay" id="overlay" onclick="closeWishlist()"></div>
+
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <h3>Your Wishlist</h3>
+        <button onclick="closeWishlist()">✕</button>
+    </div>
+
+    <div class="wishlist-content" id="wishlistContent">
+    </div>
+
+    <!-- TOTAL + BUY BUTTON -->
+    <div id="wishlistFooter"
+     style="
+        display:block !important;
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        background:white;
+        padding:15px 20px;
+        border-top:1px solid #ddd;
+        z-index:9999;
+     ">
+
+        <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:12px;
+        font-size:18px;
+        font-weight:bold;
+        ">
+        <span>Total Amount</span>
+        <span id="wishlistTotal" style="color:#ff2780;">
+            ₹0.00
+        </span>
+        </div>
+
+        <button
+        type="button"
+        onclick="proceedToBuy()"
+        style="
+            display:block !important;
+            width:100%;
+            padding:13px;
+            background:#ff2780;
+            color:white;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        ">
+        Proceed to Buy
+        </button>
+
+</div>
+   </header> 
+   <script>
+    const search = document.getElementById("search");
+const products = [
+    'Search for "toners"',
+    'Search for "lipsticks"',
+    'Search for "face wash"',
+    'Search for "serums"',
+    'Search for "moisturizers"'
+];
+let i = 0;
+setInterval(function () {
+    i++;
+    if (i >= products.length) {
+        i = 0;
+    }
+    search.placeholder = products[i];
+}, 1000);
+function openWishlist() {
+    document.getElementById("wishlistPanel")
+        .classList.add("active");
+     document.getElementById("overlay")
+        .classList.add("active");
+}
+function closeWishlist() {
+    document.getElementById("wishlistPanel")
+        .classList.remove("active");
+
+    document.getElementById("overlay")
+        .classList.remove("active");
+}
+function continueShopping() {
+     closeWishlist();
+}
+function slideLeft() {
+    document.getElementById("productContainer").scrollBy({
+        left: -500,
+        behavior: "smooth"
+    });
+}
+
+function slideRight() {
+    document.getElementById("productContainer").scrollBy({
+        left: 500,
+        behavior: "smooth"
+    });
+}
+
+
+function addWishlist(button, name, price, image) {
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let exists = wishlist.find(function(product) {
+        return product.name === name;
+    });
+
+    if (!exists) {
+
+        wishlist.push({
+            name: name,
+            price: price,
+            image: image,
+            quantity :1
+        });
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+        // Heart change
+        button.innerHTML = "♥";
+        button.classList.add("liked");
+
+    } else {
+
+        // Already wishlist-la irundha remove
+        wishlist = wishlist.filter(function(product) {
+            return product.name !== name;
+        });
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+        // Heart back to normal
+        button.innerHTML = "♡";
+        button.classList.remove("liked");
+    }
+
+    showWishlist();
+    openWishlist();
+    updateWishlistCount();
+    updateWishlistHearts();
+}
+function removeWishlist(index) {
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    wishlist.splice(index, 1);
+
+    localStorage.setItem(
+        "wishlist",
+        JSON.stringify(wishlist)
+    );
+
+    showWishlist();
+    updateWishlistCount();
+    updateWishlistHearts();
+}
+/* SHOW WISHLIST */
+
+function showWishlist() {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let content =
+        document.getElementById("wishlistContent");
+
+    let totalElement =
+        document.querySelector("#wishlistFooter #wishlistTotal");
+
+    if (!content || !totalElement) {
+        return;
+    }
+
+    content.innerHTML = "";
+
+    if (wishlist.length === 0) {
+
+        content.innerHTML = `
+            <div class="empty-wishlist">
+
+                <div class="heart">♡</div>
+
+                <p>Your wishlist is currently empty</p>
+
+                <p>Add your favourite products here.</p>
+
+                <button
+                    class="continue-btn"
+                    onclick="continueShopping()">
+                    CONTINUE SHOPPING
+                </button>
+
+            </div>
+        `;
+
+        totalElement.innerText = "₹0.00";
+        return;
+    }
+
+    let total = 0;
+
+    wishlist.forEach(function(product, index) {
+
+        let price = parseFloat(
+            String(product.price)
+                .replace(/[^0-9.]/g, "")
+        ) || 0;
+
+        // Quantity saved in localStorage
+        let quantity = product.quantity || 1;
+
+        let productTotal = price * quantity;
+
+        total += productTotal;
+
+        content.innerHTML += `
+            <div class="wishlist-product">
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
+
+                <div class="wishlist-product-info">
+
+                    <h4>${product.name}</h4>
+
+                    <p>₹${price.toFixed(2)}</p>
+
+                </div>
+                <div class="quantity-control">
+    <span>Quantity: ${quantity}</span>
+
+    <button type="button"
+            onclick="decreaseQuantity(${index})">−</button>
+
+    <button type="button"
+            onclick="increaseQuantity(${index})">+</button>
+</div>
+
+                <button
+                    class="remove-wishlist"
+                    onclick="removeWishlist(${index})">
+                    ×
+                </button>
+
+            </div>
+        `;
+    });
+
+    totalElement.innerText =
+        "₹" + total.toFixed(2);
+
+    localStorage.setItem(
+        "wishlist",
+        JSON.stringify(wishlist)
+    );
+}
+function increaseQuantity(index) {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    wishlist[index].quantity =
+        (wishlist[index].quantity || 1) + 1;
+
+    localStorage.setItem(
+        "wishlist",
+        JSON.stringify(wishlist)
+    );
+
+    showWishlist();
+}
+function increaseQuantity(index) {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    wishlist[index].quantity =
+        (wishlist[index].quantity || 1) + 1;
+
+    localStorage.setItem(
+        "wishlist",
+        JSON.stringify(wishlist)
+    );
+
+    showWishlist();
+}
+function decreaseQuantity(index) {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let quantity =
+        wishlist[index].quantity || 1;
+
+    if (quantity > 1) {
+
+        wishlist[index].quantity =
+            quantity - 1;
+
+        localStorage.setItem(
+            "wishlist",
+            JSON.stringify(wishlist)
+        );
+
+        showWishlist();
+    }
+}
+function updateWishlistHearts() {
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let buttons = document.querySelectorAll(".wishlist-add");
+
+    buttons.forEach(function(button) {
+
+        let productName = button.getAttribute("data-name");
+
+        let exists = wishlist.some(function(product) {
+            return product.name === productName;
+        });
+
+        if (exists) {
+
+            button.innerHTML = "♥";
+            button.classList.add("liked");
+
+        } else {
+
+            button.innerHTML = "♡";
+            button.classList.remove("liked");
+
+        }
+
+    });
+}
+function updateWishlistCount() {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let totalQuantity = 0;
+
+    wishlist.forEach(function(product) {
+        totalQuantity += product.quantity || 1;
+    });
+
+    let countElement =
+        document.getElementById("wishlistCount");
+
+    if (countElement) {
+        countElement.innerText = totalQuantity;
+    }
+}
+function proceedToBuy() {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    if (wishlist.length === 0) {
+        return;
+    }
+    window.location.href = "/checkout/";
+}
+
+function toggleProfileMenu() {
+    document.getElementById("profileDropdown")
+        .classList.toggle("show");
+}
+
+document.addEventListener("click", function(event) {
+    const profile = document.querySelector(".customer-profile");
+    const dropdown = document.getElementById("profileDropdown");
+
+    if (profile && !profile.contains(event.target)) {
+        dropdown.classList.remove("show");
+    }
+});
+document.addEventListener("DOMContentLoaded", function() {
+    showWishlist();
+    updateWishlistCount();
+    updateWishlistHearts();
+});
+   </script>
+   {% block content %}
+
+{% endblock %}
+<footer class="jd-footer">
+
+    <div class="jd-footer-top">
+
+        <!-- BRAND SECTION -->
+        <div class="jd-footer-brand">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'image/logo_colour.jpeg' %}"
+                     alt="JD Elegance">
+            </a>
+
+            <h2>Beauty begins with confidence.</h2>
+
+            <p>
+                Discover your beauty. Celebrate yourself.
+                Experience beauty with JD Elegance.
+            </p>
+
+            <div class="jd-footer-social">
+                <a href="#" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="#" aria-label="Pinterest">
+                    <i class="fab fa-pinterest-p"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- SHOP -->
+        <div class="jd-footer-links">
+            <h3>EXPLORE</h3>
+
+            <a href="{% url 'home' %}">All Products</a>
+            <a href="{% url 'new_arrivals' %}">New Arrivals</a>
+            <a href="{% url 'skin' %}">Skincare</a>
+            <a href="{% url 'hair_page' %}">Haircare</a>
+            <a href="{% url 'fragrance' %}">Fragrance</a>
+        </div>
+
+        <!-- CUSTOMER CARE -->
+        <div class="jd-footer-links">
+            <h3>INFORMATION</h3>
+
+            <a href="{% url 'home' %}">Contact Us</a>
+            <a href="{% url 'home' %}">Shipping Policy</a>
+            <a href="{% url 'home' %}">Privacy Policy</a>
+            <a href="{% url 'home' %}">Terms & Conditions</a>
+        </div>
+
+        <!-- ACCOUNT -->
+        <div class="jd-footer-links">
+            <h3>MY ACCOUNT</h3>
+
+            <a href="{% url 'customer_login' %}">Login / Register</a>
+            <a href="{% url 'home' %}">My Wishlist</a>
+            <a href="{% url 'my-orders' %}">My Orders</a>
+            <a href="mailto:jegatheesh4065@gmail.com">Email Us ↗</a>
+        </div>
+
+    </div>
+
+    <!-- NEWSLETTER STRIP -->
+    <div class="jd-footer-newsletter">
+
+        <div>
+            <span>STAY CONNECTED</span>
+            <h2>A little beauty in your inbox.</h2>
+            <p>Discover new arrivals and exclusive beauty offers.</p>
+        </div>
+
+        <a href="{% url 'home' %}" class="jd-footer-shop-btn">
+            EXPLORE NOW →
+        </a>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="jd-footer-bottom">
+
+        <p>© {% now "Y" %} JD Elegance. All rights reserved.</p>
+
+        <p>Made with <span>♥</span> for your beauty.</p>
+
+    </div>
+
+</footer>
+
+
+{% block extra_js %}{% endblock %}
+</body>
+</html>

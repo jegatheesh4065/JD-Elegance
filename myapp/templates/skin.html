@@ -1,0 +1,2132 @@
+{% extends 'nav_bar.html' %}
+{% load static %}
+{% block extra_css %}
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fffdfb;
+            color: #302820;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================
+           HERO SECTION
+        ========================= */
+        
+        .skin-hero {
+    width: 100%;
+    min-height: 20px;
+
+    display: flex;
+    align-items: center;
+
+    margin-top: 0;
+    padding: 70px;
+    z-index: 1;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(40, 29, 23, 0.72),
+            rgba(40, 29, 23, 0.08)
+        ),
+        url("{% static 'image/skin_banner.jpg' %}");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white;
+}
+.skin-hero,
+.skin-intro,
+.skin-categories,
+.skin-benefits,
+.skin-products,
+.skin-routine,
+.skin-why,
+.skin-quote,
+.skin-newsletter {
+    background-color: transparent;
+}
+
+        .skin-hero-content {
+            max-width: 560px;
+        }
+
+        .skin-hero-tag {
+            font-size: 13px;
+            letter-spacing: 4px;
+            margin-bottom: 22px;
+        }
+
+        .skin-hero h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(42px, 5vw, 68px);
+            line-height: 1.12;
+            font-weight: normal;
+            margin-bottom: 22px;
+        }
+
+        .skin-hero p {
+            max-width: 450px;
+            font-size: 16px;
+            line-height: 1.9;
+            margin-bottom: 30px;
+            color: #f7eee8;
+        }
+
+        .skin-primary-btn {
+            display: inline-block;
+            padding: 15px 30px;
+
+            background: #f4ded3;
+            color: #302820;
+
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .skin-primary-btn:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           COMMON SECTION HEADING
+        ========================= */
+
+        .skin-section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .skin-section-heading .eyebrow {
+            color: #a37b66;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 13px;
+        }
+
+        .skin-section-heading h2 {
+            font-family: Georgia, serif;
+            font-size: clamp(29px, 4vw, 42px);
+            font-weight: normal;
+            margin-bottom: 14px;
+        }
+
+        .skin-section-heading p {
+            color: #81766e;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           INTRO SECTION
+        ========================= */
+
+        .skin-intro {
+            padding: 65px 20px 45px;
+            text-align: center;
+        }
+
+        .skin-intro h2 {
+            font-family: Georgia, serif;
+            font-size: 34px;
+            font-weight: normal;
+            margin-bottom: 18px;
+        }
+
+        .skin-intro p {
+            max-width: 650px;
+            margin: auto;
+            color: #81766e;
+            line-height: 1.9;
+        }
+
+
+        /* =========================
+           CATEGORY SECTION
+        ========================= */
+
+        .skin-categories-section {
+            padding: 35px 6% 75px;
+        }
+
+        .skin-categories {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .skin-category-card {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .skin-category-image {
+            height: 290px;
+            overflow: hidden;
+            border-radius: 150px 150px 8px 8px;
+            background: #f2e7df;
+        }
+
+        .skin-category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .skin-category-card:hover img {
+            transform: scale(1.07);
+        }
+
+        .skin-category-card h3 {
+            font-family: Georgia, serif;
+            font-size: 22px;
+            font-weight: normal;
+            margin-top: 20px;
+        }
+
+        .skin-category-card p {
+            color: #887b71;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+
+        /* =========================
+           SKINCARE BENEFITS STRIP
+        ========================= */
+
+        .skin-benefits-strip {
+            background: #f5e7df;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            padding: 32px 6%;
+            gap: 20px;
+        }
+
+        .skin-benefit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .skin-benefit i {
+            font-size: 27px;
+            color: #a37b66;
+        }
+
+        .skin-benefit h4 {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .skin-benefit p {
+            font-size: 12px;
+            color: #81766e;
+        }
+
+
+        /* =========================
+           PRODUCTS SECTION
+        ========================= */
+
+        .skin-products-section {
+            padding: 80px 5%;
+            background: #fffdfb;
+        }
+
+        .skin-products {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .skin-product-card {
+            position: relative;
+            background: white;
+
+            border: 1px solid #eee6e0;
+            padding: 12px;
+
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skin-product-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 15px 35px rgba(60, 40, 25, 0.09);
+        }
+
+        .skin-product-image {
+            height: 270px;
+            overflow: hidden;
+            position: relative;
+            background: #f5eee9;
+        }
+
+        .skin-product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .skin-product-card:hover
+        .skin-product-image img {
+            transform: scale(1.05);
+        }
+
+        .skin-product-card h3 {
+            font-size: 15px;
+            line-height: 1.6;
+            font-weight: 500;
+
+            margin: 17px 0 10px;
+
+            min-height: 48px;
+        }
+
+        .skin-product-price {
+            font-size: 17px;
+            font-weight: bold;
+            color: #302820;
+        }
+
+        .skin-stock-text {
+            font-size: 12px;
+            color: #64805b;
+            margin-top: 8px;
+        }
+
+        .skin-product-actions {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 15px;
+        }
+
+        .skin-wishlist-btn {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+
+            background: #f7eee8;
+            color: #302820;
+
+            border: none;
+            border-radius: 50%;
+
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .skin-wishlist-btn.liked {
+            color: #df4566;
+        }
+
+        .skin-buy-form {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .skin-buy-btn {
+            display: block;
+            width: 100%;
+            min-height: 42px;
+
+            background: #302820;
+            color: white;
+
+            border: none;
+            padding: 11px 8px;
+
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .skin-buy-btn:hover {
+            background: #98725f;
+        }
+
+
+        /* SOLD OUT */
+
+        .skin-product-card.out-of-stock
+        .skin-product-image img {
+            filter: blur(3px);
+            opacity: 0.58;
+        }
+
+        .skin-sold-out {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            background: #302820;
+            color: white;
+
+            padding: 12px 20px;
+
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+
+            white-space: nowrap;
+        }
+
+        .skin-sold-out-btn {
+            width: 100%;
+            min-height: 42px;
+
+            border: none;
+            background: #e7e0db;
+            color: #71665e;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+           EMPTY PRODUCTS
+        ========================= */
+
+        .skin-empty-products {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 15px;
+
+            background: #f8efea;
+            color: #81766e;
+        }
+
+
+        /* =========================
+           ROUTINE SECTION
+        ========================= */
+
+        .skin-routine-section {
+            padding: 75px 7%;
+            background: #f6ebe4;
+        }
+
+        .skin-routine-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 55px;
+        }
+
+        .skin-routine-image {
+            height: 430px;
+            overflow: hidden;
+        }
+
+        .skin-routine-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .skin-routine-text .eyebrow {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #a37b66;
+            margin-bottom: 18px;
+        }
+
+        .skin-routine-text h2 {
+            font-family: Georgia, serif;
+            font-weight: normal;
+            font-size: 43px;
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+
+        .skin-routine-text > p {
+            color: #81766e;
+            line-height: 1.9;
+            margin-bottom: 25px;
+        }
+
+        .skin-routine-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .skin-routine-number {
+            width: 35px;
+            height: 35px;
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #b99b89;
+            border-radius: 50%;
+
+            font-family: Georgia, serif;
+        }
+
+        .skin-routine-step h4 {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .skin-routine-step p {
+            font-size: 13px;
+            color: #81766e;
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           WHY JD ELEGANCE
+        ========================= */
+
+        .skin-why-section {
+            padding: 80px 6%;
+        }
+
+        .skin-why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .skin-why-card {
+            text-align: center;
+            padding: 35px 25px;
+
+            border: 1px solid #eee5df;
+            background: white;
+        }
+
+        .skin-why-card i {
+            font-size: 32px;
+            color: #a37b66;
+            margin-bottom: 20px;
+        }
+
+        .skin-why-card h3 {
+            font-family: Georgia, serif;
+            font-size: 22px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .skin-why-card p {
+            color: #81766e;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+
+        /* =========================
+           BEAUTY QUOTE BANNER
+        ========================= */
+
+        .skin-quote-section {
+            padding: 80px 20px;
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    rgba(43, 32, 25, 0.68),
+                    rgba(43, 32, 25, 0.68)
+                ),
+                url("{% static 'image/skin_quote.jpg' %}");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+        }
+
+        .skin-quote-section i {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #f4ded3;
+        }
+
+        .skin-quote-section h2 {
+            max-width: 760px;
+            margin: auto;
+
+            font-family: Georgia, serif;
+            font-size: clamp(27px, 4vw, 42px);
+            font-weight: normal;
+            line-height: 1.5;
+        }
+
+        .skin-quote-section p {
+            margin-top: 22px;
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+
+        /* =========================
+           NEWSLETTER SECTION
+        ========================= */
+
+        .skin-newsletter {
+            padding: 70px 20px;
+            text-align: center;
+            background: #f5e7df;
+        }
+
+        .skin-newsletter h2 {
+            font-family: Georgia, serif;
+            font-size: 35px;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .skin-newsletter p {
+            color: #81766e;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .skin-newsletter form {
+            display: flex;
+            max-width: 480px;
+            margin: auto;
+        }
+
+        .skin-newsletter input {
+            flex: 1;
+            min-width: 0;
+
+            padding: 15px;
+            border: 1px solid #ddc9bd;
+            background: white;
+
+            outline: none;
+        }
+
+        .skin-newsletter button {
+            border: none;
+            padding: 0 22px;
+
+            background: #302820;
+            color: white;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .skin-categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skin-products {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .skin-category-image {
+                height: 260px;
+            }
+
+            .skin-routine-content {
+                gap: 30px;
+            }
+
+            .skin-routine-text h2 {
+                font-size: 34px;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .skin-hero {
+                min-height: 430px;
+                padding: 45px 7%;
+            }
+
+            .skin-hero h1 {
+                font-size: 43px;
+            }
+
+            .skin-products {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 13px;
+            }
+
+            .skin-product-image {
+                height: 190px;
+            }
+
+            .skin-product-card h3 {
+                font-size: 13px;
+            }
+
+            .skin-product-actions {
+                gap: 6px;
+            }
+
+            .skin-wishlist-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 19px;
+            }
+
+            .skin-buy-btn {
+                font-size: 10px;
+                padding: 9px 4px;
+            }
+
+            .skin-benefits-strip {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .skin-benefit {
+                justify-content: flex-start;
+            }
+
+            .skin-routine-content {
+                grid-template-columns: 1fr;
+            }
+
+            .skin-routine-image {
+                height: 320px;
+            }
+
+            .skin-routine-text h2 {
+                font-size: 35px;
+            }
+
+            .skin-why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skin-newsletter form {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .skin-newsletter button {
+                min-height: 45px;
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
+            .skin-categories {
+                gap: 12px;
+            }
+
+            .skin-category-image {
+                height: 190px;
+            }
+
+            .skin-category-card h3 {
+                font-size: 18px;
+            }
+
+            .skin-product-image {
+                height: 155px;
+            }
+
+            .skin-products-section {
+                padding: 55px 4%;
+            }
+
+        }
+        .buy-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 13px 20px;
+    margin-top: 12px;
+    background: #302820;
+    color: #fff;
+    border: 1px solid #302820;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.buy-btn:hover {
+    background: #a56b51;
+    border-color: #a56b51;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(165, 107, 81, 0.25);
+}
+
+.buy-btn:active {
+    transform: scale(0.98);
+}
+/* =====================================
+   JD ELEGANCE - BEST SELLERS
+===================================== */
+
+.skin-extra-section {
+    padding: 75px 5%;
+    background: #f8f0ea;
+}
+
+.skin-extra-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.skin-extra-heading .eyebrow {
+    color: #a37b66;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+.skin-extra-heading h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.skin-extra-heading p {
+    color: #81766e;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.skin-extra-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.skin-extra-card {
+    background: white;
+    padding: 12px;
+    border: 1px solid #eee3db;
+    transition: 0.3s;
+}
+
+.skin-extra-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(48, 40, 32, 0.10);
+}
+
+.skin-extra-image {
+    height: 240px;
+    overflow: hidden;
+    background: #f5eee9;
+}
+
+.skin-extra-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s;
+}
+
+.skin-extra-card:hover .skin-extra-image img {
+    transform: scale(1.05);
+}
+
+.skin-extra-tag {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 6px 10px;
+    background: #f3e2d6;
+    color: #76533f;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.skin-extra-card h3 {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.6;
+    margin: 12px 0;
+}
+
+.skin-extra-price {
+    font-weight: bold;
+    font-size: 17px;
+    color: #302820;
+}
+
+.skin-extra-old-price {
+    margin-left: 8px;
+    color: #998e86;
+    font-size: 13px;
+    text-decoration: line-through;
+}
+
+.skin-extra-button {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background: #302820;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.skin-extra-button:hover {
+    background: #98725f;
+    color: white;
+}
+
+
+/* =====================================
+   SPECIAL OFFERS
+===================================== */
+
+.skin-offer-banner {
+    padding: 65px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ead4c5, #f8eee7);
+}
+
+.skin-offer-banner .eyebrow {
+    color: #8c614a;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.skin-offer-banner h2 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: clamp(30px, 4vw, 45px);
+    margin-bottom: 15px;
+}
+
+.skin-offer-banner p {
+    max-width: 550px;
+    margin: 0 auto 25px;
+    color: #6e5d51;
+    line-height: 1.8;
+}
+
+.skin-offer-button {
+    display: inline-block;
+    padding: 14px 28px;
+    background: #302820;
+    color: white;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.skin-offer-button:hover {
+    background: #98725f;
+    color: white;
+}
+
+
+/* =====================================
+   CUSTOMER REVIEWS
+===================================== */
+
+.skin-reviews-section {
+    padding: 75px 6%;
+    background: #fffdfb;
+}
+
+.skin-reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.skin-review-card {
+    padding: 30px 25px;
+    border: 1px solid #eee3db;
+    background: white;
+    transition: 0.3s;
+}
+
+.skin-review-card:hover {
+    box-shadow: 0 10px 25px rgba(48, 40, 32, 0.07);
+    transform: translateY(-4px);
+}
+
+.skin-review-stars {
+    color: #b78a46;
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.skin-review-card h3 {
+    font-family: Georgia, serif;
+    font-size: 21px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.skin-review-card p {
+    color: #81766e;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.skin-review-author {
+    display: block;
+    margin-top: 20px;
+    color: #302820;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .skin-extra-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .skin-reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .skin-extra-section,
+    .skin-reviews-section {
+        padding: 50px 4%;
+    }
+
+    .skin-extra-grid {
+        gap: 12px;
+    }
+
+    .skin-extra-image {
+        height: 170px;
+    }
+
+    .skin-extra-card h3 {
+        font-size: 13px;
+    }
+
+    .skin-extra-price {
+        font-size: 14px;
+    }
+}
+/* =====================================
+   MAKEUP COLLECTION
+===================================== */
+
+.makeup-section {
+    padding: 80px 5%;
+     background: #fffdfb;
+}
+
+.makeup-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.makeup-eyebrow {
+    color: #8965a8;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+}
+
+.makeup-heading h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 43px);
+    font-weight: normal;
+    color: #49305f;
+    margin-bottom: 14px;
+}
+
+.makeup-heading > p:last-child {
+    color: #84758f;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.makeup-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.makeup-card {
+    background: #ffffff;
+    border: 1px solid #e9dff2;
+    padding: 12px;
+    transition: 0.3s ease;
+    min-width: 0;
+}
+
+.makeup-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(73, 48, 95, 0.12);
+}
+
+.makeup-image {
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+    background: #eee5f7;
+}
+
+.makeup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.makeup-card:hover .makeup-image img {
+    transform: scale(1.05);
+}
+
+.makeup-tag {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 6px 10px;
+    background: #eee5f7;
+    color: #70518f;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.makeup-details h3 {
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 500;
+    color: #30263d;
+    margin: 12px 0;
+    min-height: 48px;
+}
+
+.makeup-price {
+    color: #49305f;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.makeup-stock {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #617653;
+}
+
+.makeup-actions {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.makeup-wishlist {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    background: #f1eafb;
+    color: #70518f;
+    font-size: 23px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.makeup-wishlist:hover {
+    background: #e1d1f2;
+    color: #49305f;
+}
+
+.makeup-buy {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 8px;
+    background: #5b4278;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.makeup-buy:hover {
+    background: #8062a6;
+    color: white;
+}
+
+.makeup-out-of-stock .makeup-image img {
+    filter: blur(3px);
+    opacity: 0.6;
+}
+
+.makeup-sold-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #49305f;
+    color: white;
+    padding: 11px 17px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.sold-text {
+    color: #b34668;
+    margin-bottom: 12px;
+}
+
+.makeup-disabled {
+    width: 100%;
+    background: #e8e1ed;
+    color: #82768d;
+    cursor: not-allowed;
+}
+
+.makeup-disabled:hover {
+    background: #e8e1ed;
+    color: #82768d;
+}
+
+.makeup-empty {
+    grid-column: 1 / -1;
+    padding: 50px 20px;
+    text-align: center;
+    background: white;
+    border: 1px solid #e9dff2;
+    color: #84758f;
+}
+
+.makeup-empty i {
+    font-size: 35px;
+    color: #8965a8;
+    margin-bottom: 18px;
+}
+
+.makeup-empty h3 {
+    color: #49305f;
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.makeup-empty p {
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+    .makeup-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .makeup-section {
+        padding: 55px 4%;
+    }
+
+    .makeup-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px;
+    }
+
+    .makeup-image {
+        height: 190px;
+    }
+
+    .makeup-details h3 {
+        font-size: 13px;
+    }
+
+    .makeup-wishlist {
+        width: 35px;
+        height: 35px;
+        font-size: 19px;
+    }
+
+    .makeup-buy {
+        font-size: 10px;
+        padding: 8px 4px;
+    }
+}
+
+@media (max-width: 400px) {
+    .makeup-image {
+        height: 155px;
+    }
+
+    .makeup-actions {
+        gap: 5px;
+    }
+}
+    </style>
+
+{% endblock %}
+{% block content %}
+    <section class="skin-hero">
+
+        <div class="skin-hero-content">
+
+            <p class="skin-hero-tag">
+                THE ART OF SKINCARE
+            </p>
+
+            <h1>
+                Love Your Skin.<br>
+                Reveal Your Glow.
+            </h1>
+
+            <p>
+                Discover skincare essentials for your daily ritual.
+                Explore products to cleanse, hydrate and care for
+                your skin with JD Elegance.
+            </p>
+
+            <a href="#skinProducts" class="skin-primary-btn">
+                EXPLORE THE COLLECTION
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         2. INTRO
+    ================================== -->
+
+    <section class="skin-intro">
+
+        <div class="skin-section-heading">
+
+            <p class="eyebrow">
+                YOUR DAILY RITUAL
+            </p>
+
+            <h2>A Little Love Goes a Long Way</h2>
+
+            <p>
+                Make time for yourself with skincare essentials
+                selected for your everyday beauty routine.
+            </p>
+
+        </div>
+
+    </section>
+
+    <section class="skin-categories-section">
+
+        <div class="skin-section-heading">
+
+            <p class="eyebrow">
+                EXPLORE YOUR FAVOURITES
+            </p>
+
+            <h2>Shop By Category</h2>
+
+            <p>
+                Find the essentials for your skincare routine.
+            </p>
+
+        </div>
+
+
+        <div class="skin-categories">
+
+
+            <a href="?category=Cleanser#skinProducts" class="skin-category-card">
+
+                <div class="skin-category-image">
+
+                    <img src="{% static 'image/Cleanser.jpg' %}"
+                         alt="Cleansers">
+
+                </div>
+
+                <h3>Cleansers</h3>
+
+                <p>Start fresh, every day.</p>
+
+            </a>
+
+
+            <a href="?category=Moisturizer#skinProducts" class="skin-category-card">
+
+                <div class="skin-category-image">
+
+                    <img src="{% static 'image/moisturizer.jpg' %}"
+                         alt="Moisturizers">
+
+                </div>
+
+                <h3>Moisturizers</h3>
+
+                <p>Everyday hydration.</p>
+
+            </a>
+
+
+            <a href="?category=Serum#skinProducts" class="skin-category-card">
+
+                <div class="skin-category-image">
+
+                    <img src="{% static 'image/face serum.jpg' %}"
+                         alt="Face Serums">
+
+                </div>
+
+                <h3>Face Serums</h3>
+
+                <p>Your daily skincare boost.</p>
+
+            </a>
+
+
+            <a href="?category=Sunscreen#skinProducts" class="skin-category-card">
+
+                <div class="skin-category-image">
+
+                    <img src="{% static 'image/sunscreen.jpg' %}"
+                         alt="Sunscreen">
+
+                </div>
+
+                <h3>Sunscreen</h3>
+
+                <p>Care for your skin daily.</p>
+            </a>
+        </div>
+    </section>
+    <section class="skin-benefits-strip">
+
+        <div class="skin-benefit">
+
+            <i class="fa-solid fa-leaf"></i>
+
+            <div>
+
+                <h4>Your Daily Skincare Ritual</h4>
+
+                <p>Find essentials for your routine.</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="skin-benefit">
+
+            <i class="fa-solid fa-droplet"></i>
+
+            <div>
+
+                <h4>Hydration & Care</h4>
+
+                <p>Explore your skincare favourites.</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="skin-benefit">
+
+            <i class="fa-solid fa-heart"></i>
+
+            <div>
+
+                <h4>Beauty Made Personal</h4>
+
+                <p>Choose products that suit your needs.</p>
+
+            </div>
+
+        </div>
+
+    </section>
+    <section class="skin-products-section" id="skinProducts">
+
+    <div class="skin-section-heading">
+        <p class="eyebrow">DISCOVER YOUR FAVOURITES</p>
+        <h2>Skincare Essentials</h2>
+        <p>Explore our skincare collection.</p>
+    </div>
+
+    <div class="skin-products">
+
+        {% for product in products %}
+
+        <div class="skin-product-card {% if product.stock == 0 %}out-of-stock{% endif %}">
+
+            <div class="skin-product-image">
+
+                {% if product.image %}
+                    <img src="{{ product.image.url }}"
+                         alt="{{ product.name }}">
+                {% endif %}
+
+                {% if product.stock == 0 %}
+                    <span class="skin-sold-out">SOLD OUT</span>
+                {% endif %}
+
+            </div>
+
+            <h3>{{ product.name }}</h3>
+
+            <p class="skin-product-price">
+                ₹{{ product.price|floatformat:2 }}
+            </p>
+
+            <div class="skin-product-actions">
+
+                {% if product.stock > 0 %}
+
+                    <button
+                        type="button"
+                        class="skin-wishlist-btn wishlist-add"
+                        data-name="{{ product.name }}"
+                        onclick="addWishlist(
+                            this,
+                            '{{ product.name|escapejs }}',
+                            '{{ product.price }}',
+                            '{{ product.image.url|escapejs }}'
+                        )">
+                        ♡
+                    </button>
+
+                    <form method="POST"
+                          action="{% url 'purchase_product' product.id %}"
+                          class="skin-buy-form">
+
+                        {% csrf_token %}
+
+                        <a href="{% url 'product_order' product.id %}" class="buy-btn">
+    <i class="fa-solid fa-bag-shopping"></i>
+    BUY NOW
+</a>
+
+                    </form>
+
+                {% else %}
+
+                    <button type="button"
+                            class="skin-sold-out-btn"
+                            disabled>
+                        SOLD OUT
+                    </button>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="skin-empty-products">
+            <h3>No skincare products available</h3>
+            <p>Add Skin category products through the admin panel.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- =====================================
+     BEST SELLERS
+===================================== -->
+
+<section class="skin-extra-section">
+
+    <div class="skin-extra-heading">
+
+        <p class="eyebrow">CUSTOMER FAVOURITES</p>
+
+        <h2>Our Best Sellers</h2>
+
+        <p>Discover skincare essentials for your daily routine.</p>
+
+    </div>
+
+    <div class="skin-extra-grid">
+
+        {% for product in best_sellers %}
+
+        <div class="skin-extra-card">
+
+            <div class="skin-extra-image">
+
+                {% if product.image %}
+                <img src="{{ product.image.url }}"
+                     alt="{{ product.name }}">
+                {% endif %}
+
+            </div>
+
+            <span class="skin-extra-tag">BEST SELLER</span>
+
+            <h3>{{ product.name }}</h3>
+
+            <p class="skin-extra-price">
+                ₹{{ product.price|floatformat:2 }}
+            </p>
+
+            {% if product.stock > 0 %}
+
+            <a href="{% url 'product_order' product.id %}"
+               class="skin-extra-button">
+                BUY NOW
+            </a>
+
+            {% else %}
+
+            <button class="skin-extra-button"
+                    disabled
+                    style="background:#aaa;">
+                SOLD OUT
+            </button>
+
+            {% endif %}
+
+        </div>
+
+        {% empty %}
+
+        <p>No best sellers available right now.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+<!-- =====================================
+     MAKEUP COLLECTION
+===================================== -->
+
+<section class="makeup-section" id="makeupCollection">
+
+    <div class="makeup-heading">
+
+        <p class="makeup-eyebrow">EXPRESS YOUR BEAUTY</p>
+
+        <h2>Makeup Collection</h2>
+
+        <p>
+            Discover your favourite makeup essentials
+            and create a look that's uniquely yours.
+        </p>
+
+    </div>
+
+    <div class="makeup-grid">
+
+        {% for product in makeup_products %}
+
+        <div class="makeup-card
+            {% if product.stock == 0 %}makeup-out-of-stock{% endif %}">
+
+            <div class="makeup-image">
+
+                {% if product.image %}
+                <img src="{{ product.image.url }}"
+                     alt="{{ product.name }}">
+                {% endif %}
+
+                {% if product.stock == 0 %}
+                <span class="makeup-sold-label">SOLD OUT</span>
+                {% endif %}
+
+            </div>
+
+            <div class="makeup-details">
+
+                <span class="makeup-tag">MAKEUP</span>
+
+                <h3>{{ product.name }}</h3>
+
+                <p class="makeup-price">
+                    ₹{{ product.price|floatformat:2 }}
+                </p>
+
+                {% if product.stock > 0 %}
+
+                <p class="makeup-stock">
+                    <i class="fa-solid fa-circle-check"></i>
+                    In Stock
+                </p>
+
+                <div class="makeup-actions">
+
+                    <button
+                        type="button"
+                        class="makeup-wishlist"
+                        aria-label="Add to wishlist"
+                        onclick="addWishlist(
+                            this,
+                            '{{ product.name|escapejs }}',
+                            '{{ product.price }}',
+                            '{{ product.image.url|escapejs }}'
+                        )">
+                        ♡
+                    </button>
+
+                    <a href="{% url 'product_order' product.id %}"
+                       class="makeup-buy">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        BUY NOW
+                    </a>
+
+                </div>
+
+                {% else %}
+
+                <p class="makeup-stock sold-text">
+                    Currently unavailable
+                </p>
+
+                <button class="makeup-buy makeup-disabled"
+                        type="button"
+                        disabled>
+                    SOLD OUT
+                </button>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="makeup-empty">
+
+            <i class="fa-solid fa-palette"></i>
+
+            <h3>Makeup Collection Coming Soon</h3>
+
+            <p>
+                Add products under the Makeup category
+                through your admin panel.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- =====================================
+     SPECIAL OFFERS
+===================================== -->
+
+<section class="skin-offer-banner">
+
+    <p class="eyebrow">A LITTLE SOMETHING SPECIAL</p>
+
+    <h2>Your Skincare, Your Ritual</h2>
+
+    <p>
+        Explore our skincare collection and discover
+        your new everyday favourites at JD Elegance.
+    </p>
+
+    <a href="#skinProducts" class="skin-offer-button">
+        EXPLORE COLLECTION
+        <i class="fa-solid fa-arrow-right"></i>
+    </a>
+
+</section>
+<!-- =====================================
+     CUSTOMER REVIEWS
+===================================== -->
+
+<section class="skin-reviews-section">
+
+    <div class="skin-extra-heading">
+
+        <p class="eyebrow">THE JD ELEGANCE EXPERIENCE</p>
+
+        <h2>Love From Our Customers</h2>
+
+        <p>Discover what makes a beauty routine special.</p>
+
+    </div>
+
+    <div class="skin-reviews-grid">
+
+        <div class="skin-review-card">
+
+            <div class="skin-review-stars">★★★★★</div>
+
+            <h3>Everyday Skincare</h3>
+
+            <p>
+                Finding skincare essentials for my everyday
+                routine feels simple and convenient.
+            </p>
+
+            <span class="skin-review-author">
+                CUSTOMER REVIEW
+            </span>
+
+        </div>
+
+        <div class="skin-review-card">
+
+            <div class="skin-review-stars">★★★★★</div>
+
+            <h3>Lovely Collection</h3>
+
+            <p>
+                I enjoy exploring the different skincare
+                products and discovering new favourites.
+            </p>
+
+            <span class="skin-review-author">
+                CUSTOMER REVIEW
+            </span>
+
+        </div>
+
+        <div class="skin-review-card">
+
+            <div class="skin-review-stars">★★★★★</div>
+
+            <h3>Easy Shopping</h3>
+
+            <p>
+                The product collection makes it easy to
+                explore skincare essentials in one place.
+            </p>
+
+            <span class="skin-review-author">
+                CUSTOMER REVIEW
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+    <!-- =================================
+         6. DAILY SKINCARE ROUTINE
+    ================================== -->
+
+    <section class="skin-routine-section">
+
+        <div class="skin-routine-content">
+
+
+            <div class="skin-routine-image">
+
+                <img src="{% static 'image/skin_routine.jpg' %}"
+                     alt="Daily skincare routine">
+
+            </div>
+
+
+            <div class="skin-routine-text">
+
+                <p class="eyebrow">
+                    YOUR MOMENT OF SELF-CARE
+                </p>
+
+                <h2>
+                    Make Skincare<br>
+                    Your Favourite Ritual
+                </h2>
+
+                <p>
+                    Keep your routine simple and consistent.
+                    Choose products based on your skin's needs
+                    and give your skin the care it deserves.
+                </p>
+
+
+                <div class="skin-routine-step">
+
+                    <div class="skin-routine-number">
+                        1
+                    </div>
+
+                    <div>
+
+                        <h4>Cleanse</h4>
+
+                        <p>
+                            Begin with a cleanser suited to your skin.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="skin-routine-step">
+
+                    <div class="skin-routine-number">
+                        2
+                    </div>
+
+                    <div>
+
+                        <h4>Hydrate</h4>
+
+                        <p>
+                            Explore moisturizers that suit your needs.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="skin-routine-step">
+
+                    <div class="skin-routine-number">
+                        3
+                    </div>
+
+                    <div>
+
+                        <h4>Protect</h4>
+
+                        <p>
+                            Include appropriate sun protection in your
+                            daytime routine.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <a href="#skinProducts" class="skin-primary-btn">
+                    SHOP SKINCARE
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         7. WHY JD ELEGANCE
+    ================================== -->
+
+    <section class="skin-why-section">
+
+        <div class="skin-section-heading">
+
+            <p class="eyebrow">
+                THE JD ELEGANCE EXPERIENCE
+            </p>
+
+            <h2>Your Beauty, Your Way</h2>
+
+            <p>
+                Discover a shopping experience designed around you.
+            </p>
+
+        </div>
+
+
+        <div class="skin-why-grid">
+
+
+            <div class="skin-why-card">
+
+                <i class="fa-solid fa-spa"></i>
+
+                <h3>Your Beauty Ritual</h3>
+
+                <p>
+                    Explore skincare essentials and create a routine
+                    that fits your everyday lifestyle.
+                </p>
+
+            </div>
+
+
+            <div class="skin-why-card">
+
+                <i class="fa-solid fa-heart"></i>
+
+                <h3>Choose Your Favourites</h3>
+
+                <p>
+                    Save the products you love to your wishlist
+                    and revisit them whenever you want.
+                </p>
+
+            </div>
+
+
+            <div class="skin-why-card">
+
+                <i class="fa-solid fa-gift"></i>
+
+                <h3>Beauty Finds</h3>
+
+                <p>
+                    Discover new products and find essentials
+                    for your personal skincare collection.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         8. BEAUTY QUOTE BANNER
+    ================================== -->
+
+    <section class="skin-quote-section">
+
+        <i class="fa-solid fa-spa"></i>
+
+        <h2>
+            "Your skincare routine is a little reminder
+            to take care of yourself."
+        </h2>
+
+        <p>
+            YOUR BEAUTY. YOUR RITUAL. YOUR JD ELEGANCE.
+        </p>
+
+    </section>
+
+
+    <!-- =================================
+         9. NEWSLETTER DESIGN
+    ================================== -->
+
+    <section class="skin-newsletter">
+
+        <h2>A Little Beauty Inspiration</h2>
+
+        <p>
+            Discover your skincare favourites and make room
+            for a little self-care every day.
+        </p>
+
+        <form onsubmit="return false;">
+
+            <input
+                type="email"
+                placeholder="Your email address"
+                aria-label="Your email address"
+                required>
+
+            <button type="submit">
+                EXPLORE BEAUTY
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            if (typeof updateWishlistHearts === "function") {
+                updateWishlistHearts();
+            }
+
+        });
+
+    </script>
+    {% endblock %}

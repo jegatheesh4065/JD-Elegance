@@ -1,0 +1,1307 @@
+{% extends 'nav_bar.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+/* ===== MAIN PAGE ===== */
+
+.gifts-page {
+    background: #fff9f7;
+    padding: 30px 5%;
+    color: #513a40;
+}
+
+/* ===== HERO BANNER ===== */
+
+.gift-hero {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 80px 25px;
+    border-radius: 16px;
+    background: linear-gradient(
+        120deg,
+        #f6dce5,
+        #fff2e8,
+        #f1d7c4
+    );
+    margin-bottom: 60px;
+}
+
+.gift-hero .eyebrow {
+    color: #a56a7c;
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.gift-hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.2;
+    color: #693c4d;
+    margin: 20px auto;
+}
+
+.gift-hero p {
+    color: #86636b;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 580px;
+    margin: 0 auto 28px;
+}
+
+.gift-hero a {
+    display: inline-block;
+    background: #b75d7c;
+    color: #fff;
+    padding: 14px 30px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    transition: 0.3s;
+}
+
+.gift-hero a:hover {
+    background: #813e59;
+    color: white;
+}
+
+/* ===== SECTION HEADINGS ===== */
+
+.gift-heading {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.gift-heading span {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #b1846c;
+}
+
+.gift-heading h2 {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    color: #693c4d;
+    margin: 12px 0;
+}
+
+.gift-heading p {
+    font-size: 14px;
+    color: #927981;
+}
+
+/* ===== OCCASION CARDS ===== */
+
+.gift-occasions {
+    margin-bottom: 65px;
+}
+
+.occasion-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.occasion-card {
+    min-height: 210px;
+    padding: 28px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 12px;
+    border: 1px solid #f1dce3;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.occasion-card:nth-child(1) {
+    background: #f9e6ed;
+}
+
+.occasion-card:nth-child(2) {
+    background: #f7eadc;
+}
+
+.occasion-card:nth-child(3) {
+    background: #f1e7f4;
+}
+
+.occasion-card:nth-child(4) {
+    background: #f8e5df;
+}
+
+.occasion-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px #9d647018;
+}
+
+.occasion-icon {
+    font-size: 36px;
+    margin-bottom: 14px;
+}
+
+.occasion-card h3 {
+    color: #693c4d;
+    font-family: Georgia, serif;
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.occasion-card p {
+    color: #92717c;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* ===== PRODUCT COLLECTION ===== */
+
+.gift-products {
+    margin-bottom: 65px;
+}
+
+.gift-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.gift-product-card {
+    position: relative;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #f0dfe3;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.gift-product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px #9d647018;
+}
+
+.gift-product-image {
+    height: 230px;
+    background: #fff5f6;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.gift-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px;
+    transition: transform 0.4s;
+}
+
+.gift-product-card:hover .gift-product-image img {
+    transform: scale(1.05);
+}
+
+.gift-product-card h3 {
+    font-size: 15px;
+    color: #593d47;
+    margin: 16px 0 10px;
+    min-height: 38px;
+}
+
+.gift-price {
+    font-size: 19px;
+    font-weight: 700;
+    color: #b75d7c;
+    margin-bottom: 12px;
+}
+
+.gift-stock {
+    display: inline-block;
+    padding: 5px 12px;
+    background: #eaf4e6;
+    color: #53764c;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.gift-stock.sold-out {
+    background: #fde7ec;
+    color: #b13c5a;
+}
+
+/* Wishlist */
+
+.gift-wishlist {
+    position: absolute;
+    z-index: 2;
+    top: 22px;
+    right: 22px;
+    height: 38px;
+    width: 38px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    color: #c45f82;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px #00000010;
+}
+
+.gift-wishlist:hover {
+    background: #c45f82;
+    color: white;
+}
+
+/* Buttons */
+
+.gift-buy {
+    display: block;
+    padding: 12px;
+    background: #b75d7c;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.gift-buy:hover {
+    background: #813e59;
+    color: white;
+}
+
+.gift-buy.disabled {
+    background: #d9cbd0;
+    pointer-events: none;
+}
+
+/* Empty State */
+
+.gift-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 45px 20px;
+    background: white;
+    border: 1px solid #f0dfe3;
+    border-radius: 10px;
+}
+
+/* ===== PROMOTION BANNER ===== */
+
+.gift-promo {
+    margin: 60px 0;
+    padding: 50px 35px;
+    text-align: center;
+    background: linear-gradient(120deg, #6c4052, #945d70);
+    border-radius: 14px;
+    color: white;
+}
+
+.gift-promo span {
+    color: #f4d9c4;
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+.gift-promo h2 {
+    font-family: Georgia, serif;
+    font-size: 36px;
+    margin: 18px 0;
+}
+
+.gift-promo p {
+    color: #f4e5e8;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.gift-promo a {
+    display: inline-block;
+    background: #f2d5df;
+    color: #693c4d;
+    padding: 13px 25px;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-radius: 4px;
+}
+
+.gift-promo a:hover {
+    background: white;
+}
+
+/* ===== BENEFITS ===== */
+
+.gift-benefits {
+    margin: 60px 0;
+}
+
+.gift-benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.gift-benefit-card {
+    background: white;
+    padding: 30px 20px;
+    text-align: center;
+    border: 1px solid #f0dfe3;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.gift-benefit-card:hover {
+    transform: translateY(-5px);
+    border-color: #d9a7b8;
+}
+
+.gift-benefit-card .icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.gift-benefit-card h3 {
+    font-family: Georgia, serif;
+    font-size: 19px;
+    color: #693c4d;
+}
+
+.gift-benefit-card p {
+    color: #927981;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 992px) {
+    .gift-product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .occasion-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .gifts-page {
+        padding: 20px 4%;
+    }
+
+    .gift-hero {
+        padding: 50px 18px;
+    }
+
+    .gift-heading h2 {
+        font-size: 27px;
+    }
+
+    .gift-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .gift-product-card {
+        padding: 9px;
+    }
+
+    .gift-product-image {
+        height: 165px;
+    }
+
+    .gift-product-card h3 {
+        font-size: 13px;
+    }
+
+    .gift-price {
+        font-size: 16px;
+    }
+
+    .gift-benefit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gift-promo {
+        padding: 38px 20px;
+    }
+
+    .gift-promo h2 {
+        font-size: 28px;
+    }
+}
+/* ===== MODERN TRENDING GIFTS ===== */
+
+.trending-gifts {
+    padding: 45px 0 70px;
+}
+
+.modern-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.mini-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #b27688;
+}
+
+.modern-heading h2 {
+    font-family: Georgia, serif;
+    color: #583d48;
+    font-size: 34px;
+    margin: 12px 0;
+}
+
+.modern-heading p {
+    color: #8d7980;
+    font-size: 14px;
+}
+
+.view-all {
+    text-decoration: none;
+    color: #a44e6d;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding-bottom: 8px;
+    white-space: nowrap;
+}
+
+.trending-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.trending-card {
+    text-decoration: none;
+    color: inherit;
+    min-width: 0;
+}
+
+.trending-image {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.35s ease;
+}
+
+.image-one {
+    background: linear-gradient(145deg, #f6dce5, #e9b8c9);
+}
+
+.image-two {
+    background: linear-gradient(145deg, #e7d5c7, #c7a38b);
+}
+
+.image-three {
+    background: linear-gradient(145deg, #f5e7df, #e5c6d1);
+}
+
+.trending-card:hover .trending-image {
+    filter: saturate(1.1);
+}
+
+.trend-tag {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #704a59;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 9px 11px;
+}
+
+.trend-number {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    color: rgba(91, 57, 71, 0.45);
+    font-family: Georgia, serif;
+    font-size: 14px;
+}
+
+.trend-symbol {
+    width: 130px;
+    height: 160px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 65px 65px 14px 14px;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 55px;
+    transition: transform 0.4s ease;
+}
+
+.trending-card:hover .trend-symbol {
+    transform: translateY(-6px);
+}
+
+.trending-info {
+    padding: 20px 3px;
+}
+
+.trend-category {
+    color: #b27688;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.trending-info h3 {
+    font-family: Georgia, serif;
+    font-size: 23px;
+    color: #583d48;
+    margin: 10px 0;
+}
+
+.trending-info p {
+    color: #8d7980;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.discover-link {
+    color: #a44e6d;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .trending-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .trending-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .trending-card:last-child .trending-image {
+        height: 230px;
+    }
+
+    .trending-image {
+        height: 220px;
+    }
+
+    .trend-symbol {
+        width: 95px;
+        height: 120px;
+    }
+
+    .modern-heading h2 {
+        font-size: 27px;
+    }
+}
+
+@media (max-width: 450px) {
+    .modern-heading {
+        align-items: start;
+    }
+
+    .modern-heading p {
+        line-height: 1.7;
+    }
+
+    .view-all {
+        font-size: 9px;
+    }
+
+    .trending-info h3 {
+        font-size: 19px;
+    }
+}
+/* ===== BUDGET COLLECTION ===== */
+
+.gift-budget {
+    padding: 35px 0 70px;
+}
+
+.budget-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.budget-card {
+    padding: 28px 22px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-decoration: none;
+    color: #654451;
+    transition: 0.3s ease;
+}
+
+.budget-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 22px rgba(105, 60, 77, 0.08);
+}
+
+.budget-one {
+    background: #f9e8ed;
+}
+
+.budget-two {
+    background: #f4e7dc;
+}
+
+.budget-three {
+    background: #f0e6f1;
+}
+
+.budget-four {
+    background: #e9dfd4;
+}
+
+.budget-card span {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.budget-card h3 {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    margin: 15px 0 8px;
+}
+
+.budget-card p {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.budget-card b {
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-top: 12px;
+}
+
+@media (max-width: 850px) {
+    .budget-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 400px) {
+    .budget-card {
+        padding: 20px 13px;
+    }
+
+    .budget-card h3 {
+        font-size: 21px;
+    }
+}
+/* ===== GIFT FINDER ===== */
+
+.gift-finder {
+    margin: 25px 0 70px;
+    padding: 45px 55px;
+    background: #f3e5e8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    overflow: hidden;
+}
+
+.finder-content {
+    max-width: 540px;
+}
+
+.finder-content > span {
+    color: #a66a80;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.finder-content h2 {
+    font-family: Georgia, serif;
+    font-size: 39px;
+    color: #653e4e;
+    line-height: 1.25;
+    margin: 18px 0;
+}
+
+.finder-content p {
+    color: #856a75;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 25px;
+}
+
+.finder-content a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: #a95575;
+    padding: 14px 24px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.finder-content a:hover {
+    background: #713c52;
+}
+
+.finder-visual {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    flex-shrink: 0;
+}
+
+.finder-circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle-back {
+    width: 220px;
+    height: 220px;
+    background: #e5c3cf;
+    top: 0;
+    left: 0;
+}
+
+.circle-front {
+    width: 180px;
+    height: 180px;
+    right: 0;
+    bottom: 0;
+    background: #fff8f4;
+    border: 1px solid #d3a7b7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.finder-ribbon {
+    width: 75px;
+    height: 75px;
+    border: 1px solid #b77a90;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-family: Georgia, serif;
+    color: #9a526c;
+    font-size: 32px;
+}
+
+.circle-front span {
+    color: #9a526c;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.finder-star {
+    position: absolute;
+    color: #a95575;
+    font-size: 28px;
+}
+
+.star-one {
+    top: 10px;
+    right: 8px;
+}
+
+.star-two {
+    bottom: 0;
+    left: 5px;
+}
+
+@media (max-width: 650px) {
+    .gift-finder {
+        padding: 35px 25px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .finder-content h2 {
+        font-size: 31px;
+    }
+
+    .finder-visual {
+        align-self: center;
+        transform: scale(0.85);
+        transform-origin: center;
+        margin: 0 auto;
+    }
+}
+/* ===== GIFT PERSONALITIES ===== */
+
+.gift-personalities {
+    padding: 35px 0 70px;
+}
+
+.gift-personality-heading {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.gift-personality-heading span {
+    color: #ae7185;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.gift-personality-heading h2 {
+    font-family: Georgia, serif;
+    color: #583d48;
+    font-size: 33px;
+    margin-top: 13px;
+}
+
+.personality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.personality-card {
+    padding: 35px 27px;
+    min-height: 240px;
+    border: 1px solid #ead9df;
+    background: #fffdfc;
+    color: #583d48;
+    text-decoration: none;
+    transition: 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.personality-card:hover {
+    background: #f8e9ee;
+    border-color: #d7a9ba;
+    transform: translateY(-5px);
+}
+
+.personality-number {
+    color: #ae7185;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.personality-card h3 {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    margin: 28px 0 10px;
+}
+
+.personality-card p {
+    color: #8d7980;
+    font-size: 13px;
+    line-height: 1.8;
+    flex-grow: 1;
+}
+
+.personality-card > span {
+    color: #a44e6d;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+
+@media (max-width: 750px) {
+    .personality-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .personality-card {
+        min-height: 200px;
+    }
+}
+</style>
+
+
+<div class="gifts-page">
+
+    <!-- HERO BANNER -->
+
+    <section class="gift-hero">
+        <div class="eyebrow">JD Elegance Gift Studio</div>
+
+        <h1>Beautiful Gifts,<br>Unforgettable Moments</h1>
+
+        <p>
+            Discover thoughtfully selected beauty essentials
+            and elegant gift combinations for every special occasion.
+        </p>
+
+        <a href="#gift-collection">EXPLORE GIFT COLLECTION</a>
+    </section>
+
+
+    <!-- GIFTS BY OCCASION -->
+
+    <section class="gift-occasions">
+
+        <div class="gift-heading">
+            <span>MAKE EVERY MOMENT SPECIAL</span>
+            <h2>Gifts for Every Occasion</h2>
+            <p>A thoughtful gift makes every celebration more beautiful.</p>
+        </div>
+
+        <div class="occasion-grid">
+
+    <a href="?category=Birthdays#gift-collection" class="occasion-card">
+        <div class="occasion-icon">🎂</div>
+        <h3>Birthdays</h3>
+        <p>Make their day extra special</p>
+    </a>
+
+    <a href="?category=Anniversary#gift-collection" class="occasion-card">
+        <div class="occasion-icon">💝</div>
+        <h3>Anniversary</h3>
+        <p>Celebrate beautiful memories</p>
+    </a>
+
+    <a href="?category=Self Care#gift-collection" class="occasion-card">
+        <div class="occasion-icon">🌸</div>
+        <h3>Self Care</h3>
+        <p>A little gift for yourself</p>
+    </a>
+
+    <a href="?category=Special Moments#gift-collection" class="occasion-card">
+        <div class="occasion-icon">🎀</div>
+        <h3>Special Moments</h3>
+        <p>Surprise someone you love</p>
+    </a>
+
+</div>
+
+    </section>
+    <!-- TRENDING GIFT COMBOS -->
+
+<section class="trending-gifts">
+
+    <div class="modern-heading">
+        <div>
+            <span class="mini-label">LOVED BY EVERYONE</span>
+            <h2>Trending Gift Combos</h2>
+            <p>Beautiful little luxuries for unforgettable moments.</p>
+        </div>
+
+        <a href="#gift-collection" class="view-all">
+            VIEW ALL <span>↗</span>
+        </a>
+    </div>
+
+    <div class="trending-grid">
+
+        <a href="#gift-collection" class="trending-card">
+            <div class="trending-image image-one">
+                <span class="trend-tag">BESTSELLER</span>
+                <span class="trend-number">01</span>
+                <div class="trend-symbol">✧</div>
+            </div>
+            <div class="trending-info">
+                <span class="trend-category">BEAUTY ESSENTIALS</span>
+                <h3>The Beauty Edit</h3>
+                <p>Your everyday beauty favourites.</p>
+                <span class="discover-link">DISCOVER MORE →</span>
+            </div>
+        </a>
+
+        <a href="#gift-collection" class="trending-card">
+            <div class="trending-image image-two">
+                <span class="trend-tag">FAN FAVOURITE</span>
+                <span class="trend-number">02</span>
+                <div class="trend-symbol">♡</div>
+            </div>
+            <div class="trending-info">
+                <span class="trend-category">FRAGRANCE COLLECTION</span>
+                <h3>The Scent Story</h3>
+                <p>A little luxury in every fragrance.</p>
+                <span class="discover-link">DISCOVER MORE →</span>
+            </div>
+        </a>
+
+        <a href="#gift-collection" class="trending-card">
+            <div class="trending-image image-three">
+                <span class="trend-tag">SELF-CARE</span>
+                <span class="trend-number">03</span>
+                <div class="trend-symbol">❀</div>
+            </div>
+            <div class="trending-info">
+                <span class="trend-category">SKINCARE FAVOURITES</span>
+                <h3>The Glow Box</h3>
+                <p>A thoughtful treat for glowing days.</p>
+                <span class="discover-link">DISCOVER MORE →</span>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+
+    <!-- GIFT PRODUCTS FROM DJANGO DATABASE -->
+
+    <section class="gift-products" id="gift-collection">
+
+        <div class="gift-heading">
+            <span>CURATED WITH LOVE</span>
+            <h2>Gifts & Combos</h2>
+            <p>Discover something beautiful for every occasion.</p>
+        </div>
+
+        <div class="gift-product-grid">
+
+            {% for product in gift_products %}
+
+            <div class="gift-product-card">
+
+                {% if product.stock > 0 %}
+                <button
+                    type="button"
+                    class="gift-wishlist"
+                    onclick="addWishlist(
+                        this,
+                        '{{ product.name|escapejs }}',
+                        '{{ product.price }}',
+                        '{% if product.image %}{{ product.image.url|escapejs }}{% endif %}'
+                    )">
+                    ♡
+                </button>
+                {% endif %}
+
+                <div class="gift-product-image">
+
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}"
+                         alt="{{ product.name }}">
+                    {% endif %}
+
+                </div>
+
+                <h3>{{ product.name }}</h3>
+
+                <div class="gift-price">
+                    ₹{{ product.price }}
+                </div>
+
+                {% if product.stock > 0 %}
+
+                    <div class="gift-stock">
+                        In Stock
+                    </div>
+
+                    <a href="{% url 'product_order' product.id %}"
+                       class="gift-buy">
+                        BUY NOW
+                    </a>
+
+                {% else %}
+
+                    <div class="gift-stock sold-out">
+                        Sold Out
+                    </div>
+
+                    <a class="gift-buy disabled">
+                        OUT OF STOCK
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+            {% empty %}
+
+            <div class="gift-empty">
+                <h3>No gift combos available yet 🎁</h3>
+                <p>Add products under the Gifts & Combos category in Django admin.</p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+    <section class="gift-finder">
+
+    <div class="finder-content">
+        <span>YOUR PERFECT GIFT STARTS HERE</span>
+
+        <h2>Not Sure What to Gift?</h2>
+
+        <p>
+            From beauty lovers to fragrance enthusiasts,
+            discover thoughtful gifts for every kind of personality.
+        </p>
+
+        <a href="#gift-collection">FIND YOUR GIFT ↗</a>
+    </div>
+
+    <div class="finder-visual">
+        <div class="finder-circle circle-back"></div>
+
+        <div class="finder-circle circle-front">
+            <div class="finder-ribbon">JD</div>
+            <span>ELEGANCE</span>
+        </div>
+
+        <div class="finder-star star-one">✦</div>
+        <div class="finder-star star-two">✧</div>
+    </div>
+
+</section>
+
+
+    <!-- PROMOTION BANNER -->
+
+    <section class="gift-promo">
+
+        <span>A LITTLE SOMETHING SPECIAL</span>
+
+        <h2>Make Someone Feel Extraordinary</h2>
+
+        <p>
+            From beauty favourites to thoughtful combinations,
+            find a gift that makes them smile.
+        </p>
+
+        <a href="#gift-collection">SHOP GIFT COMBOS</a>
+
+    </section>
+    <section class="gift-budget">
+
+    <div class="modern-heading">
+        <div>
+            <span class="mini-label">SOMETHING FOR EVERYONE</span>
+            <h2>Gifts for Every Budget</h2>
+            <p>Thoughtful gifting doesn't need a big budget.</p>
+        </div>
+    </div>
+
+    <div class="budget-grid">
+
+    <a href="?budget=under499#gift-collection" class="budget-card budget-one">
+        <span>THE LITTLE TREAT</span>
+        <h3>Under ₹499</h3>
+        <p>Small gifts, big smiles.</p>
+        <b>EXPLORE ↗</b>
+    </a>
+
+    <a href="?budget=under999#gift-collection" class="budget-card budget-two">
+        <span>EVERYDAY LUXURY</span>
+        <h3>Under ₹999</h3>
+        <p>Beautiful gifts to share.</p>
+        <b>EXPLORE ↗</b>
+    </a>
+
+    <a href="?budget=above1499#gift-collection" class="budget-card budget-three">
+        <span>THE SPECIAL EDIT</span>
+        <h3>Above ₹1,499</h3>
+        <p>Make their moment special.</p>
+        <b>EXPLORE ↗</b>
+    </a>
+
+    <a href="?budget=above2499#gift-collection" class="budget-card budget-four">
+        <span>PREMIUM INDULGENCE</span>
+        <h3>Above ₹2,499</h3>
+        <p>Give a little extra luxury.</p>
+        <b>EXPLORE ↗</b>
+    </a>
+
+</div>
+
+</section>
+
+<section class="gift-personalities">
+
+    <div class="gift-personality-heading">
+        <span>MADE FOR THEIR KIND OF BEAUTY</span>
+        <h2>Choose Their Kind of Gift</h2>
+    </div>
+
+    <div class="personality-grid">
+
+        <a href="#gift-collection" class="personality-card">
+            <div class="personality-number">01 / SKINCARE</div>
+            <h3>The Glow Lover</h3>
+            <p>Skincare favourites for self-care moments.</p>
+            <span>EXPLORE ↗</span>
+        </a>
+
+        <a href="#gift-collection" class="personality-card">
+            <div class="personality-number">02 / MAKEUP</div>
+            <h3>The Glam Lover</h3>
+            <p>Beauty essentials for every special occasion.</p>
+            <span>EXPLORE ↗</span>
+        </a>
+
+        <a href="#gift-collection" class="personality-card">
+            <div class="personality-number">03 / FRAGRANCE</div>
+            <h3>The Scent Lover</h3>
+            <p>Discover a fragrance that feels personal.</p>
+            <span>EXPLORE ↗</span>
+        </a>
+
+    </div>
+
+</section>
+
+    <!-- WHY CHOOSE US -->
+
+    <section class="gift-benefits">
+
+        <div class="gift-heading">
+            <span>THE JD ELEGANCE PROMISE</span>
+            <h2>Gifting Made Beautiful</h2>
+        </div>
+
+        <div class="gift-benefit-grid">
+
+            <div class="gift-benefit-card">
+                <div class="icon">🎁</div>
+                <h3>Thoughtful Selections</h3>
+                <p>Discover beauty favourites and curated gift ideas.</p>
+            </div>
+
+            <div class="gift-benefit-card">
+                <div class="icon">💗</div>
+                <h3>Made for Every Occasion</h3>
+                <p>Find something special for celebrations and everyday moments.</p>
+            </div>
+
+            <div class="gift-benefit-card">
+                <div class="icon">✨</div>
+                <h3>Elegant Choices</h3>
+                <p>Explore beautiful products to make gifting memorable.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,692 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Orders | JD ELEGANCE</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f8f6fb;
+            color: #392447;
+        }
+
+        .main-content {
+            max-width: 1600px;
+            margin: auto;
+            padding: 40px;
+        }
+
+        /* PAGE HEADER */
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            color: #48265f;
+        }
+
+        .page-header p {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #91839a;
+        }
+
+        .header-decoration {
+            width: 65px;
+            height: 4px;
+            background: linear-gradient(90deg, #70458b, #d4a75b);
+            border-radius: 10px;
+            margin-top: 14px;
+        }
+
+        .back-link {
+            padding: 11px 18px;
+            border: 1px solid #e6d9ed;
+            border-radius: 8px;
+            color: #694481;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            background: white;
+        }
+
+        .back-link:hover {
+            background: #f0e6f7;
+        }
+
+        /* STATUS NAVIGATION */
+
+        .status-navigation {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 5px 2px 16px;
+            margin-bottom: 20px;
+        }
+
+        .status-tab {
+            flex-shrink: 0;
+            padding: 12px 19px;
+            border: 1px solid #e8ddec;
+            border-radius: 8px;
+            background: white;
+            color: #786582;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .status-tab:hover {
+            border-color: #a783bd;
+            color: #603779;
+        }
+
+        .status-tab.active {
+            background: #603779;
+            border-color: #603779;
+            color: white;
+            box-shadow: 0 5px 12px rgba(96, 55, 121, 0.15);
+        }
+
+        /* SEARCH AND FILTER SECTION */
+
+        .filter-section {
+            background: white;
+            border: 1px solid #ebe2ef;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 25px;
+        }
+
+        .filter-heading {
+            font-size: 14px;
+            font-weight: 700;
+            color: #56316d;
+            margin-bottom: 16px;
+        }
+
+        .filter-form {
+            display: grid;
+            grid-template-columns: minmax(220px, 2fr)
+                                   minmax(140px, 1fr)
+                                   minmax(130px, 1fr)
+                                   minmax(130px, 1fr)
+                                   auto auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #887692;
+            margin-bottom: 8px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            height: 42px;
+            padding: 0 12px;
+            border: 1px solid #e6dce9;
+            border-radius: 7px;
+            background: #fff;
+            color: #56316d;
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color: #9670ad;
+        }
+
+        .filter-btn,
+        .reset-btn {
+            height: 42px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 17px;
+            border-radius: 7px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .filter-btn {
+            background: #603779;
+            color: white;
+            border: 1px solid #603779;
+        }
+
+        .filter-btn:hover {
+            background: #48265f;
+        }
+
+        .reset-btn {
+            background: #f6f1f9;
+            color: #694481;
+            border: 1px solid #e8ddec;
+        }
+
+        .reset-btn:hover {
+            background: #eee3f5;
+        }
+
+        /* ORDERS TABLE CONTAINER */
+
+        .orders-container {
+            background: white;
+            border: 1px solid #ebe2ef;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .orders-container-header {
+            padding: 22px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #eee6f1;
+        }
+
+        .orders-container-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 21px;
+            color: #48265f;
+        }
+
+        .result-label {
+            font-size: 12px;
+            color: #897795;
+        }
+
+        .result-label strong {
+            color: #603779;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .orders-table {
+            width: 100%;
+            min-width: 1000px;
+            border-collapse: collapse;
+        }
+
+        .orders-table thead {
+            background: #faf7fc;
+        }
+
+        .orders-table th {
+            text-align: left;
+            padding: 16px 18px;
+            color: #8a7795;
+            font-size: 10px;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+            border-bottom: 1px solid #eee6f1;
+            white-space: nowrap;
+        }
+
+        .orders-table td {
+            padding: 19px 18px;
+            border-bottom: 1px solid #f0eaf3;
+            color: #776681;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        .orders-table tbody tr {
+            transition: background 0.2s;
+        }
+
+        .orders-table tbody tr:hover {
+            background: #fcf9fe;
+        }
+
+        .orders-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .order-number {
+            color: #603779;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .customer-cell strong {
+            display: block;
+            color: #493154;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .customer-cell small {
+            color: #a092a8;
+            font-size: 10px;
+        }
+
+        .amount-cell {
+            color: #603779 !important;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .payment-badge {
+            display: inline-block;
+            padding: 7px 10px;
+            background: #f2eafa;
+            color: #694481;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* DELIVERY STATUS */
+
+        .status-badge {
+            display: inline-block;
+            padding: 7px 10px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-ordered,
+        .status-order-placed {
+            background: #fff1d7;
+            color: #956400;
+        }
+
+        .status-accepted {
+            background: #eee7ff;
+            color: #6542a0;
+        }
+
+        .status-shipped {
+            background: #e1f3ff;
+            color: #176b98;
+        }
+
+        .status-delivered {
+            background: #e1f7e8;
+            color: #237745;
+        }
+
+        .status-cancelled {
+            background: #ffe7e7;
+            color: #b52c39;
+        }
+
+        .date-cell {
+            white-space: nowrap;
+        }
+
+        /* VIEW BUTTON */
+
+        .view-btn {
+            display: inline-block;
+            padding: 9px 13px;
+            border: 1px solid #e3d5ec;
+            border-radius: 6px;
+            background: white;
+            color: #603779;
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .view-btn:hover {
+            background: #603779;
+            color: white;
+            border-color: #603779;
+        }
+
+        /* EMPTY STATE */
+
+        .empty-state {
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .empty-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: #f3eafa;
+            color: #70458b;
+            font-size: 27px;
+        }
+
+        .empty-state h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 23px;
+            color: #48265f;
+            margin-bottom: 9px;
+        }
+
+        .empty-state p {
+            color: #95869e;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
+            .filter-form {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 650px) {
+            .main-content {
+                padding: 25px 14px;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+
+            .filter-section {
+                padding: 16px;
+            }
+
+            .filter-form {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-btn,
+            .reset-btn {
+                width: 100%;
+            }
+
+            .orders-container-header {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="main-content">
+
+    <!-- PAGE HEADER -->
+
+    <header class="page-header">
+        <div>
+            <h1>Order Management</h1>
+            <p>Review customer purchases and manage their delivery status.</p>
+            <div class="header-decoration"></div>
+        </div>
+
+        <a href="{% url 'dashboard' %}" class="back-link">
+            ← Back to Dashboard
+        </a>
+    </header>
+
+
+    <!-- HORIZONTAL STATUS TABS -->
+
+    <nav class="status-navigation">
+
+        <a href="?status=all&search={{ search|urlencode }}&payment={{ payment|urlencode }}"
+           class="status-tab {% if status == 'all' or not status %}active{% endif %}">
+            All Orders
+        </a>
+
+        <a href="?status=ordered&search={{ search|urlencode }}&payment={{ payment|urlencode }}"
+           class="status-tab {% if status == 'ordered' %}active{% endif %}">
+            Ordered
+        </a>
+
+        <a href="?status=accepted&search={{ search|urlencode }}&payment={{ payment|urlencode }}"
+           class="status-tab {% if status == 'accepted' %}active{% endif %}">
+            Accepted
+        </a>
+
+        <a href="?status=shipped&search={{ search|urlencode }}&payment={{ payment|urlencode }}"
+           class="status-tab {% if status == 'shipped' %}active{% endif %}">
+            Shipped
+        </a>
+
+        <a href="?status=delivered&search={{ search|urlencode }}&payment={{ payment|urlencode }}"
+           class="status-tab {% if status == 'delivered' %}active{% endif %}">
+            Delivered
+        </a>
+
+        <a href="?status=cancelled&search={{ search|urlencode }}&payment={{ payment|urlencode }}"
+           class="status-tab {% if status == 'cancelled' %}active{% endif %}">
+            Cancelled
+        </a>
+
+    </nav>
+
+
+    <!-- SEARCH AND FILTERS -->
+
+    <section class="filter-section">
+
+        <h3 class="filter-heading">Search & Filter Orders</h3>
+
+        <form method="GET" class="filter-form">
+
+            <input type="hidden"
+                   name="status"
+                   value="{{ status|default:'all' }}">
+
+            <div class="filter-group">
+                <label for="search">SEARCH ORDERS</label>
+                <input type="text"
+                       id="search"
+                       name="search"
+                       value="{{ search }}"
+                       placeholder="Name, phone or order ID">
+            </div>
+
+            <div class="filter-group">
+                <label for="payment">PAYMENT METHOD</label>
+                <select name="payment" id="payment">
+                    <option value="">All Payments</option>
+                    <option value="cod" {% if payment == 'cod' %}selected{% endif %}>
+                        Cash on Delivery
+                    </option>
+                    <option value="upi" {% if payment == 'upi' %}selected{% endif %}>
+                        UPI
+                    </option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="date_from">FROM DATE</label>
+                <input type="date"
+                       id="date_from"
+                       name="date_from"
+                       value="{{ date_from }}">
+            </div>
+
+            <div class="filter-group">
+                <label for="date_to">TO DATE</label>
+                <input type="date"
+                       id="date_to"
+                       name="date_to"
+                       value="{{ date_to }}">
+            </div>
+
+            <button type="submit" class="filter-btn">
+                Apply Filters
+            </button>
+
+            <a href="{% url 'admin_orders' %}" class="reset-btn">
+                Reset
+            </a>
+
+        </form>
+
+    </section>
+
+
+    <!-- ORDERS TABLE -->
+
+    <section class="orders-container">
+
+        <div class="orders-container-header">
+
+            <h2>
+                {% if status == 'all' or not status %}
+                    All Customer Orders
+                {% else %}
+                    {{ status|title }} Orders
+                {% endif %}
+            </h2>
+
+            <span class="result-label">
+                Showing <strong>{{ orders|length }}</strong> matching orders
+            </span>
+
+        </div>
+
+
+        {% if orders %}
+
+        <div class="table-wrapper">
+
+            <table class="orders-table">
+
+                <thead>
+                    <tr>
+                        <th>ORDER ID</th>
+                        <th>CUSTOMER DETAILS</th>
+                        <th>PHONE</th>
+                        <th>ORDER AMOUNT</th>
+                        <th>PAYMENT</th>
+                        <th>DELIVERY STATUS</th>
+                        <th>ORDER DATE</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for order in orders %}
+
+                    <tr>
+
+                        <td>
+                            <span class="order-number">
+                                #{{ order.id }}
+                            </span>
+                        </td>
+
+                        <td class="customer-cell">
+                            <strong>{{ order.full_name }}</strong>
+                            <small>{{ order.city }}</small>
+                        </td>
+
+                        <td>{{ order.phone }}</td>
+
+                        <td class="amount-cell">
+                            ₹{{ order.total_amount|floatformat:2 }}
+                        </td>
+
+                        <td>
+                            <span class="payment-badge">
+                                {{ order.payment|upper }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {% with current_status=order.delivery_status|lower %}
+                                <span class="status-badge status-{{ current_status|slugify }}">
+                                    {{ order.delivery_status|default:"Order Placed" }}
+                                </span>
+                            {% endwith %}
+                        </td>
+
+                        <td class="date-cell">
+                            {{ order.order_date|date:"d M Y" }}
+                        </td>
+
+                        <td>
+                            <a href="{% url 'order_details' order.id %}"
+                               class="view-btn">
+                                VIEW DETAILS →
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <div class="empty-icon">⌕</div>
+
+            <h3>No Orders Found</h3>
+
+            <p>
+                No orders match your selected filters.<br>
+                Try changing the search text or clearing the filters.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+</body>
+</html>

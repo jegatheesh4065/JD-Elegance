@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Search Products | JD Elegance</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: #fff9f8;
+            color: #302326;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: linear-gradient(135deg, #f8d9d5, #fff0ed);
+            padding: 28px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 20px rgba(80, 30, 40, 0.06);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #713d48;
+        }
+
+        .logo span {
+            color: #b66c7d;
+        }
+
+        .back-home {
+            text-decoration: none;
+            color: #713d48;
+            border: 1px solid #c58c98;
+            padding: 11px 22px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            background: #713d48;
+            color: white;
+        }
+
+        /* SEARCH BAR */
+
+        .search-section {
+            padding: 35px 20px 10px;
+            text-align: center;
+        }
+
+        .search-form {
+            max-width: 650px;
+            margin: auto;
+            display: flex;
+            background: white;
+            border: 1px solid #f0d7d8;
+            border-radius: 40px;
+            padding: 6px;
+            box-shadow: 0 8px 25px rgba(120, 60, 70, 0.08);
+        }
+
+        .search-form input {
+            flex: 1;
+            min-width: 0;
+            border: none;
+            outline: none;
+            padding: 13px 20px;
+            font-size: 15px;
+            background: transparent;
+        }
+
+        .search-form button {
+            border: none;
+            background: #854e5b;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .search-form button:hover {
+            background: #60333e;
+        }
+
+        /* PAGE TITLE */
+
+        .page-title {
+            text-align: center;
+            padding: 35px 20px 25px;
+        }
+
+        .page-title .eyebrow {
+            color: #b16d7c;
+            font-size: 12px;
+            letter-spacing: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .page-title h1 {
+            font-size: clamp(27px, 4vw, 38px);
+            margin: 12px 0;
+            color: #593640;
+        }
+
+        .page-title h1 span {
+            color: #b66c7d;
+        }
+
+        .page-title p {
+            color: #89767b;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* PRODUCT GRID */
+
+        .product-container {
+            max-width: 1250px;
+            margin: 10px auto 70px;
+            padding: 0 25px;
+        }
+
+        .result-count {
+            margin-bottom: 25px;
+            color: #80666c;
+            font-size: 14px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        /* PRODUCT CARD */
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #f2e4e4;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.35s ease,
+                        box-shadow 0.35s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(100, 50, 60, 0.13);
+        }
+
+        .product-image {
+            height: 250px;
+            background: #fff5f3;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.45s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+
+        .stock-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: #e5f4e9;
+            color: #28683b;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .stock-badge.sold-out {
+            background: #383033;
+            color: white;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #b77a87;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0;
+            color: #39292e;
+            min-height: 50px;
+            overflow-wrap: anywhere;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #814653;
+            margin: 13px 0 18px;
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            background: #854e5b;
+            color: white;
+            padding: 13px 10px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #60333e;
+            box-shadow: 0 6px 15px rgba(90, 40, 50, 0.18);
+        }
+
+        .buy-btn.disabled {
+            background: #ded6d7;
+            color: #796e70;
+            pointer-events: none;
+        }
+
+        /* EMPTY SEARCH RESULT */
+
+        .empty-result {
+            background: white;
+            border: 1px solid #f0dfdf;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 25px auto 60px;
+            padding: 55px 25px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 18px;
+        }
+
+        .empty-result h2 {
+            color: #593640;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .empty-result p {
+            color: #89767b;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .continue-btn {
+            display: inline-block;
+            margin-top: 23px;
+            background: #854e5b;
+            color: white;
+            padding: 13px 25px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            background: #f6e4e2;
+            color: #78545d;
+            text-align: center;
+            padding: 25px 15px;
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+            .product-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 15px;
+            }
+
+            .product-container {
+                padding: 0 15px;
+            }
+
+            .product-image {
+                height: 190px;
+            }
+
+            .product-info {
+                padding: 14px;
+            }
+
+            .product-info h3 {
+                font-size: 14px;
+            }
+
+            .product-price {
+                font-size: 19px;
+            }
+
+            .header {
+                padding: 22px;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+        <div class="logo">JD <span>ELEGANCE</span></div>
+
+        <a href="/" class="back-home">← Back to Home</a>
+    </header>
+
+    <!-- SEARCH BAR -->
+
+    <section class="search-section">
+        <form action="{% url 'search_products' %}"
+              method="GET"
+              class="search-form">
+
+            <input
+                type="text"
+                name="q"
+                placeholder="Search for skincare, lipstick..."
+                value="{{ query }}"
+                required
+            >
+
+            <button type="submit">⌕ Search</button>
+        </form>
+    </section>
+
+    <!-- TITLE -->
+
+    <section class="page-title">
+        <div class="eyebrow">Your Beauty, Your Choice</div>
+
+        <h1>Discover <span>Your Favorites</span></h1>
+
+        <p>
+            {% if query %}
+                Products matching "{{ query }}"
+            {% else %}
+                Explore our beauty collection
+            {% endif %}
+        </p>
+    </section>
+
+    <!-- PRODUCTS -->
+
+    <main class="product-container">
+
+        {% if products %}
+
+            <div class="result-count">
+                Showing {{ products|length }} matching product{{ products|length|pluralize }}
+            </div>
+
+            <div class="product-grid">
+
+                {% for product in products %}
+
+                    <article class="product-card">
+
+                        <div class="product-image">
+
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}"
+                                     alt="{{ product.name }}">
+                            {% endif %}
+
+                            {% if product.stock > 0 %}
+                                <span class="stock-badge">
+                                    IN STOCK
+                                </span>
+                            {% else %}
+                                <span class="stock-badge sold-out">
+                                    SOLD OUT
+                                </span>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <div class="product-label">
+                                JD Beauty Collection
+                            </div>
+
+                            <h3>{{ product.name }}</h3>
+
+                            <div class="product-price">
+                                ₹{{ product.price }}
+                            </div>
+
+                            {% if product.stock > 0 %}
+                                <a href="{% url 'product_order' product.id %}"
+                                   class="buy-btn">
+                                    BUY NOW &nbsp; →
+                                </a>
+                            {% else %}
+                                <span class="buy-btn disabled">
+                                    OUT OF STOCK
+                                </span>
+                            {% endif %}
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-result">
+
+                <div class="empty-icon">🔎</div>
+
+                <h2>No Products Found</h2>
+
+                <p>
+                    We couldn't find a product matching
+                    "{{ query }}". Try another product name.
+                </p>
+
+                <a href="/" class="continue-btn">
+                    Explore Collection
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+        © 2026 JD Elegance — A Little Luxury for Every Day ✨
+    </footer>
+
+</body>
+</html>

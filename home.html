@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <script src="bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+    <style>
+.carousel-indicators button {
+    width: 7px !important;
+    height: 7px !important;
+    padding: 0 !important;
+    margin: 0 7px !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background-color: white !important;
+    opacity: 0.5 !important;
+}
+
+.carousel-indicators button.active {
+    opacity: 1 !important;
+}
+#myCarousel{
+    position: relative;
+    bottom: 49px;
+}
+
+.carousel-item img,
+.carousel-item video {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+.carousel {
+    /* margin: 30px auto; */
+    width: 100%;
+    max-width: 1400px;
+    /* border-radius: 20px; */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.carousel-item img,
+.carousel-item video {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+}
+
+/* Dark overlay */
+.carousel-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0.45),
+        transparent
+    );
+}
+
+    /* Zoom effect */
+    /* .carousel-item.active img,
+    .carousel-item.active video {
+        animation: zoom 6s ease-in-out;
+    } */
+
+@keyframes zoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+}
+
+    /* Previous / Next buttons */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.8);
+    border-radius: 50%;
+    margin: 0 20px;
+    opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        .carousel {
+            width: 100%;
+            border-radius: 0;
+        }
+
+        .carousel-item img,
+        .carousel-item video {
+            height: 350px;
+        }
+    }
+
+ .carousel-caption {
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    text-align: left;
+}
+
+.carousel-caption h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.carousel-caption p {
+    font-size: 20px;
+}
+
+.carousel-caption button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.carousel-caption button:hover {
+    transform: scale(1.05);
+}   
+ .best-sellers {
+    width: 100%;
+    padding: 45px 0;
+    background: white;
+    overflow: hidden;
+}
+
+.best-sellers h2 {
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 25px;
+    font-weight: 700;
+    color: #e0ae45;
+}
+
+.product-slider {
+    position: relative;
+    width: 95%;
+    margin: auto;
+    padding: 55px 5px;
+    background: #eeeeee;
+    border-radius: 25px;
+}
+
+.product-container {
+    display: flex;
+    gap: 28px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: 5px;
+}
+
+.product-container::-webkit-scrollbar {
+    display: none;
+}
+
+.product-card {
+    flex: 0 0 220px;
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.product-img {
+    width: 100%;
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: 0.4s;
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.06);
+}
+
+.product-card h3 {
+    font-size: 16px;
+    min-height: 48px;
+    margin: 10px 5px 5px;
+    color: #222;
+    line-height: 1.4;
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 5px 5px;
+}
+
+.product-bottom span {
+    font-size: 17px;
+    font-weight: 600;
+    color: #111;
+}
+
+.product-bottom button {
+    border: none;
+    background: #222;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.product-bottom button:hover {
+    background: #000;
+    transform: scale(1.05);
+}
+
+/* Arrows */
+
+.slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+    color: #222;
+
+    font-size: 25px;
+    cursor: pointer;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.prev {
+    left: -18px;
+}
+
+.next {
+    right: -18px;
+}
+
+.slide-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .best-sellers h2 {
+        font-size: 30px;
+    }
+
+    .product-slider {
+        width: 92%;
+        padding: 35px 5px;
+    }
+
+    .product-card {
+        flex: 0 0 180px;
+    }
+
+    .product-img {
+        height: 190px;
+    }
+
+    .product-card h3 {
+        font-size: 14px;
+    }
+
+    .product-bottom span {
+        font-size: 14px;
+    }
+
+    .product-bottom button {
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+            <img src="image/logo_colour.jpeg" alt="Logo">
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation -->
+        <div class="collapse navbar-collapse" id="mainNav">
+
+            <ul class="navbar-nav mx-auto">
+
+                <li class="nav-item">
+                    <a href="#">All Offers</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">New Arrivals</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Brushes & Tools</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Skin</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Hair</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Fragrance</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Gifts & Combos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Bridal Bundle</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+        <div class="serach-login">
+        <div class="search-box">
+        <input type="text" id="search" placeholder="Search for toners">
+        <button><span class="search-icon">&#8981;</span></button>
+        </div>
+        </div> 
+         <button class="login-btn">&#128100;</button>
+         <button class="wishlist-btn" onclick="openWishlist()">♡ Wishlist
+            <span class="wishlist-badge" id="wishlistCount">0</span>
+         </button>
+         <button class="delivery-btn"><i class="fa-solid fa-truck"></i></button>
+<div class="overlay" id="overlay" onclick="closeWishlist()"></div>
+
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <h3>Your Wishlist</h3>
+        <button onclick="closeWishlist()">✕</button>
+    </div>
+
+    <div class="wishlist-content" id="wishlistContent">
+    </div>
+
+</div>
+        
+    </header>
+    <script src="home.js"></script>
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-inner">
+
+        <!-- Image -->
+        <div class="carousel-item active">
+            <img src="image/Why Beauty and Self-Care Are Essential for Women and Girls in 2026.jpg" class="d-block w-100" alt="Image">
+            <div class="carousel-caption">
+    <h1>Discover Your Beauty</h1>
+    <p>Premium cosmetics for your everyday look</p>
+    <button>Shop Now</button>
+</div>
+        </div>
+
+        <!-- Video -->
+        <div class="carousel-item">
+            <video class="d-block w-100" autoplay muted loop playsinline>
+                <source src="video/SaveInta.com_AQPLHXs6fVyihk7pIzavvqq6m_LhJvwJuxKvRwy1itCxJ7HWK_DsfOoHrWtJkhiAR7Ip9zmsxbUGKDZ7eSm3xhIs7Uvg6ohFH3bTfLQ.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Image -->
+        <div class="carousel-item">
+            <img src="image/Top Selling YSL Perfume in Canada.jpg" class="d-block w-100 " alt="Image">
+        </div>
+
+        <!-- Video -->
+        <div class="carousel-item">
+            <video class="d-block w-100" autoplay muted loop playsinline>
+                <source src="video/vidssave.com Skin Care Product example commercial 480P.mp4" type="video/mp4">
+            </video>
+        </div>
+
+    </div>
+    
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active">
+            <span></span>
+        </button>
+
+        <button type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="1">
+            <span></span>
+        </button>
+
+        <button type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="2">
+            <span></span>
+        </button>
+        <button type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="3">
+            <span></span>
+        </button>
+
+
+    </div>
+
+</div>
+
+</div>
+<div class="category">
+    <section class="best-sellers">
+
+    <h2>New & Trending</h2>
+
+    <div class="product-slider">
+
+        <button class="slide-btn prev" onclick="slideLeft()">&#10094;</button>
+
+        <div class="product-container" id="productContainer">
+
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-img">
+                   <a href="#"><img src="image/eye shadow__ cute eye shadow.jpg" alt="Eyeshadow"></a>
+                </div>
+
+                <h3>On The Go Glam Eyeshadow Palette</h3>
+
+                <div class="product-bottom">
+                    <span>₹1,895</span>
+                    <button class="wishlist-add"
+                    data-name="On The Go Glam Eyeshadow Palette"
+            onclick="addWishlist(this,
+                'On The Go Glam Eyeshadow Palette',
+                '1895',
+                'image/eye shadow__ cute eye shadow.jpg'
+            )">
+            ♡
+        </button>
+        
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <a href="product1.html">
+                    <img src="image/foundation.jpg" alt="Foundation"></a>
+                </div>
+
+                <h3>Spotlight Cushion Foundation</h3>
+
+                <div class="product-bottom">
+                    <span>₹995</span>
+                    <button class="wishlist-add"
+                    data-name="Studio HD Liquid Concealer"
+            onclick="addWishlist(this,
+                'Spotlight Cushion Foundation',
+                '₹995',
+                'image/foundation.jpg'
+            )">
+            ♡
+        </button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <a href="#"><img src="image/concelar.jpg" alt="Concealer"></a>
+                </div>
+
+                <h3>Studio HD Liquid Concealer</h3>
+
+                <div class="product-bottom">
+                    <span>₹695</span>
+                    <button class="wishlist-add"
+                    data-name="Studio HD Liquid Concealer"
+            onclick="addWishlist( this,
+                'Studio HD Liquid Concealer',
+                '₹695',
+                'image/concelar.jpg'
+            )">
+            ♡
+        </button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-img">
+                   <a href="#"><img src="image/makeup_brush.jpg" alt="Makeup Brush"></a>
+                </div>
+
+                <h3>4-IN-1 Makeup Brush</h3>
+
+                <div class="product-bottom">
+                    <span>₹995</span>
+                     <button class="wishlist-add"
+                     data-name="4-IN-1 Makeup Brush"
+            onclick="addWishlist(this,
+                '4-IN-1 Makeup Brush',
+                '₹995',
+                'image/makeup_brush.jpg'
+            )">
+            ♡
+        </button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-img">
+                  <a href="#"><img src="image/fixer.jpg" alt="Makeup Fixer"></a>
+                </div>
+
+                <h3>Micro Finish Makeup Fixer</h3>
+
+                <div class="product-bottom">
+                    <span>₹1,195</span>
+                    <button class="wishlist-add"
+                    data-name="Micro Finish Makeup Fixer"
+            onclick="addWishlist(this,
+                'Micro Finish Makeup Fixer',
+                '₹1195',
+                'image/fixer.jpg'
+            )">
+            ♡
+        </button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-img">
+                   <a href="#"> <img src="image/eyeliner.jpg" alt="Eyeliner"></a>
+                </div>
+
+                <h3>Studio HD Eyeliner</h3>
+
+                <div class="product-bottom">
+                    <span>₹695</span>
+                   <button class="wishlist-add"
+                   data-name="Studio HD Eyeliner"
+            onclick="addWishlist(this,
+                'Studio HD Eyeliner',
+                '₹695',
+                'image/eyeliner.jpg'
+            )">
+            ♡
+        </button>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="slide-btn next" onclick="slideRight()">&#10095;</button>
+
+    </div>
+
+</section>
+</div>
+
+    
+    
+</body>
+</html>

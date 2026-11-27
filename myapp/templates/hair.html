@@ -1,0 +1,932 @@
+{% extends 'nav_bar.html' %}
+{% load static %}
+
+{% block extra_css %}
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fffdf9;
+    color: #302820;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* HERO */
+
+.hair-hero {
+    min-height: 520px;
+    padding: 70px 8%;
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(35, 27, 21, 0.78),
+            rgba(35, 27, 21, 0.10)
+        ),
+        url("{% static 'image/hair_banner.jpg' %}");
+
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.hair-hero-content {
+    max-width: 570px;
+}
+
+.hair-eyebrow {
+    color: #c6a58c;
+    font-size: 12px;
+    letter-spacing: 4px;
+    margin-bottom: 22px;
+}
+
+.hair-hero h1 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.15;
+    margin-bottom: 22px;
+}
+
+.hair-hero p {
+    max-width: 460px;
+    color: #f1e7df;
+    font-size: 15px;
+    line-height: 1.9;
+    margin-bottom: 30px;
+}
+
+.hair-btn {
+    display: inline-block;
+    padding: 15px 28px;
+    background: #ead5c3;
+    color: #302820;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    transition: 0.3s;
+}
+
+.hair-btn:hover {
+    background: white;
+    color: #302820;
+    transform: translateY(-3px);
+}
+
+/* COMMON HEADING */
+
+.hair-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hair-heading .hair-eyebrow {
+    margin-bottom: 13px;
+}
+
+.hair-heading h2 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: clamp(29px, 4vw, 42px);
+    margin-bottom: 14px;
+}
+
+.hair-heading p {
+    color: #85766b;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* INTRO */
+
+.hair-intro {
+    padding: 65px 20px 50px;
+    text-align: center;
+}
+
+.hair-intro h2 {
+    font-family: Georgia, serif;
+    font-size: 34px;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.hair-intro p {
+    max-width: 650px;
+    margin: auto;
+    color: #85766b;
+    line-height: 1.9;
+}
+
+/* CATEGORIES */
+
+.hair-categories-section {
+    padding: 30px 6% 75px;
+}
+
+.hair-categories {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.hair-category {
+    text-align: center;
+    color: #302820;
+}
+
+.hair-category-image {
+    height: 280px;
+    overflow: hidden;
+    background: #eee0d3;
+    border-radius: 140px 140px 8px 8px;
+}
+
+.hair-category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.hair-category:hover img {
+    transform: scale(1.07);
+}
+
+.hair-category h3 {
+    font-family: Georgia, serif;
+    font-size: 21px;
+    font-weight: normal;
+    margin-top: 18px;
+}
+
+.hair-category p {
+    color: #85766b;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* BENEFITS */
+
+.hair-benefits {
+    padding: 32px 6%;
+    background: #f2e5da;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.hair-benefit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.hair-benefit i {
+    color: #98725f;
+    font-size: 28px;
+}
+
+.hair-benefit h4 {
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.hair-benefit p {
+    color: #85766b;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* PRODUCTS */
+
+.hair-products-section {
+    padding: 80px 5%;
+    background: #fffdf9;
+}
+
+.hair-products {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 23px;
+}
+
+.hair-product-card {
+    position: relative;
+    padding: 12px;
+    background: white;
+    border: 1px solid #eee4dc;
+    transition: 0.3s;
+}
+
+.hair-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(48, 40, 32, 0.09);
+}
+
+.hair-product-image {
+    height: 260px;
+    overflow: hidden;
+    background: #f4ece5;
+    position: relative;
+}
+
+.hair-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s;
+}
+
+.hair-product-card:hover .hair-product-image img {
+    transform: scale(1.05);
+}
+
+.hair-product-card h3 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.7;
+    margin: 16px 0 10px;
+    min-height: 47px;
+}
+
+.hair-price {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.hair-stock {
+    color: #63815c;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.hair-product-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hair-wishlist-btn {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    background: #f3e8df;
+    color: #302820;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.hair-wishlist-btn:hover {
+    color: #d94b68;
+}
+
+.hair-buy-btn {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 5px;
+    background: #302820;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hair-buy-btn:hover {
+    background: #98725f;
+    color: white;
+}
+
+.hair-out-of-stock .hair-product-image img {
+    filter: blur(3px);
+    opacity: 0.55;
+}
+
+.hair-sold-out {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 11px 16px;
+    background: #302820;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.hair-empty {
+    grid-column: 1 / -1;
+    padding: 40px 20px;
+    text-align: center;
+    background: #f5ece4;
+    color: #85766b;
+    line-height: 1.8;
+}
+
+/* HAIR ROUTINE */
+
+.hair-routine {
+    padding: 75px 7%;
+    background: #f5eae0;
+}
+
+.hair-routine-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 55px;
+}
+
+.hair-routine-image {
+    height: 440px;
+    overflow: hidden;
+}
+
+.hair-routine-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hair-routine-text h2 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: clamp(32px, 4vw, 44px);
+    line-height: 1.3;
+    margin-bottom: 20px;
+}
+
+.hair-routine-text > p {
+    color: #85766b;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 25px;
+}
+
+.hair-step {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.hair-step-number {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border: 1px solid #b99b89;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+}
+
+.hair-step h4 {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.hair-step p {
+    color: #85766b;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* REVIEWS */
+
+.hair-reviews {
+    padding: 75px 6%;
+}
+
+.hair-review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.hair-review-card {
+    padding: 30px 25px;
+    border: 1px solid #eee4dc;
+    background: white;
+}
+
+.hair-stars {
+    color: #b78a46;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.hair-review-card h3 {
+    font-family: Georgia, serif;
+    font-size: 21px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.hair-review-card p {
+    color: #85766b;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 950px) {
+    .hair-categories,
+    .hair-products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hair-routine-grid {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 700px) {
+    .hair-hero {
+        min-height: 440px;
+        padding: 45px 7%;
+    }
+
+    .hair-categories {
+        gap: 18px;
+    }
+
+    .hair-category-image {
+        height: 220px;
+    }
+
+    .hair-benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .hair-benefit {
+        justify-content: flex-start;
+    }
+
+    .hair-product-image {
+        height: 190px;
+    }
+
+    .hair-product-card h3 {
+        font-size: 13px;
+    }
+
+    .hair-product-actions {
+        gap: 5px;
+    }
+
+    .hair-wishlist-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .hair-buy-btn {
+        font-size: 10px;
+    }
+
+    .hair-routine-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hair-routine-image {
+        height: 320px;
+    }
+
+    .hair-review-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 400px) {
+    .hair-products-section {
+        padding: 50px 4%;
+    }
+
+    .hair-products {
+        gap: 12px;
+    }
+
+    .hair-product-image {
+        height: 155px;
+    }
+
+    .hair-category-image {
+        height: 180px;
+    }
+
+    .hair-category h3 {
+        font-size: 18px;
+    }
+}
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<!-- HERO -->
+
+<section class="hair-hero">
+
+    <div class="hair-hero-content">
+
+        <p class="hair-eyebrow">THE ART OF HAIR CARE</p>
+
+        <h1>
+            Love Your Hair.<br>
+            Own Your Shine.
+        </h1>
+
+        <p>
+            Discover hair care essentials for your everyday routine.
+            Explore shampoos, conditioners, hair masks and more
+            with JD Elegance.
+        </p>
+
+        <a href="#hairProducts" class="hair-btn">
+            EXPLORE HAIR CARE
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- INTRO -->
+
+<section class="hair-intro">
+
+    <div class="hair-heading">
+
+        <p class="hair-eyebrow">YOUR HAIR CARE RITUAL</p>
+
+        <h2>A Little Care, A Lot of Shine</h2>
+
+        <p>
+            Explore hair care essentials and create a simple routine
+            that suits your hair and scalp needs.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="hair-categories-section">
+
+    <div class="hair-heading">
+
+        <p class="hair-eyebrow">EXPLORE YOUR FAVOURITES</p>
+
+        <h2>Shop By Category</h2>
+
+        <p>Find the essentials for your hair care routine.</p>
+
+    </div>
+
+   <div class="hair-categories">
+
+    <!-- SHAMPOO -->
+    <a href="?category=Shampoo#hairProducts" class="hair-category">
+        <div class="hair-category-image">
+            <img src="{% static 'image/shampoo.jpg' %}" alt="Shampoo">
+        </div>
+        <h3>Shampoo</h3>
+        <p>Refresh your hair routine.</p>
+    </a>
+
+    <!-- CONDITIONER -->
+    <a href="?category=Conditioner#hairProducts" class="hair-category">
+        <div class="hair-category-image">
+            <img src="{% static 'image/hair_conditioner.jpg' %}" alt="Conditioner">
+        </div>
+        <h3>Conditioner</h3>
+        <p>Softness and smoothness.</p>
+    </a>
+
+    <!-- HAIR MASK -->
+    <a href="?category=Hair Masks#hairProducts" class="hair-category">
+        <div class="hair-category-image">
+            <img src="{% static 'image/hair_mask.jpg' %}" alt="Hair mask">
+        </div>
+        <h3>Hair Masks</h3>
+        <p>Extra care for your routine.</p>
+    </a>
+
+    <!-- HAIR OIL -->
+    <a href="?category=Hair Oils#hairProducts" class="hair-category">
+        <div class="hair-category-image">
+            <img src="{% static 'image/hair_oil.jpg' %}" alt="Hair oil">
+        </div>
+        <h3>Hair Oils</h3>
+        <p>A nourishing care ritual.</p>
+    </a>
+
+</div>
+
+</section>
+
+
+<!-- BENEFITS -->
+
+<section class="hair-benefits">
+
+    <div class="hair-benefit">
+
+        <i class="fa-solid fa-leaf"></i>
+
+        <div>
+            <h4>Your Hair Care Ritual</h4>
+            <p>Explore products for your routine.</p>
+        </div>
+
+    </div>
+
+    <div class="hair-benefit">
+
+        <i class="fa-solid fa-droplet"></i>
+
+        <div>
+            <h4>Everyday Care</h4>
+            <p>Discover shampoos and conditioners.</p>
+        </div>
+
+    </div>
+
+    <div class="hair-benefit">
+
+        <i class="fa-solid fa-heart"></i>
+
+        <div>
+            <h4>Your Beauty, Your Way</h4>
+            <p>Find your favourite hair care essentials.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DYNAMIC PRODUCTS -->
+
+<section class="hair-products-section" id="hairProducts">
+
+    <div class="hair-heading">
+
+        <p class="hair-eyebrow">DISCOVER YOUR FAVOURITES</p>
+
+        <h2>Hair Care Essentials</h2>
+
+        <p>Explore our hair care collection.</p>
+
+    </div>
+
+    <div class="hair-products">
+
+        {% for product in products %}
+
+        <div class="hair-product-card
+             {% if product.stock <= 0 %}hair-out-of-stock{% endif %}">
+
+            <div class="hair-product-image">
+
+                {% if product.image %}
+                <img src="{{ product.image.url }}"
+                     alt="{{ product.name }}">
+                {% endif %}
+
+                {% if product.stock <= 0 %}
+                <span class="hair-sold-out">SOLD OUT</span>
+                {% endif %}
+
+            </div>
+
+            <h3>{{ product.name }}</h3>
+
+            <p class="hair-price">
+                ₹{{ product.price|floatformat:2 }}
+            </p>
+
+            {% if product.stock > 0 %}
+
+            <p class="hair-stock">In stock</p>
+
+            <div class="hair-product-actions">
+
+                <button
+                    type="button"
+                    class="hair-wishlist-btn"
+                    aria-label="Add to wishlist"
+                    onclick="addWishlist(
+                        this,
+                        '{{ product.name|escapejs }}',
+                        '{{ product.price }}',
+                        '{{ product.image.url|escapejs }}'
+                    )">
+                    ♡
+                </button>
+
+                <a href="{% url 'product_order' product.id %}"
+                   class="hair-buy-btn">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    BUY NOW
+                </a>
+
+            </div>
+
+            {% else %}
+
+            <button class="hair-buy-btn"
+                    type="button"
+                    disabled
+                    style="width:100%; background:#aaa;">
+                SOLD OUT
+            </button>
+
+            {% endif %}
+
+        </div>
+
+        {% empty %}
+
+        <div class="hair-empty">
+
+            <h3>No hair care products available</h3>
+
+            <p>
+                Add products under the Hair category through your
+                admin panel.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- HAIR CARE ROUTINE -->
+
+<section class="hair-routine">
+
+    <div class="hair-routine-grid">
+
+        <div class="hair-routine-image">
+
+            <img src="{% static 'image/hair_routine.jpg' %}"
+                 alt="Hair care routine">
+
+        </div>
+
+        <div class="hair-routine-text">
+
+            <p class="hair-eyebrow">YOUR MOMENT OF SELF-CARE</p>
+
+            <h2>
+                Make Hair Care<br>
+                Your Favourite Ritual
+            </h2>
+
+            <p>
+                Build a simple routine based on your hair type
+                and personal needs. Choose suitable products
+                and follow their usage instructions.
+            </p>
+
+            <div class="hair-step">
+
+                <div class="hair-step-number">1</div>
+
+                <div>
+                    <h4>Cleanse</h4>
+                    <p>Choose a shampoo suitable for your scalp.</p>
+                </div>
+
+            </div>
+
+            <div class="hair-step">
+
+                <div class="hair-step-number">2</div>
+
+                <div>
+                    <h4>Condition</h4>
+                    <p>Use conditioner according to product directions.</p>
+                </div>
+
+            </div>
+
+            <div class="hair-step">
+
+                <div class="hair-step-number">3</div>
+
+                <div>
+                    <h4>Nourish</h4>
+                    <p>Explore masks and other care products suited to your hair.</p>
+                </div>
+
+            </div>
+
+            <a href="#hairProducts" class="hair-btn">
+                SHOP HAIR CARE
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CUSTOMER REVIEWS DESIGN -->
+
+<section class="hair-reviews">
+
+    <div class="hair-heading">
+
+        <p class="hair-eyebrow">THE JD ELEGANCE EXPERIENCE</p>
+
+        <h2>Your Hair Care Favourites</h2>
+
+        <p>Explore products for your everyday beauty routine.</p>
+
+    </div>
+
+    <div class="hair-review-grid">
+
+        <div class="hair-review-card">
+
+            <div class="hair-stars">★★★★★</div>
+
+            <h3>Everyday Essentials</h3>
+
+            <p>
+                Discover products that fit easily into your
+                everyday hair care routine.
+            </p>
+
+        </div>
+
+        <div class="hair-review-card">
+
+            <div class="hair-stars">★★★★★</div>
+
+            <h3>Explore Something New</h3>
+
+            <p>
+                Browse different hair care products and find
+                options that suit your personal needs.
+            </p>
+
+        </div>
+
+        <div class="hair-review-card">
+
+            <div class="hair-stars">★★★★★</div>
+
+            <h3>Your Beauty Ritual</h3>
+
+            <p>
+                Make time for self-care with products selected
+                for your everyday routine.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

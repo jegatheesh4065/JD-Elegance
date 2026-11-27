@@ -1,0 +1,533 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Login | JD Elegance</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+
+            background: linear-gradient(
+                135deg,
+                #fae2dd,
+                #fff8f5,
+                #f5d8d2
+            );
+        }
+
+        /* MAIN CONTAINER */
+
+        .login-container {
+            display: flex;
+            width: 900px;
+            max-width: 100%;
+            min-height: 540px;
+
+            background: #ffffff;
+            border-radius: 22px;
+            overflow: hidden;
+
+            box-shadow: 0 15px 45px rgba(150, 100, 90, 0.16);
+        }
+
+        /* LEFT SIDE */
+
+        .login-left {
+            width: 45%;
+            padding: 45px 35px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            background: linear-gradient(
+                145deg,
+                #f3d2cb,
+                #fae8e3,
+                #eac3ba
+            );
+        }
+
+        .brand-icon {
+            width: 95px;
+            height: 95px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #bd8b7e;
+            border-radius: 50%;
+
+            color: #a66f70;
+            font-size: 38px;
+
+            margin-bottom: 25px;
+        }
+
+        .login-left h1 {
+            font-family: Georgia, serif;
+            font-size: 38px;
+            font-weight: 500;
+            color: #754b48;
+            margin-bottom: 15px;
+        }
+
+        .login-left p {
+            color: #815f5a;
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 260px;
+        }
+
+        .decorative-line {
+            width: 65px;
+            height: 2px;
+            background: #b98579;
+            margin: 22px 0;
+        }
+
+        .beauty-text {
+            font-family: Georgia, serif;
+            font-size: 17px;
+            font-style: italic;
+            color: #754b48;
+        }
+
+        /* RIGHT SIDE */
+
+        .login-right {
+            width: 55%;
+            padding: 50px 45px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-heading {
+            font-size: 29px;
+            color: #493533;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* FORM */
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #614845;
+            margin-bottom: 9px;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+
+            height: 48px;
+            padding: 0 15px;
+
+            border: 1px solid #eadbd7;
+            border-radius: 9px;
+
+            background: #fffdfc;
+            transition: 0.3s;
+        }
+
+        .input-box:focus-within {
+            border-color: #bd8b7e;
+            box-shadow: 0 0 0 3px rgba(189, 139, 126, 0.12);
+        }
+
+        .input-box i {
+            color: #b98579;
+            font-size: 15px;
+            margin-right: 12px;
+        }
+
+        .input-box input {
+            width: 100%;
+            border: none;
+            outline: none;
+
+            background: transparent;
+            color: #493533;
+            font-size: 14px;
+        }
+
+        .input-box input::placeholder {
+            color: #bbb;
+        }
+
+        /* PASSWORD TOGGLE */
+
+        .toggle-password {
+            cursor: pointer;
+            margin-right: 0 !important;
+            margin-left: 10px;
+        }
+
+        /* OPTIONS */
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+
+            margin: 5px 0 25px;
+            font-size: 12px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #777;
+        }
+
+        .remember-me input {
+            accent-color: #b98579;
+        }
+
+        .login-options a {
+            color: #a66f70;
+            text-decoration: none;
+        }
+
+        .login-options a:hover {
+            text-decoration: underline;
+        }
+
+        /* LOGIN BUTTON */
+
+        .login-submit {
+            width: 100%;
+            height: 49px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: linear-gradient(
+                135deg,
+                #c59488,
+                #a66f70
+            );
+
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-submit:hover {
+            background: linear-gradient(
+                135deg,
+                #a66f70,
+                #865454
+            );
+
+            transform: translateY(-2px);
+            box-shadow: 0 7px 15px rgba(166, 111, 112, 0.22);
+        }
+
+        /* REGISTER */
+
+        .register-text {
+            margin-top: 25px;
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .register-text a {
+            color: #a66f70;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #c62828;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        /* BACK TO HOME */
+
+        .back-home {
+            text-align: center;
+            margin-top: 22px;
+        }
+
+        .back-home a {
+            color: #a66f70;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 650px) {
+            body {
+                padding: 15px;
+            }
+
+            .login-container {
+                flex-direction: column;
+                width: 420px;
+            }
+
+            .login-left {
+                width: 100%;
+                padding: 30px 20px;
+            }
+
+            .brand-icon {
+                width: 65px;
+                height: 65px;
+                font-size: 27px;
+                margin-bottom: 15px;
+            }
+
+            .login-left h1 {
+                font-size: 30px;
+            }
+
+            .login-left p {
+                font-size: 13px;
+            }
+
+            .decorative-line {
+                margin: 12px 0;
+            }
+
+            .login-right {
+                width: 100%;
+                padding: 35px 25px;
+            }
+
+            .login-heading {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- LEFT BRAND SECTION -->
+
+    <div class="login-left">
+
+        <div class="brand-icon">
+            <i class="fa-solid fa-spa"></i>
+        </div>
+
+        <h1>JD Elegance</h1>
+
+        <p>
+            Discover your beauty essentials and
+            enjoy a personalized shopping experience.
+        </p>
+
+        <div class="decorative-line"></div>
+
+        <div class="beauty-text">
+            Beauty begins with you.
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT LOGIN SECTION -->
+
+    <div class="login-right">
+
+        <h2 class="login-heading">Welcome Back!</h2>
+
+        <p class="login-subtitle">
+            Sign in to continue your beauty journey.
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="error-message">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <!-- EMAIL -->
+
+            <div class="input-group">
+
+                <label for="email">Email Address</label>
+
+                <div class="input-box">
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="input-group">
+
+                <label for="password">Password</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <i
+                        class="fa-regular fa-eye toggle-password"
+                        onclick="togglePassword()"
+                        title="Show or hide password">
+                    </i>
+
+                </div>
+
+            </div>
+
+
+            <!-- OPTIONS -->
+
+            <div class="login-options">
+
+                <label class="remember-me">
+                    <input type="checkbox" name="remember">
+                    Remember me
+                </label>
+
+                <a href="{% url 'password_reset' %}">
+                    Forgot password?
+                </a>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button type="submit" class="login-submit">
+                SIGN IN &nbsp; <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        </form>
+
+
+        <!-- REGISTER LINK -->
+
+        <p class="register-text">
+            Don't have an account?
+            <a href="{% url 'customer_register' %}">
+                Create Account
+            </a>
+        </p>
+
+
+        <div class="back-home">
+            <a href="{% url 'home' %}">
+                <i class="fa-solid fa-arrow-left"></i>
+                &nbsp; Back to Home
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    function togglePassword() {
+
+        const password = document.getElementById("password");
+        const icon = document.querySelector(".toggle-password");
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+
+        } else {
+
+            password.type = "password";
+
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+
+        }
+    }
+</script>
+
+</body>
+</html>

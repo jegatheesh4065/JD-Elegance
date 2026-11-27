@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ category.name }} | JD ELEGANCE</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #faf8f5;
+            color: #30251f;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 85px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #eee5dc;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #634633;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #634633;
+            font-size: 13px;
+            letter-spacing: 1px;
+            border: 1px solid #c9b39e;
+            padding: 11px 20px;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            background: #634633;
+            color: white;
+        }
+
+        /* HERO SECTION */
+
+        .hero {
+            background: linear-gradient(120deg, #e9ddd0, #f6eee5, #e8d7c6);
+            padding: 55px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "JD";
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 180px;
+            color: #ffffff;
+            opacity: 0.18;
+            top: -50px;
+            left: 4%;
+        }
+
+        .hero small {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #8c6b51;
+            font-size: 11px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 43px;
+            margin: 15px 0;
+            color: #493326;
+            font-weight: 600;
+        }
+
+        .hero p {
+            color: #786454;
+            font-size: 13px;
+        }
+
+        .hero-line {
+            width: 55px;
+            height: 2px;
+            background: #a78360;
+            margin: 20px auto 0;
+        }
+
+        /* PRODUCT SECTION */
+
+        .products-section {
+            max-width: 1400px;
+            margin: auto;
+            padding: 55px 6%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            font-weight: 600;
+        }
+
+        .count {
+            color: #8c7767;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        /* PRODUCT CARD */
+
+        .product-card {
+            background: white;
+            border: 1px solid #eee7df;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.35s, box-shadow 0.35s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(83, 59, 40, 0.12);
+        }
+
+        .image-box {
+            height: 270px;
+            background: #f4eee8;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .image-box img {
+            transform: scale(1.07);
+        }
+
+        .product-info {
+            padding: 20px 17px;
+        }
+
+        .product-info h3 {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.7;
+            min-height: 48px;
+            color: #423126;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #795638;
+            margin-top: 12px;
+        }
+
+        .stock {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 10px;
+            background: #eaf3e8;
+            color: #497348;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            border-radius: 2px;
+        }
+
+        .out-stock {
+            background: #f9e7e3;
+            color: #b04435;
+        }
+
+        .sold-out {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #493326;
+            color: white;
+            font-size: 10px;
+            letter-spacing: 1px;
+            padding: 8px 12px;
+            z-index: 2;
+        }
+
+        .product-card.is-sold-out .image-box img {
+            opacity: 0.45;
+            filter: grayscale(50%);
+        }
+
+        /* EMPTY PRODUCTS */
+
+        .empty-box {
+            text-align: center;
+            background: white;
+            padding: 75px 20px;
+            border: 1px solid #eee5dc;
+        }
+
+        .empty-box .icon {
+            font-size: 45px;
+            color: #b79b81;
+            margin-bottom: 15px;
+        }
+
+        .empty-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .empty-box p {
+            font-size: 13px;
+            color: #8c7767;
+        }
+
+        .back-bottom {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 24px;
+            background: #634633;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .back-bottom:hover {
+            background: #8c6b51;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #30251f;
+            color: #e7d8c9;
+            padding: 30px 15px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        footer span {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
+            .product-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 750px) {
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 14px;
+            }
+
+            .products-section {
+                padding: 35px 4%;
+            }
+
+            .image-box {
+                height: 210px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-box {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+        <div class="logo">JD ELEGANCE</div>
+
+        <a href="{% url 'categories' %}" class="nav-link">
+            ← ALL CATEGORIES
+        </a>
+    </nav>
+
+    <!-- CATEGORY BANNER -->
+
+    <section class="hero">
+        <small>Discover Your Beauty</small>
+
+        <h1>{{ category.name }}</h1>
+
+        <p>Beauty, elegance and luxury — curated just for you.</p>
+
+        <div class="hero-line"></div>
+    </section>
+
+    <!-- PRODUCTS -->
+
+    <section class="products-section">
+
+        <div class="section-header">
+            <div>
+                <h2>Explore The Collection</h2>
+
+                <p class="count">
+                    {{ products|length }} products available
+                </p>
+            </div>
+        </div>
+
+        {% if products %}
+
+            <div class="product-grid">
+
+                {% for product in products %}
+
+                    <div class="product-card {% if product.stock <= 0 %}is-sold-out{% endif %}">
+
+                        {% if product.stock <= 0 %}
+                            <span class="sold-out">SOLD OUT</span>
+                        {% endif %}
+
+                        <div class="image-box">
+
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}"
+                                     alt="{{ product.name }}">
+                            {% else %}
+                                <img src="https://placehold.co/300x300?text=No+Image"
+                                     alt="No image available">
+                            {% endif %}
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <h3>{{ product.name }}</h3>
+
+                            <p class="price">₹{{ product.price }}</p>
+
+                            {% if product.stock > 0 %}
+                                <span class="stock">
+                                    ✓ IN STOCK
+                                </span>
+                            {% else %}
+                                <span class="stock out-stock">
+                                    CURRENTLY UNAVAILABLE
+                                </span>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-box">
+
+                <div class="icon">✧</div>
+
+                <h3>Coming Soon</h3>
+
+                <p>We're preparing something beautiful for this collection.</p>
+
+                <a href="{% url 'categories' %}" class="back-bottom">
+                    EXPLORE OTHER CATEGORIES
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+        <span>JD ELEGANCE</span>
+        BEAUTY IN EVERY DETAIL
+    </footer>
+
+</body>
+</html>

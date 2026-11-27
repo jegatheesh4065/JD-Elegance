@@ -1,0 +1,170 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Successful | JD Elegance</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #fff5f9, #fce4ec);
+        }
+
+        .success-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .success-box {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            padding: 45px 35px;
+            text-align: center;
+            border-radius: 22px;
+            box-shadow: 0 10px 40px rgba(190, 90, 130, 0.15);
+        }
+
+        .brand-name {
+            font-family: Georgia, serif;
+            color: #b76e79;
+            font-size: 25px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .success-icon {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            background: #ff2780;
+            color: white;
+            font-size: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(255, 39, 128, 0.2);
+        }
+
+        .success-box h1 {
+            font-size: 30px;
+            margin-bottom: 12px;
+            color: #49343c;
+        }
+
+        .success-box p {
+            color: #777;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .track-btn,
+        .continue-btn {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .track-btn {
+            background: #ff2780;
+            color: white;
+            margin-bottom: 13px;
+            box-shadow: 0 5px 15px rgba(255, 39, 128, 0.15);
+        }
+
+        .track-btn:hover {
+            color: white;
+            background: #e91e70;
+            transform: translateY(-2px);
+        }
+
+        .continue-btn {
+            background: #fff5f8;
+            color: #b76e79;
+            border: 1px solid #f0d5df;
+        }
+
+        .continue-btn:hover {
+            color: #a34e69;
+            background: #fce4ec;
+        }
+
+        .thank-you {
+            margin-top: 22px;
+            font-size: 13px;
+            color: #b76e79;
+        }
+
+        @media (max-width: 500px) {
+            .success-box {
+                padding: 35px 22px;
+            }
+
+            .success-box h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="success-container">
+
+    <div class="success-box">
+
+        <div class="brand-name">JD Elegance</div>
+
+        <div class="success-icon">✓</div>
+
+        <h1>Order Successful!</h1>
+
+        <p>
+            Thank you for shopping with us! 💗
+            Your order has been placed successfully.
+            Track your beauty essentials and check their delivery status.
+        </p>
+
+        {% if order %}
+
+            <a href="{% url 'delivery_tracking' order.id %}"
+               class="track-btn">
+                📦 Track My Order
+            </a>
+
+        {% endif %}
+
+        <a href="{% url 'home' %}" class="continue-btn">
+            Continue Shopping
+        </a>
+
+        <div class="thank-you">
+            Thank you for choosing JD Elegance ✨
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

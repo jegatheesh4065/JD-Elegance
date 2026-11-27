@@ -1,0 +1,1080 @@
+{% extends 'nav_bar.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+
+/* HERO */
+.lip-hero {
+    min-height: 390px;
+    display: flex;
+    align-items: center;
+    padding: 60px 10%;
+    background: linear-gradient(110deg, #f7dfd9, #fff5f1, #eac5bd);
+    position: relative;
+    overflow: hidden;
+}
+
+.lip-hero-content {
+    animation: lipSlide 1s ease;
+}
+
+.lip-hero-content span {
+    color: #a47770;
+    letter-spacing: 3px;
+    font-size: 11px;
+}
+
+.lip-hero-content h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(40px, 5vw, 65px);
+    color: #714b45;
+    line-height: 1.15;
+    margin: 18px 0;
+}
+
+.lip-hero-content p {
+    color: #8c6c64;
+    font-size: 14px;
+}
+
+.lip-hero-content a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 25px;
+    background: #a47770;
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    transition: .3s;
+}
+
+.lip-hero-content a:hover {
+    background: #714b45;
+    transform: translateY(-4px);
+}
+
+
+/* COLLECTION */
+.lip-collection {
+    background: #fffdfc;
+    padding: 65px 6%;
+}
+
+.lip-title {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.lip-title span {
+    color: #b17d75;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.lip-title h2 {
+    color: #714b45;
+    font-family: Georgia, serif;
+    font-size: 38px;
+    margin: 12px 0;
+}
+
+.lip-title p {
+    color: #987b73;
+    font-size: 13px;
+}
+
+
+/* LAYOUT */
+.lip-layout {
+    max-width: 1400px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 45px;
+}
+
+
+/* SIDEBAR */
+.lip-sidebar {
+    border-right: 1px solid #f0dfda;
+    padding-right: 25px;
+}
+
+.filter-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-heading h3 {
+    color: #714b45;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.filter-heading button {
+    border: none;
+    background: none;
+    color: #a47770;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.filter-box {
+    padding: 25px 0;
+    border-bottom: 1px solid #f0dfda;
+}
+
+.filter-box h4 {
+    color: #714b45;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+}
+
+.availability-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #90756d;
+    font-size: 12px;
+}
+
+.filter-box label:not(.availability-option) {
+    display: block;
+    color: #90756d;
+    font-size: 12px;
+    margin-bottom: 13px;
+    cursor: pointer;
+}
+
+.filter-box input[type="checkbox"] {
+    accent-color: #a47770;
+}
+
+.price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.price-inputs input {
+    width: 45%;
+    min-width: 0;
+    padding: 9px 5px;
+    border: 1px solid #e5cbc4;
+    outline: none;
+}
+
+.price-inputs span {
+    font-size: 10px;
+    color: #987b73;
+}
+
+.apply-price {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background: #a47770;
+    border: none;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+
+/* PRODUCTS */
+.lip-results-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.lip-results-heading h3 {
+    font-family: Georgia, serif;
+    color: #714b45;
+    font-size: 22px;
+}
+
+.lip-results-heading span {
+    color: #987b73;
+    font-size: 12px;
+}
+
+.lip-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px 22px;
+}
+
+.lip-product-card {
+    min-width: 0;
+    animation: lipFade .7s ease;
+    transition: .35s;
+}
+
+.lip-product-card:hover {
+    transform: translateY(-6px);
+}
+
+
+/* IMAGE */
+.lip-product-image {
+    height: 280px;
+    background: #f9efec;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-lip-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 12px;
+    transition: opacity .2s ease, transform .5s ease;
+}
+
+.lip-product-card:hover .main-lip-image {
+    transform: scale(1.05);
+}
+
+.lip-discount {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #a47770;
+    color: white;
+    font-size: 10px;
+    padding: 6px 9px;
+}
+
+.lip-sold-label {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #80574f;
+    color: white;
+    padding: 6px 10px;
+    font-size: 10px;
+}
+
+
+/* DETAILS */
+.lip-product-details {
+    padding: 15px 3px;
+}
+
+.lip-product-details h3 {
+    font-size: 12px;
+    letter-spacing: 1.3px;
+    color: #714b45;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+
+/* SHADE SELECTOR */
+.shade-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 13px;
+    gap: 5px;
+}
+
+.shade-selected-name {
+    color: #8b6962;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.shade-count {
+    color: #a47770;
+    font-size: 10px;
+}
+
+.lip-shade-list {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+}
+
+.lip-shade {
+    width: 17px;
+    height: 17px;
+    border: none;
+    padding: 0;
+    background: transparent;
+    border-radius: 50%;
+    outline: 1px solid #d5c2bd;
+    outline-offset: 2px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.lip-shade span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--shade);
+}
+
+.lip-shade:hover {
+    transform: scale(1.25);
+}
+
+.lip-shade.selected {
+    outline: 2px solid #65443e;
+    outline-offset: 3px;
+    transform: scale(1.12);
+}
+
+.lip-shade.shade-out {
+    opacity: .3;
+    cursor: not-allowed;
+}
+
+
+/* PRICE */
+.lip-product-price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0;
+}
+
+.lip-product-price strong {
+    color: #714b45;
+    font-size: 15px;
+}
+
+.lip-product-price del {
+    color: #a99a95;
+    font-size: 12px;
+}
+
+
+/* ACTION BUTTONS */
+.lip-product-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 18px;
+}
+
+.lip-wishlist-btn {
+    width: 43px;
+    height: 43px;
+    min-width: 43px;
+    border: none;
+    border-radius: 50%;
+    background: #f7eee9;
+    color: #30271f;
+    font-size: 17px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+}
+
+.lip-wishlist-btn:hover {
+    background: #30271f;
+    color: white;
+}
+
+.lip-add-cart {
+    flex: 1;
+    height: 49px;
+    border-radius: 5px;
+    background: #30271f;
+    color: white;
+    border: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.lip-add-cart:hover {
+    background: #9b6658;
+    color: white;
+}
+
+
+/* EMPTY */
+.lip-empty {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 70px 20px;
+    color: #987b73;
+}
+
+
+/* ANIMATION */
+@keyframes lipSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes lipFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* RESPONSIVE */
+@media(max-width: 1000px) {
+    .lip-layout {
+        grid-template-columns: 180px 1fr;
+        gap: 25px;
+    }
+
+    .lip-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media(max-width: 600px) {
+    .lip-hero {
+        min-height: 330px;
+        padding: 40px 7%;
+    }
+
+    .lip-collection {
+        padding: 40px 5%;
+    }
+
+    .lip-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .lip-sidebar {
+        border-right: none;
+        border-bottom: 1px solid #f0dfda;
+        padding: 0 0 20px;
+    }
+
+    .lip-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px 12px;
+    }
+
+    .lip-product-image {
+        height: 190px;
+    }
+
+    .lip-product-details h3 {
+        font-size: 11px;
+    }
+
+    .lip-title h2 {
+        font-size: 29px;
+    }
+
+    .lip-add-cart {
+        font-size: 11px;
+    }
+}
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- HERO -->
+<section class="lip-hero">
+
+    <div class="lip-hero-content">
+
+        <span>JD ELEGANCE COLLECTION</span>
+
+        <h1>
+            Find Your Perfect<br>
+            Lip Colour.
+        </h1>
+
+        <p>
+            From everyday nudes to bold reds,
+            discover shades that express you.
+        </p>
+
+        <a href="#lip-collection">EXPLORE COLLECTION</a>
+
+    </div>
+
+</section>
+
+
+<!-- COLLECTION -->
+<section class="lip-collection" id="lip-collection">
+
+    <div class="lip-title">
+
+        <span>THE LIP EDIT</span>
+
+        <h2>Find Your Lip Favourite</h2>
+
+        <p>
+            Explore our collection and choose your perfect shade.
+        </p>
+
+    </div>
+
+
+    <div class="lip-layout">
+
+        <!-- LEFT FILTER SIDEBAR -->
+        <aside class="lip-sidebar">
+
+            <div class="filter-heading">
+
+                <h3>FILTER BY</h3>
+
+                <button type="button" id="clearFilters">
+                    CLEAR
+                </button>
+
+            </div>
+
+
+            <!-- AVAILABILITY -->
+            <div class="filter-box">
+
+                <h4>AVAILABILITY</h4>
+
+                <label class="availability-option">
+
+                    <input type="checkbox" id="stockFilter">
+
+                    <span>In stock only</span>
+
+                </label>
+
+            </div>
+
+
+            <!-- PRICE -->
+            <div class="filter-box">
+
+                <h4>PRICE</h4>
+
+                <div class="price-inputs">
+
+                    <input type="number"
+                           id="minPrice"
+                           placeholder="Min">
+
+                    <span>TO</span>
+
+                    <input type="number"
+                           id="maxPrice"
+                           placeholder="Max">
+
+                </div>
+
+                <button type="button"
+                        class="apply-price"
+                        id="applyPrice">
+
+                    APPLY PRICE
+
+                </button>
+
+            </div>
+
+
+            <!-- SHADE CATEGORY -->
+            <div class="filter-box">
+
+                <h4>SHADE FAMILY</h4>
+
+                <label>
+                    <input type="checkbox"
+                           class="shade-filter"
+                           value="nude">
+                    Nude
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                           class="shade-filter"
+                           value="pink">
+                    Pink
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                           class="shade-filter"
+                           value="red">
+                    Red
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                           class="shade-filter"
+                           value="berry">
+                    Berry
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                           class="shade-filter"
+                           value="brown">
+                    Brown
+                </label>
+
+            </div>
+
+        </aside>
+
+
+        <!-- PRODUCTS -->
+        <div class="lip-products-area">
+
+            <div class="lip-results-heading">
+
+                <h3>Lipstick Collection</h3>
+
+                <span>{{ products|length }} Products</span>
+
+            </div>
+
+
+            <div class="lip-product-grid">
+
+                {% for product in products %}
+
+                <div class="lip-product-card"
+     data-product-id="{{ product.id }}"
+     data-price="{{ product.get_display_price }}"
+     data-stock="{{ product.stock }}">
+
+                    <!-- IMAGE -->
+                    <div class="lip-product-image">
+
+                        {% if product.image %}
+
+                        <img class="main-lip-image"
+                             src="{{ product.image.url }}"
+                             alt="{{ product.name }}">
+
+                        {% endif %}
+
+
+                        {% if product.is_offer_active %}
+
+                        <span class="lip-discount">
+                            {{ product.discount_percentage }}% OFF
+                        </span>
+
+                        {% endif %}
+
+
+                        {% if product.stock == 0 %}
+
+                        <span class="lip-sold-label">
+                            SOLD OUT
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- DETAILS -->
+                    <div class="lip-product-details">
+
+                        <h3>{{ product.name }}</h3>
+
+
+                        <!-- SHADE SELECTOR -->
+                        <div class="lip-shade-section">
+
+                            <div class="shade-info">
+
+                                <span class="shade-selected-name">
+                                    Select a shade
+                                </span>
+
+                                <span class="shade-count">
+                                    {{ product.variants.all|length }} Shades
+                                </span>
+
+                            </div>
+
+
+                            <div class="lip-shade-list">
+
+                                {% for variant in product.variants.all %}
+
+                                <button type="button"
+                                        class="lip-shade {% if variant.stock <= 0 %}shade-out{% endif %}"
+                                        style="--shade: {{ variant.shade_color }};"
+
+                                        data-variant-id="{{ variant.id }}"
+                                        data-name="{{ variant.size }}"
+
+                                        data-image="{% if variant.shade_image %}{{ variant.shade_image.url }}{% elif product.image %}{{ product.image.url }}{% endif %}"
+
+                                        data-price="{{ variant.price }}"
+                                        data-stock="{{ variant.stock }}"
+
+                                        title="{{ variant.size }}"
+
+                                        {% if variant.stock <= 0 %}
+                                        disabled
+                                        {% endif %}>
+
+                                    <span></span>
+
+                                </button>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PRICE -->
+                        <div class="lip-product-price">
+
+                            {% if product.is_offer_active %}
+
+                            <strong>
+                                ₹{{ product.get_display_price }}
+                            </strong>
+
+                            <del>
+                                ₹{{ product.price }}
+                            </del>
+
+                            {% else %}
+
+                            <strong>
+                                ₹{{ product.price }}
+                            </strong>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- BUTTONS -->
+                        <div class="lip-product-actions">
+
+                            <!-- WISHLIST -->
+                            <button type="button"
+                                    class="lip-wishlist-btn"
+                                    data-name="{{ product.name }}"
+                                    data-price="{{ product.get_display_price }}"
+                                    data-image="{% if product.image %}{{ product.image.url }}{% endif %}">
+
+                                <i class="far fa-heart"></i>
+
+                            </button>
+
+
+                            <!-- BUY NOW -->
+                            <a href="{% url 'checkout' %}"
+                                class="lip-add-cart buy-now-btn">
+                                    <i class="fas fa-shopping-bag"></i> BUY NOW
+                                </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                {% empty %}
+
+                <div class="lip-empty">
+
+                    <h2>No Lip Products Yet</h2>
+
+                    <p>
+                        Add products to the Lipstick category.
+                    </p>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+
+{% block extra_js %}
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    // PRODUCT CARDS
+    document.querySelectorAll(".lip-product-card").forEach(card => {
+
+        const shades = card.querySelectorAll(".lip-shade");
+
+        const image = card.querySelector(".main-lip-image");
+
+        const shadeName = card.querySelector(".shade-selected-name");
+
+        const priceBox = card.querySelector(".lip-product-price");
+
+        const buyButton = card.querySelector(".buy-now-btn");
+
+        const wishlistButton = card.querySelector(".lip-wishlist-btn");
+
+
+        // SHADE SELECTION
+        shades.forEach(shade => {
+
+            shade.addEventListener("click", function () {
+
+                // REMOVE PREVIOUS SELECTION
+                shades.forEach(item => {
+                    item.classList.remove("selected");
+                });
+
+                this.classList.add("selected");
+
+
+                // UPDATE SHADE NAME
+                shadeName.textContent = this.dataset.name;
+
+
+                // UPDATE IMAGE
+                if (image) {
+
+                    image.style.opacity = "0";
+
+                    setTimeout(() => {
+
+                        image.src = this.dataset.image;
+
+                        image.style.opacity = "1";
+
+                    }, 180);
+
+                }
+
+
+                // UPDATE PRICE
+                priceBox.innerHTML =
+                    `<strong>₹${this.dataset.price}</strong>`;
+
+
+                // UPDATE WISHLIST IMAGE AND PRICE
+                wishlistButton.dataset.price = this.dataset.price;
+
+                wishlistButton.dataset.image = this.dataset.image;
+
+
+                // UPDATE VARIANT ID AND CHECKOUT URL
+                buyButton.dataset.variantId = this.dataset.variantId;
+
+                const checkoutUrl = "{% url 'checkout' %}";
+
+                const params = new URLSearchParams({
+                    product_id: card.dataset.productId,
+                    variant_id: this.dataset.variantId,
+                    quantity: 1
+                });
+
+                buyButton.href = checkoutUrl + "?" + params.toString();
+
+
+                // CHECK STOCK
+                if (Number(this.dataset.stock) <= 0) {
+
+                    buyButton.href = "#";
+
+                    buyButton.style.pointerEvents = "none";
+
+                    buyButton.style.opacity = "0.6";
+
+                } else {
+
+                    buyButton.style.pointerEvents = "auto";
+
+                    buyButton.style.opacity = "1";
+
+                    // VARIANT DETAIL PAGE URL
+                    // GO DIRECTLY TO CHECKOUT
+                        buyButton.href = "{% url 'checkout' %}";
+
+                }
+
+            });
+
+        });
+
+
+        // FIRST AVAILABLE SHADE
+        const firstShade = card.querySelector(
+            ".lip-shade:not(:disabled)"
+        );
+
+        if (firstShade) {
+            firstShade.click();
+        }
+
+
+        // WISHLIST CLICK
+        wishlistButton.addEventListener("click", function () {
+
+            addWishlist(
+                this,
+                this.dataset.name,
+                this.dataset.price,
+                this.dataset.image
+            );
+
+        });
+
+
+       // BUY NOW CLICK
+buyButton.addEventListener("click", function (event) {
+
+    const variantId = this.dataset.variantId;
+
+    if (!variantId) {
+        event.preventDefault();
+        alert("Please select an available shade");
+        return;
+    }
+
+    if (this.style.pointerEvents === "none") {
+        event.preventDefault();
+        return;
+    }
+
+});
+
+    });
+
+
+
+    // STOCK FILTER
+    const stockFilter = document.getElementById("stockFilter");
+
+
+    // PRICE FILTER
+    const minPrice = document.getElementById("minPrice");
+
+    const maxPrice = document.getElementById("maxPrice");
+
+
+    function applyFilters() {
+
+        const cards = document.querySelectorAll(".lip-product-card");
+
+        const min = Number(minPrice.value) || 0;
+
+        const max = Number(maxPrice.value) || Infinity;
+
+        const stockOnly = stockFilter.checked;
+
+
+        cards.forEach(card => {
+
+            const price = Number(card.dataset.price);
+
+            const stock = Number(card.dataset.stock);
+
+            let show = true;
+
+
+            if (price < min || price > max) {
+                show = false;
+            }
+
+
+            if (stockOnly && stock <= 0) {
+                show = false;
+            }
+
+
+            card.style.display = show ? "" : "none";
+
+        });
+
+    }
+
+
+    // APPLY PRICE FILTER
+    document.getElementById("applyPrice").addEventListener(
+        "click",
+        applyFilters
+    );
+
+
+    // STOCK FILTER
+    stockFilter.addEventListener("change", applyFilters);
+
+
+
+    // CLEAR FILTERS
+    document.getElementById("clearFilters").addEventListener(
+        "click",
+        function () {
+
+            stockFilter.checked = false;
+
+            minPrice.value = "";
+
+            maxPrice.value = "";
+
+
+            document.querySelectorAll(".shade-filter").forEach(
+                item => item.checked = false
+            );
+
+
+            applyFilters();
+
+        }
+    );
+
+
+});
+
+</script>
+
+{% endblock %}

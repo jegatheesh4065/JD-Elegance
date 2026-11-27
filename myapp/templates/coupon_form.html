@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{ title }} | JD Elegance</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: linear-gradient(130deg, #f1e7fa, #fff8f6, #fceaf0);
+    color: #493064;
+}
+
+.coupon-form-container {
+    min-height: 100vh;
+    padding: 40px 25px;
+}
+
+/* TOP HEADING */
+
+.page-heading {
+    margin-bottom: 28px;
+}
+
+.page-heading span {
+    color: #a17ab9;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.page-heading h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    color: #542d75;
+    margin-top: 8px;
+}
+
+.page-heading p {
+    color: #8d7b98;
+    margin-top: 7px;
+    font-size: 14px;
+}
+
+/* MAIN LAYOUT */
+
+.coupon-layout {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 0.85fr 1.5fr;
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* LEFT BANNER */
+
+.coupon-banner {
+    background: linear-gradient(155deg, #754494, #4d286c);
+    border-radius: 20px;
+    padding: 35px 28px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 570px;
+    box-shadow: 0 12px 30px rgba(84,45,117,0.18);
+}
+
+.coupon-banner::before {
+    content: "";
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    top: -80px;
+    right: -70px;
+}
+
+.coupon-banner::after {
+    content: "";
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    bottom: -70px;
+    left: -70px;
+}
+
+.banner-content,
+.banner-bottom {
+    position: relative;
+    z-index: 1;
+}
+
+.banner-icon {
+    width: 75px;
+    height: 75px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 33px;
+    color: #f8dca2;
+    margin-bottom: 30px;
+}
+
+.coupon-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 31px;
+    line-height: 1.35;
+    margin-bottom: 15px;
+}
+
+.coupon-banner p {
+    color: #e5d8ef;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.banner-line {
+    width: 55px;
+    height: 3px;
+    background: #e4bd72;
+    margin: 25px 0;
+    border-radius: 10px;
+}
+
+.banner-bottom {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 20px;
+}
+
+.banner-bottom p {
+    font-size: 12px;
+    color: #e7d9ef;
+}
+
+.banner-bottom strong {
+    color: #f4d99f;
+    font-size: 13px;
+}
+
+/* FORM CARD */
+
+.coupon-form-page {
+    background: rgba(255,255,255,0.95);
+    border: 1px solid #e9dcef;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 10px 35px rgba(85,50,110,0.07);
+}
+
+.form-header {
+    margin-bottom: 28px;
+}
+
+.form-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    color: #542d75;
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    font-size: 13px;
+    color: #97879e;
+}
+
+.form-header .gold-line {
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #d9a84e, #f0d59a);
+    margin-top: 17px;
+    border-radius: 10px;
+}
+
+/* FORM GRID */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.coupon-field {
+    margin-bottom: 21px;
+}
+
+.coupon-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #624278;
+    margin-bottom: 9px;
+}
+
+.coupon-field input {
+    width: 100%;
+    height: 47px;
+    padding: 0 14px;
+    border: 1px solid #e5d9ed;
+    border-radius: 9px;
+    background: #fcfaff;
+    font-family: inherit;
+    font-size: 13px;
+    color: #493064;
+    outline: none;
+    transition: 0.3s;
+}
+
+.coupon-field input:focus {
+    border-color: #9d73bd;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(157,115,189,0.10);
+}
+
+.coupon-field input::placeholder {
+    color: #b8aabb;
+}
+
+.coupon-field input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    accent-color: #754494;
+    cursor: pointer;
+}
+
+/* CHECKBOX FIELD */
+
+.coupon-field:has(input[type="checkbox"]) {
+    background: linear-gradient(100deg, #f6effb, #fff2f4);
+    border: 1px solid #ebdff0;
+    border-radius: 11px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.coupon-field:has(input[type="checkbox"]) label {
+    margin: 0;
+    cursor: pointer;
+}
+
+/* ERRORS */
+
+.errorlist {
+    list-style: none;
+    color: #d34f68;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.form-errors {
+    padding: 13px 15px;
+    background: #fff0f1;
+    border: 1px solid #f4d4da;
+    color: #c34258;
+    border-radius: 9px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+/* BUTTONS */
+
+.form-buttons {
+    display: flex;
+    gap: 13px;
+    margin-top: 28px;
+    padding-top: 23px;
+    border-top: 1px solid #eee5f1;
+}
+
+.coupon-save-btn {
+    flex: 1;
+    height: 49px;
+    background: linear-gradient(120deg, #8150a0, #542d75);
+    border: none;
+    border-radius: 9px;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(84,45,117,0.18);
+}
+
+.coupon-save-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 20px rgba(84,45,117,0.25);
+}
+
+.coupon-back {
+    height: 49px;
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #f4edf9;
+    color: #704494;
+    text-decoration: none;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.coupon-back:hover {
+    background: #e9dcf2;
+    color: #542d75;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 850px) {
+
+    .coupon-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .coupon-banner {
+        min-height: 300px;
+    }
+
+}
+
+@media(max-width: 550px) {
+
+    .coupon-form-container {
+        padding: 25px 13px;
+    }
+
+    .page-heading h1 {
+        font-size: 27px;
+    }
+
+    .coupon-form-page {
+        padding: 23px 17px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .coupon-back,
+    .coupon-save-btn {
+        width: 100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="coupon-form-container">
+
+    <div class="page-heading">
+        <span>JD ELEGANCE / OFFERS</span>
+        <h1>Coupon Management</h1>
+        <p>Create exclusive discount offers for your customers.</p>
+    </div>
+
+    <div class="coupon-layout">
+
+        <!-- LEFT BANNER -->
+
+        <div class="coupon-banner">
+
+            <div class="banner-content">
+
+                <div class="banner-icon">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+
+                <h2>Make Every Purchase Special.</h2>
+
+                <p>
+                    Create beautiful offers and give your customers
+                    more reasons to love JD Elegance.
+                </p>
+
+                <div class="banner-line"></div>
+
+                <p>
+                    Exclusive Deals<br>
+                    Special Discounts<br>
+                    Beautiful Shopping Experiences
+                </p>
+
+            </div>
+
+            <div class="banner-bottom">
+                <p>BEAUTY • ELEGANCE • SAVINGS</p>
+                <strong>JD ELEGANCE</strong>
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT FORM -->
+
+        <div class="coupon-form-page">
+
+            <div class="form-header">
+
+                <h2>{{ title }}</h2>
+
+                <p>
+                    Enter the coupon details below to create your offer.
+                </p>
+
+                <div class="gold-line"></div>
+
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-errors">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+
+                <div class="form-grid">
+
+                    {% for field in form %}
+
+                        <div class="coupon-field">
+
+                            {{ field.label_tag }}
+
+                            {{ field }}
+
+                            {{ field.errors }}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-buttons">
+
+                    <button type="submit" class="coupon-save-btn">
+                        <i class="fa-solid fa-check"></i>
+                        Save Coupon
+                    </button>
+
+                    <a href="{% url 'coupons' %}" class="coupon-back">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

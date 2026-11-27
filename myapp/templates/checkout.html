@@ -1,0 +1,1459 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | JD Elegance</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #f8f6f0;
+            --white: #ffffff;
+            --dark: #303127;
+            --muted: #858477;
+            --gold: #a18d62;
+            --border: #eae7de;
+            --soft: #f5f2e9;
+            --danger: #b42332;
+        }
+
+        body {
+            margin: 0;
+            background: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--dark);
+        }
+
+        /* HEADER */
+
+        .checkout-header {
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid var(--border);
+            padding: 21px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .checkout-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 29px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--dark);
+        }
+
+        .checkout-logo span {
+            color: var(--gold);
+        }
+
+        .secure-checkout {
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .secure-checkout i {
+            color: var(--gold);
+            margin-right: 7px;
+        }
+
+        /* PAGE */
+
+        .checkout-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 42px auto 70px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: #777568;
+            text-decoration: none;
+            margin-bottom: 27px;
+            font-size: 12px;
+            transition: 0.25s;
+        }
+
+        .back-btn:hover {
+            color: var(--dark);
+            transform: translateX(-3px);
+        }
+
+        .page-intro {
+            margin-bottom: 35px;
+        }
+
+        .page-eyebrow {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 11px;
+        }
+
+        .checkout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(34px, 4vw, 45px);
+            line-height: 1.2;
+            font-weight: 500;
+            margin: 0 0 12px;
+        }
+
+        .page-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* PROGRESS */
+
+        .checkout-progress {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 35px;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .progress-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            border: 1px solid #d9d5c9;
+            background: white;
+            font-size: 11px;
+        }
+
+        .progress-step.active {
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .progress-step.active .progress-number {
+            background: var(--dark);
+            color: white;
+            border-color: var(--dark);
+        }
+
+        .progress-line {
+            height: 1px;
+            width: 45px;
+            background: #ddd8ca;
+        }
+
+        /* LAYOUT */
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.9fr);
+            align-items: start;
+            gap: 27px;
+        }
+
+        .checkout-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: 0 5px 22px rgba(47, 45, 34, 0.025);
+        }
+
+        .box-heading {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 26px;
+        }
+
+        .box-icon {
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: var(--soft);
+            color: var(--gold);
+            font-size: 16px;
+        }
+
+        .box-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0 0 6px;
+        }
+
+        .box-subtitle {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* INPUTS */
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .input-group {
+            min-width: 0;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #555448;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            display: block;
+            padding: 14px 15px;
+            border: 1px solid #e4e1d8;
+            background: #fdfcf9;
+            border-radius: 8px;
+            outline: none;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            color: var(--dark);
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .input-group textarea {
+            min-height: 105px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            color: #b0ada2;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(161, 141, 98, 0.10);
+            background: white;
+        }
+
+        .error-message {
+            display: block;
+            color: var(--danger);
+            font-size: 11px;
+            margin-top: 7px;
+            line-height: 1.5;
+        }
+
+        /* PAYMENT */
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            background: white;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .payment-option:hover {
+            border-color: var(--gold);
+            background: #fcfaf5;
+        }
+
+        .payment-option:has(input:checked) {
+            border-color: var(--gold);
+            background: #faf8f1;
+        }
+
+        .payment-option input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--dark);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .payment-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .payment-name {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .payment-description {
+            display: block;
+            font-size: 10px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .payment-icon {
+            color: var(--gold);
+            font-size: 18px;
+        }
+
+        /* PRODUCT SUMMARY */
+
+        .summary-box {
+            position: sticky;
+            top: 20px;
+        }
+
+        .summary-topline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .item-count {
+            padding: 6px 10px;
+            background: var(--soft);
+            border-radius: 20px;
+            font-size: 10px;
+            color: #77705c;
+        }
+
+        .checkout-product {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 0;
+            border-bottom: 1px solid #f0eee8;
+        }
+
+        .checkout-product img {
+            width: 78px;
+            height: 82px;
+            flex-shrink: 0;
+            object-fit: contain;
+            background: #f7f5f0;
+            border-radius: 9px;
+            padding: 5px;
+        }
+
+        .product-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-details h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            line-height: 1.5;
+            margin: 0 0 6px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .product-quantity {
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 7px;
+        }
+
+        .product-price {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .product-total {
+            font-size: 11px;
+            color: var(--gold);
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        /* TOTALS */
+
+        .summary-totals {
+            padding-top: 12px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin: 17px 0;
+            color: #777568;
+            font-size: 12px;
+        }
+
+        .summary-row span:last-child {
+            text-align: right;
+        }
+
+        .delivery-free {
+            color: #547653;
+            font-weight: 700;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid var(--border);
+            padding-top: 21px;
+            margin-top: 22px;
+            color: var(--dark);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .summary-row.total span:last-child {
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+            color: var(--dark);
+        }
+
+        .tax-note {
+            font-size: 10px;
+            line-height: 1.7;
+            color: #9b988b;
+            text-align: center;
+            margin-top: 13px;
+        }
+
+        /* ORDER BUTTON */
+
+        .place-order-btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            padding: 17px 20px;
+            border: 1px solid var(--dark);
+            border-radius: 8px;
+            background: var(--dark);
+            color: white;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 24px;
+            transition: all 0.25s;
+        }
+
+        .place-order-btn:hover {
+            background: #4b4b3e;
+            border-color: #4b4b3e;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 17px rgba(48, 49, 39, 0.12);
+        }
+
+        .place-order-btn i {
+            font-size: 13px;
+        }
+
+        .security-note {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            color: #8b887b;
+            font-size: 10px;
+            margin-top: 18px;
+        }
+
+        .security-note i {
+            color: var(--gold);
+        }
+
+        .stock-error {
+            color: #9f202c;
+            background: #fff0f0;
+            border: 1px solid #f3d4d6;
+            padding: 13px 14px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .empty-cart {
+            padding: 25px 5px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* FOOTER */
+
+        .checkout-footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: #999587;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-box {
+                position: static;
+            }
+
+            .summary-box {
+                order: 0;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .checkout-header {
+                padding: 18px 5%;
+            }
+
+            .checkout-logo {
+                font-size: 24px;
+            }
+
+            .secure-checkout {
+                font-size: 10px;
+            }
+
+            .checkout-container {
+                width: 92%;
+                margin-top: 28px;
+            }
+
+            .checkout-box {
+                padding: 21px 17px;
+                border-radius: 11px;
+            }
+
+            .input-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .checkout-progress {
+                gap: 7px;
+                font-size: 9px;
+            }
+
+            .progress-line {
+                width: 18px;
+            }
+
+            .progress-step {
+                gap: 5px;
+            }
+
+            .progress-number {
+                width: 24px;
+                height: 24px;
+            }
+
+            .box-title {
+                font-size: 20px;
+            }
+
+            .checkout-product img {
+                width: 65px;
+                height: 70px;
+            }
+        }
+        /* COUPON SECTION */
+
+.coupon-box {
+background: #fffaf5;
+border: 1px dashed #d7c19a;
+border-radius: 10px;
+padding: 18px;
+margin: 22px 0;
+}
+
+.coupon-box h3 {
+font-family: 'Playfair Display', serif;
+font-size: 17px;
+margin: 0 0 7px;
+color: var(--dark);
+}
+
+.coupon-box h3 i {
+color: var(--gold);
+margin-right: 7px;
+}
+
+.coupon-box > p {
+font-size: 11px;
+color: var(--muted);
+margin-bottom: 15px;
+}
+
+.coupon-input-row {
+display: flex;
+gap: 9px;
+}
+
+.coupon-input-row input {
+width: 100%;
+min-width: 0;
+padding: 12px;
+border: 1px solid var(--border);
+border-radius: 7px;
+outline: none;
+background: #fff;
+font-size: 12px;
+text-transform: uppercase;
+}
+
+.coupon-input-row input:focus {
+border-color: var(--gold);
+}
+
+.coupon-input-row button {
+padding: 0 18px;
+background: var(--dark);
+color: white;
+border: none;
+border-radius: 7px;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 1px;
+cursor: pointer;
+}
+
+.coupon-input-row button:hover {
+background: var(--gold);
+}
+
+.coupon-message {
+font-size: 11px;
+line-height: 1.6;
+margin-top: 10px;
+}
+
+.coupon-message.success {
+color: #34734b;
+}
+
+.coupon-message.error {
+color: var(--danger);
+}
+
+#couponDiscountAmount {
+color: #34734b;
+font-weight: 700;
+}
+
+    </style>
+</head>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<body>
+
+<header class="checkout-header">
+
+    <div class="checkout-logo">
+        JD <span>Elegance.</span>
+    </div>
+
+    <div class="secure-checkout">
+        <i class="fa-solid fa-lock"></i>
+        SECURE CHECKOUT
+    </div>
+
+</header>
+
+
+<main class="checkout-container">
+
+    <a href="/" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        Continue Shopping
+    </a>
+
+    <div class="page-intro">
+        <span class="page-eyebrow">YOUR BEAUTY, YOUR WAY</span>
+
+        <h1 class="checkout-title">Complete your order.</h1>
+
+        <p class="page-description">
+            Just a few details between you and your new favourites.
+        </p>
+    </div>
+
+    <div class="checkout-progress">
+
+        <div class="progress-step active">
+            <span class="progress-number">1</span>
+            <span>Delivery</span>
+        </div>
+
+        <span class="progress-line"></span>
+
+        <div class="progress-step active">
+            <span class="progress-number">2</span>
+            <span>Payment</span>
+        </div>
+
+        <span class="progress-line"></span>
+
+        <div class="progress-step">
+            <span class="progress-number">3</span>
+            <span>Confirmation</span>
+        </div>
+
+    </div>
+
+
+    <!-- Single form: delivery, payment and order button -->
+
+    <form method="POST" id="checkoutForm">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="cart_data" id="cartData">
+
+        <div class="checkout-layout">
+
+            <!-- LEFT COLUMN -->
+
+            <div>
+
+                <!-- DELIVERY ADDRESS -->
+
+                <section class="checkout-box">
+
+                    <div class="box-heading">
+
+                        <div class="box-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+
+                        <div>
+                            <h2 class="box-title">Delivery Address</h2>
+
+                            <p class="box-subtitle">
+                                Where should we deliver your order?
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-row">
+
+                        <div class="input-group">
+
+                            <label for="full_name">Full Name</label>
+
+                            <input
+                                type="text"
+                                id="full_name"
+                                name="full_name"
+                                value="{{ form.full_name.value|default:'' }}"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                required>
+
+                            {% for error in form.full_name.errors %}
+                                <small class="error-message">{{ error }}</small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="phone">Phone Number</label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                value="{{ form.phone.value|default:'' }}"
+                                placeholder="Enter phone number"
+                                autocomplete="tel"
+                                required>
+
+                            {% for error in form.phone.errors %}
+                                <small class="error-message">{{ error }}</small>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="address">Address</label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            placeholder="House number, street, area"
+                            autocomplete="street-address"
+                            required>{{ form.address.value|default:'' }}</textarea>
+
+                        {% for error in form.address.errors %}
+                            <small class="error-message">{{ error }}</small>
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="input-row">
+
+                        <div class="input-group">
+
+                            <label for="city">City</label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                value="{{ form.city.value|default:'' }}"
+                                placeholder="Enter your city"
+                                autocomplete="address-level2"
+                                required>
+
+                            {% for error in form.city.errors %}
+                                <small class="error-message">{{ error }}</small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="pincode">Pincode</label>
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                name="pincode"
+                                value="{{ form.pincode.value|default:'' }}"
+                                placeholder="6-digit pincode"
+                                inputmode="numeric"
+                                autocomplete="postal-code"
+                                required>
+
+                            {% for error in form.pincode.errors %}
+                                <small class="error-message">{{ error }}</small>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- PAYMENT METHOD -->
+
+                <section class="checkout-box">
+
+                    <div class="box-heading">
+
+                        <div class="box-icon">
+                            <i class="fa-regular fa-credit-card"></i>
+                        </div>
+
+                        <div>
+                            <h2 class="box-title">Payment Method</h2>
+
+                            <p class="box-subtitle">
+                                Choose your preferred payment option.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="cod"
+                            required>
+
+                        <span class="payment-text">
+
+                            <span class="payment-name">
+                                Cash on Delivery
+                            </span>
+
+                            <span class="payment-description">
+                                Pay when your order arrives.
+                            </span>
+
+                        </span>
+
+                        <i class="fa-solid fa-money-bill-wave payment-icon"></i>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="upi"
+                            required>
+
+                        <span class="payment-text">
+
+                            <span class="payment-name">UPI Payment</span>
+
+                            <span class="payment-description">
+                                Pay using a UPI app.
+                            </span>
+
+                        </span>
+
+                        <i class="fa-solid fa-mobile-screen-button payment-icon"></i>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="card"
+                            required>
+
+                        <span class="payment-text">
+
+                            <span class="payment-name">
+                                Credit / Debit Card
+                            </span>
+
+                            <span class="payment-description">
+                                Use your payment card.
+                            </span>
+
+                        </span>
+
+                        <i class="fa-regular fa-credit-card payment-icon"></i>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="netbanking"
+                            required>
+
+                        <span class="payment-text">
+
+                            <span class="payment-name">Net Banking</span>
+
+                            <span class="payment-description">
+                                Pay through your bank.
+                            </span>
+
+                        </span>
+
+                        <i class="fa-solid fa-building-columns payment-icon"></i>
+
+                    </label>
+
+
+                    {% for error in form.payment.errors %}
+                        <small class="error-message">{{ error }}</small>
+                    {% endfor %}
+
+                </section>
+
+            </div>
+
+
+            <!-- RIGHT COLUMN: ORDER SUMMARY -->
+
+            <aside>
+
+                <section class="checkout-box summary-box">
+
+                    <div class="summary-topline">
+
+                        <div class="box-heading" style="margin-bottom: 0;">
+
+                            <div class="box-icon">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </div>
+
+                            <div>
+                                <h2 class="box-title">Your Order</h2>
+
+                                <p class="box-subtitle">
+                                    A little beauty, on its way.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <span class="item-count" id="itemCount">
+                            0 items
+                        </span>
+
+                    </div>
+
+
+                    {% if selected_product %}
+
+                    <div class="checkout-product">
+
+                        {% if selected_product.image %}
+                            <img
+                                src="{{ selected_product.image.url }}"
+                                alt="{{ selected_product.name }}">
+                        {% endif %}
+
+                        <div class="product-details">
+
+                            <h4>{{ selected_product.name }}</h4>
+
+                            {% if selected_variant %}
+                                <div class="product-quantity">
+                                    Selected Size: {{ selected_variant.size }}
+                                </div>
+                            {% else %}
+                                <div class="product-quantity">
+                                    Quantity: {{ quantity }}
+                                </div>
+                            {% endif %}
+
+                            <div class="product-price">
+                                {% if selected_variant %}
+                                    ₹{{ selected_variant.price }}
+                                {% else %}
+                                    ₹{{ selected_product.price }}
+                                {% endif %}
+                            </div>
+
+                            <div class="product-total">
+                                {% if selected_variant %}
+                                    Total: ₹{{ selected_variant.price|floatformat:2 }}
+                                {% else %}
+                                    Total: ₹{{ selected_product.price|floatformat:2 }}
+                                {% endif %}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <div id="checkoutProducts"></div>
+
+
+                    <div class="empty-cart" id="emptyCart" hidden>
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <br>
+                        Your cart is empty.
+                    </div>
+                    <!-- COUPON SECTION -->
+
+<div class="coupon-box">
+    <h3>
+        <i class="fa-solid fa-ticket"></i>
+        Have a coupon?
+    </h3>
+<p>Apply your coupon to enjoy special savings.</p>
+
+<div class="coupon-input-row">
+
+    <input
+        type="text"
+        name="coupon_code"
+        id="couponCode"
+        value="{{ coupon_code|default:'' }}"
+        placeholder="Enter coupon code"
+        autocomplete="off"
+    >
+
+    <button
+        type="submit"
+        name="apply_coupon"
+        value="1"
+        formnovalidate
+    >
+        APPLY
+    </button>
+
+</div>
+
+{% if coupon_message %}
+    <div class="coupon-message {% if coupon_success %}success{% else %}error{% endif %}">
+        {{ coupon_message }}
+    </div>
+{% endif %}
+</div>
+
+
+
+
+                    <div class="summary-totals">
+
+                       <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="checkoutSubtotal">₹{{ total|default:"0.00" }}</span>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Coupon Discount</span>
+                            <span id="couponDiscountAmount">
+                                - ₹{{ coupon_discount|default:"0.00" }}
+                            </span>
+                        </div>
+
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="checkoutTotal">
+                                ₹{{ total|default:"0.00"|floatformat:2 }}
+                            </span>
+                        </div>
+
+                            <div class="summary-row">
+                                <span>Delivery</span>
+                                <span class="delivery-free">FREE</span>
+                            </div>
+
+                            
+                    </div>
+
+
+                    {% if stock_error %}
+                    <div class="stock-error">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        {{ stock_error }}
+                    </div>
+                    {% endif %}
+
+
+                    <button type="submit" class="place-order-btn">
+
+                        PLACE ORDER
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <div class="security-note">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Your checkout details are protected.
+                    </div>
+
+                    <p class="tax-note">
+                        Please review your delivery details before placing your order.
+                    </p>
+
+                </section>
+
+            </aside>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<footer class="checkout-footer">
+    JD ELEGANCE &nbsp;·&nbsp; BEAUTY IN EVERY DETAIL
+</footer>
+
+
+<script>
+
+
+function loadCheckout() {
+
+    let wishlist = [];
+
+    try {
+        wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    } catch (error) {
+        wishlist = [];
+    }
+
+    const products = document.getElementById("checkoutProducts");
+    const emptyCart = document.getElementById("emptyCart");
+
+    let total = 0;
+    let itemCount = 0;
+
+    const isDirectOrder =
+        "{% if selected_product %}yes{% else %}no{% endif %}";
+
+    const directPrice = Number(
+        "{% if selected_variant %}{{ selected_variant.price }}{% elif selected_product %}{{ selected_product.price }}{% else %}0{% endif %}"
+    ) || 0;
+
+    const directQuantity = Math.max(
+        1,
+        Number("{{ quantity|default:'1' }}") || 1
+    );
+
+    const directProductName =
+        "{{ selected_product.name|default:''|escapejs }}";
+
+    products.innerHTML = "";
+
+    // DIRECT BUY NOW PRODUCT
+    if (isDirectOrder === "yes") {
+
+        total += directPrice * directQuantity;
+        itemCount += directQuantity;
+    }
+
+    // WISHLIST PRODUCTS
+    wishlist.forEach(function(product) {
+
+        // Avoid duplicate direct product
+        if (
+            isDirectOrder === "yes" &&
+            product.name &&
+            product.name.toLowerCase() === directProductName.toLowerCase()
+        ) {
+            return;
+        }
+
+        const price = Number(
+            String(product.price || "").replace(/[^0-9.]/g, "")
+        ) || 0;
+
+        const quantity = Math.max(
+            1,
+            Number(product.quantity) || 1
+        );
+
+        const productTotal = price * quantity;
+
+        total += productTotal;
+        itemCount += quantity;
+
+        const item = document.createElement("div");
+        item.className = "checkout-product";
+
+        const img = document.createElement("img");
+        img.src = product.image || "";
+        img.alt = product.name || "Product";
+
+        const details = document.createElement("div");
+        details.className = "product-details";
+
+        const title = document.createElement("h4");
+        title.textContent = product.name || "Product";
+
+        const quantityText = document.createElement("div");
+        quantityText.className = "product-quantity";
+        quantityText.textContent = "Quantity: " + quantity;
+
+        const priceText = document.createElement("div");
+        priceText.className = "product-price";
+        priceText.textContent = "₹" + price.toFixed(2) + " each";
+
+        const totalText = document.createElement("div");
+        totalText.className = "product-total";
+        totalText.textContent = "Total: ₹" + productTotal.toFixed(2);
+
+        details.appendChild(title);
+        details.appendChild(quantityText);
+        details.appendChild(priceText);
+        details.appendChild(totalText);
+
+        item.appendChild(img);
+        item.appendChild(details);
+
+        products.appendChild(item);
+
+    });
+
+    const couponDiscount = Number(
+        "{{ coupon_discount|default:'0' }}"
+    ) || 0;
+
+    const finalTotal = Math.max(0, total - couponDiscount);
+
+    document.getElementById("checkoutSubtotal").textContent =
+        "₹" + total.toFixed(2);
+
+    document.getElementById("couponDiscountAmount").textContent =
+        "- ₹" + couponDiscount.toFixed(2);
+
+    document.getElementById("checkoutTotal").textContent =
+        "₹" + finalTotal.toFixed(2);
+
+    document.getElementById("itemCount").textContent =
+        itemCount + (itemCount === 1 ? " item" : " items");
+
+    // SEND WISHLIST DATA TO DJANGO
+    document.getElementById("cartData").value =
+        JSON.stringify(wishlist);
+
+    emptyCart.hidden = wishlist.length > 0 || isDirectOrder === "yes";
+
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    loadCheckout();
+
+    const razorpayOrderId = "{{ razorpay_order_id|default:'' }}";
+
+    if (razorpayOrderId) {
+
+        const options = {
+            key: "{{ razorpay_key }}",
+
+            amount: "{{ razorpay_amount }}",
+
+            currency: "INR",
+
+            name: "JD Elegance",
+
+            description: "Beauty Products Purchase",
+
+            order_id: razorpayOrderId,
+
+            handler: function (response) {
+
+                const formData = new FormData();
+                formData.append("order_id", "{{ local_order_id }}");
+
+                formData.append(
+                    "razorpay_payment_id",
+                    response.razorpay_payment_id
+                );
+
+                formData.append(
+                    "razorpay_order_id",
+                    response.razorpay_order_id
+                );
+
+                formData.append(
+                    "razorpay_signature",
+                    response.razorpay_signature
+                );
+
+                formData.append(
+                    "csrfmiddlewaretoken",
+                    document.querySelector(
+                        '[name="csrfmiddlewaretoken"]'
+                    ).value
+                );
+
+                fetch("{% url 'verify_payment' %}", {
+                    method: "POST",
+                    body: formData
+                })
+
+                .then(response => response.json())
+
+                .then(data => {
+
+                    if (data.success) {
+
+                        window.location.href = data.redirect_url;
+
+                    } else {
+
+                        alert(data.message || "Payment verification failed.");
+
+                    }
+
+                })
+
+                .catch(error => {
+
+                    console.error(error);
+
+                    alert("Unable to verify payment. Please contact support.");
+
+                });
+
+            },
+
+            modal: {
+                ondismiss: function () {
+                    alert("Payment window closed. Your order is still pending.");
+                }
+            },
+
+            theme: {
+                color: "#a18d62"
+            }
+
+        };
+
+        const razorpay = new Razorpay(options);
+
+        razorpay.open();
+
+    }
+
+});
+</script>
+
+</body>
+</html>

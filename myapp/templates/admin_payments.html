@@ -1,0 +1,773 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payments | JD ELEGANCE</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f8f6fa;
+            color: #392747;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* HEADER */
+
+        .top-header {
+            background: #40244f;
+            color: white;
+            padding: 24px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .brand span {
+            color: #e1b45f;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .user-icon {
+            width: 38px;
+            height: 38px;
+            background: #f4e8d3;
+            color: #513361;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            font-weight: 700;
+        }
+
+        .back-btn {
+            border: 1px solid #826891;
+            color: white;
+            padding: 11px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: #57396a;
+        }
+
+        /* PAGE INTRO */
+
+        .main-container {
+            max-width: 1450px;
+            margin: auto;
+            padding: 38px 5%;
+        }
+
+        .page-intro {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .eyebrow {
+            color: #b18a48;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .page-intro h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 39px;
+            color: #482d59;
+            margin-bottom: 10px;
+        }
+
+        .page-intro p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #897c92;
+        }
+
+        .payment-label {
+            background: #eee5f4;
+            color: #65467a;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* PAYMENT NOTE */
+
+        .payment-banner {
+            background: #fff;
+            border: 1px solid #e9dfef;
+            border-left: 5px solid #d6a64f;
+            border-radius: 12px;
+            padding: 22px 25px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .banner-icon {
+            min-width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: #f7efdf;
+            display: grid;
+            place-items: center;
+            color: #a77c2e;
+            font-size: 23px;
+        }
+
+        .banner-content h3 {
+            font-size: 15px;
+            color: #4b315b;
+            margin-bottom: 6px;
+        }
+
+        .banner-content p {
+            font-size: 12px;
+            color: #94869b;
+            line-height: 1.7;
+        }
+
+        /* TRANSACTIONS SECTION */
+
+        .transactions {
+            background: white;
+            border: 1px solid #ebe2ef;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(68, 39, 84, 0.04);
+        }
+
+        .transactions-header {
+            padding: 27px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #eee7f1;
+        }
+
+        .transactions-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #492e5b;
+            margin-bottom: 8px;
+        }
+
+        .transactions-header p {
+            color: #96899e;
+            font-size: 12px;
+        }
+
+        .history-tag {
+            padding: 10px 14px;
+            background: #f5eff9;
+            color: #704c85;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 7px;
+            white-space: nowrap;
+        }
+
+        /* FILTERS */
+
+        .filter-panel {
+            padding: 22px 28px;
+            background: #fcfaff;
+            border-bottom: 1px solid #eee7f1;
+        }
+
+        .filter-form {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-form input,
+        .filter-form select {
+            height: 45px;
+            padding: 0 14px;
+            border: 1px solid #e6dbea;
+            background: white;
+            border-radius: 8px;
+            color: #513d5e;
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .filter-form input {
+            flex: 1;
+            min-width: 230px;
+        }
+
+        .filter-form select {
+            min-width: 170px;
+        }
+
+        .filter-form input:focus,
+        .filter-form select:focus {
+            border-color: #9774ad;
+        }
+
+        .search-btn,
+        .reset-btn {
+            height: 45px;
+            padding: 0 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .search-btn {
+            border: none;
+            background: #56366c;
+            color: white;
+        }
+
+        .search-btn:hover {
+            background: #40244f;
+        }
+
+        .reset-btn {
+            background: #f0e7f5;
+            color: #614076;
+        }
+
+        .reset-btn:hover {
+            background: #e6d7ef;
+        }
+
+        /* TABLE */
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #49305a;
+        }
+
+        th {
+            padding: 17px 20px;
+            text-align: left;
+            color: #f8f1fc;
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 20px;
+            border-bottom: 1px solid #f0eaf3;
+            color: #71627b;
+            font-size: 12px;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #fcf9fe;
+        }
+
+        .order-id {
+            color: #65427b;
+            font-weight: 700;
+        }
+
+        .customer-name {
+            color: #4d3859;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .phone-number {
+            display: block;
+            margin-top: 5px;
+            color: #a093a8;
+            font-size: 11px;
+        }
+
+        .amount {
+            color: #4d315e;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* METHOD BADGES */
+
+        .method {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 7px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .method-upi {
+            background: #e8f0ff;
+            color: #4266a4;
+        }
+
+        .method-cod {
+            background: #fff1dc;
+            color: #956b25;
+        }
+
+        .method-other {
+            background: #f0e8f6;
+            color: #704d87;
+        }
+
+        /* DATE */
+
+        .date {
+            color: #8b7e95;
+            white-space: nowrap;
+        }
+
+        /* VIEW ORDER */
+
+        .view-order {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #64417a;
+            font-weight: 700;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .view-order:hover {
+            color: #b28b48;
+        }
+
+        /* EMPTY STATE */
+
+        .empty-state {
+            padding: 65px 20px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 18px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #f4edf8;
+            color: #77558d;
+            font-size: 28px;
+        }
+
+        .empty-state h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 23px;
+            color: #4c315e;
+            margin-bottom: 9px;
+        }
+
+        .empty-state p {
+            color: #978a9e;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* FOOTER */
+
+        .table-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 25px;
+            background: #fcfaff;
+            color: #a094a9;
+            font-size: 11px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+            .main-container {
+                padding: 28px 16px;
+            }
+
+            .page-intro {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .page-intro h1 {
+                font-size: 32px;
+            }
+
+            .transactions-header {
+                padding: 22px 18px;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .filter-panel {
+                padding: 18px;
+            }
+
+            .filter-form {
+                flex-direction: column;
+            }
+
+            .filter-form input,
+            .filter-form select,
+            .search-btn,
+            .reset-btn {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .payment-banner {
+                align-items: flex-start;
+                padding: 18px;
+            }
+
+            .table-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-header {
+                padding: 18px;
+            }
+
+            .brand {
+                font-size: 22px;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .page-intro h1 {
+                font-size: 29px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <!-- <header class="top-header">
+
+        <a href="{% url 'dashboard' %}" class="brand">
+            <span>JD</span> ELEGANCE
+        </a>
+
+        <div class="header-right">
+
+            <a href="{% url 'dashboard' %}" class="back-btn">
+                ← Dashboard
+            </a>
+
+            <div class="admin-user">
+                <div class="user-icon">♙</div>
+                <span>{{ request.user.username }}</span>
+            </div>
+
+        </div>
+
+    </header> -->
+
+    <main class="main-container">
+
+        <!-- PAGE INTRO -->
+
+        <section class="page-intro">
+
+            <div>
+                <div class="eyebrow">JD ELEGANCE / ADMINISTRATION</div>
+
+                <h1>Payment Centre</h1>
+
+                <p>
+                    Manage payment methods and review customer
+                    transactions from one dedicated workspace.
+                </p>
+            </div>
+
+            <div class="payment-label">
+                PAYMENT MANAGEMENT
+            </div>
+
+        </section>
+
+        <!-- INFORMATION BANNER -->
+
+        <section class="payment-banner">
+
+            <div class="banner-icon">↗</div>
+
+            <div class="banner-content">
+                <h3>Transaction Management</h3>
+
+                <p>
+                    Review each order's payment method, amount and date.
+                    Open the order details to inspect the associated order.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- TRANSACTION HISTORY -->
+
+        <section class="transactions">
+
+            <div class="transactions-header">
+
+                <div>
+                    <h2>Transaction Records</h2>
+
+                    <p>
+                        Search and review your store's order payment records.
+                    </p>
+                </div>
+
+                <div class="history-tag">
+                    PAYMENT HISTORY
+                </div>
+
+            </div>
+
+            <!-- SEARCH FILTERS -->
+
+            <div class="filter-panel">
+
+                <form method="get" class="filter-form">
+
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="Search order ID, customer name or phone..."
+                        value="{{ search }}"
+                    >
+
+                    <select name="method">
+
+                        <option value="">All Payment Methods</option>
+
+                        <option value="UPI"
+                            {% if selected_method == "UPI" %}selected{% endif %}>
+                            UPI
+                        </option>
+
+                        <option value="COD"
+                            {% if selected_method == "COD" %}selected{% endif %}>
+                            Cash on Delivery
+                        </option>
+
+                    </select>
+
+                    <button type="submit" class="search-btn">
+                        Search Records
+                    </button>
+
+                    <a href="{% url 'admin_payments' %}" class="reset-btn">
+                        Clear Filters
+                    </a>
+
+                </form>
+
+            </div>
+
+            <!-- PAYMENT TABLE -->
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ORDER ID</th>
+                            <th>CUSTOMER</th>
+                            <th>PAYMENT METHOD</th>
+                            <th>ORDER AMOUNT</th>
+                            <th>ORDER DATE</th>
+                            <th>ORDER DETAILS</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for order in orders %}
+
+                        <tr>
+
+                            <td class="order-id">
+                                #{{ order.id }}
+                            </td>
+
+                            <td>
+                                <span class="customer-name">
+                                    {{ order.full_name }}
+                                </span>
+
+                                <span class="phone-number">
+                                    {{ order.phone }}
+                                </span>
+                            </td>
+
+                            <td>
+
+                                {% if order.payment|lower == "upi" %}
+
+                                    <span class="method method-upi">
+                                        UPI PAYMENT
+                                    </span>
+
+                                {% elif order.payment|lower == "cod" %}
+
+                                    <span class="method method-cod">
+                                        CASH ON DELIVERY
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="method method-other">
+                                        {{ order.payment|upper }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td class="amount">
+                                ₹{{ order.total_amount|floatformat:2 }}
+                            </td>
+
+                            <td class="date">
+                                {{ order.order_date|date:"d M Y" }}
+                            </td>
+
+                            <td>
+                                <a
+                                    href="{% url 'order_details' order.id %}"
+                                    class="view-order">
+                                    View Order &nbsp; →
+                                </a>
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="6">
+
+                                <div class="empty-state">
+
+                                    <div class="empty-icon">↗</div>
+
+                                    <h3>No Payment Records Found</h3>
+
+                                    <p>
+                                        No matching orders were found.
+                                        Try clearing your filters or searching
+                                        for another customer.
+                                    </p>
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="table-footer">
+
+                <span>
+                    Payment records are displayed from saved orders.
+                </span>
+
+                <span>
+                    JD ELEGANCE &copy; 2026
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

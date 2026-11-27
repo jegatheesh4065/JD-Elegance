@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Product | JD ELEGANCE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', Arial, sans-serif;
+    background: #f7f3fb;
+    min-height: 100vh;
+}
+
+.page-container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+/* LEFT SIDE */
+
+.left-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 55px 9%;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(193, 154, 218, 0.35),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #321747,
+            #563176 55%,
+            #9a5290
+        );
+
+    overflow: hidden;
+}
+
+.left-section::after {
+    content: "";
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    right: -100px;
+    bottom: 70px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 35px rgba(255, 255, 255, 0.035),
+        0 0 0 70px rgba(255, 255, 255, 0.025);
+
+    pointer-events: none;
+}
+
+.brand {
+    position: relative;
+    z-index: 1;
+
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 25px;
+    letter-spacing: 3px;
+}
+
+.brand span {
+    color: #e1c18a;
+}
+
+.left-content {
+    position: relative;
+    z-index: 1;
+
+    max-width: 480px;
+    margin: 55px 0;
+}
+
+.tagline {
+    color: #e1c18a;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+
+    margin-bottom: 22px;
+}
+
+.left-content h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+
+    font-size: clamp(35px, 4vw, 54px);
+    line-height: 1.22;
+
+    margin-bottom: 22px;
+}
+
+.left-content h1 span {
+    color: #e1c18a;
+}
+
+.description {
+    max-width: 390px;
+
+    color: #e4d8ec;
+    font-size: 14px;
+    line-height: 1.9;
+
+    margin-bottom: 30px;
+}
+
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: #f6effb;
+    font-size: 13px;
+}
+
+.feature span {
+    color: #e1c18a;
+    font-size: 19px;
+}
+
+.bottom-text {
+    position: relative;
+    z-index: 1;
+
+    color: #d9c6e7;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+/* RIGHT SIDE */
+
+.right-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 7%;
+
+    background: linear-gradient(
+        135deg,
+        #faf7fd,
+        #f2ebf9
+    );
+}
+
+/* FORM CARD */
+
+.product-form {
+    width: 100%;
+    max-width: 440px;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border: 1px solid #ebe1f2;
+    border-radius: 17px;
+
+    box-shadow:
+        0 15px 45px rgba(66, 35, 88, 0.09);
+}
+
+.product-form h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+
+    font-size: 29px;
+    color: #422456;
+
+    margin-bottom: 9px;
+}
+
+.form-subtitle {
+    color: #93869c;
+    font-size: 12px;
+    line-height: 1.7;
+
+    margin-bottom: 28px;
+}
+
+.form-group {
+    margin-bottom: 19px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #493953;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+    min-width: 0;
+
+    padding: 12px 13px;
+
+    border: 1px solid #e5dbea;
+    border-radius: 8px;
+
+    background: #fdfbff;
+
+    color: #392747;
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: 13px;
+
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.form-group input::placeholder {
+    color: #ad9fb7;
+}
+
+.form-group input:focus {
+    border-color: #8054a0;
+    background: white;
+
+    box-shadow: 0 0 0 3px rgba(128, 84, 160, 0.10);
+}
+
+.form-group input[type="file"] {
+    padding: 8px;
+    background: #faf7fd;
+    cursor: pointer;
+}
+
+.form-group input[type="file"]::file-selector-button {
+    padding: 8px 10px;
+    margin-right: 8px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #eee4f6;
+    color: #563176;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+/* Category Dropdown */
+.form-group select {
+    width: 100%;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid #e5d8ed;
+    border-radius: 9px;
+    background: #fdfbfe;
+    color: #45245e;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* When Clicked */
+.form-group select:focus {
+    border-color: #754296;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(117, 66, 150, 0.12);
+}
+
+/* Dropdown Options */
+.form-group select option {
+    background-color: #ffffff;
+    color: #45245e;
+    padding: 12px;
+    font-size: 14px;
+}
+
+/* First Option */
+.form-group select option:first-child {
+    color: #a99ab7;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 14px;
+
+    margin-top: 4px;
+
+    color: white;
+    background: linear-gradient(
+        100deg,
+        #563176,
+        #8054a0
+    );
+
+    border: none;
+    border-radius: 8px;
+
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.add-btn:hover {
+    background: linear-gradient(
+        100deg,
+        #422354,
+        #684184
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(86, 49, 118, 0.2);
+}
+
+.form-footer {
+    margin-top: 23px;
+
+    text-align: center;
+
+    color: #a79aaf;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .page-container {
+        grid-template-columns: 0.85fr 1.15fr;
+    }
+
+    .left-section {
+        padding: 40px 7%;
+    }
+
+    .right-section {
+        padding: 30px 5%;
+    }
+
+    .product-form {
+        padding: 27px 22px;
+    }
+
+    .left-content h1 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 650px) {
+    .page-container {
+        grid-template-columns: 1fr;
+    }
+
+    .left-section {
+        min-height: 300px;
+        padding: 30px 25px;
+    }
+
+    .left-content {
+        margin: 35px 0;
+    }
+
+    .left-content h1 {
+        font-size: 36px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    .right-section {
+        padding: 30px 18px;
+    }
+
+    .product-form {
+        max-width: 480px;
+        padding: 27px 22px;
+    }
+
+    .bottom-text {
+        margin-top: 5px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- LEFT SIDE -->
+    <div class="left-section">
+
+        <h3 class="brand">
+            <span>JD</span> ELEGANCE
+        </h3>
+
+        <div class="left-content">
+
+            <p class="tagline">YOUR BEAUTY COLLECTION</p>
+
+            <h1>
+                Every Product<br>
+                Has Its Own<br>
+                <span>Beauty Story.</span>
+            </h1>
+
+            <p class="description">
+                Bring your beauty collection to life.
+                Add products, manage stock and keep
+                your collection beautifully organized.
+            </p>
+
+            <div class="feature-list">
+
+                <div class="feature">
+                    <span>✦</span>
+                    Easy Product Management
+                </div>
+
+                <div class="feature">
+                    <span>✦</span>
+                    Smart Stock Tracking
+                </div>
+
+                <div class="feature">
+                    <span>✦</span>
+                    Your Beauty Store, Your Style
+                </div>
+
+            </div>
+
+        </div>
+
+        <p class="bottom-text">
+            BEAUTY IN EVERY DETAIL
+        </p>
+
+    </div>
+
+
+    <!-- RIGHT SIDE FORM -->
+    <div class="right-section">
+
+        <div class="product-form">
+
+            <h2>Add New Product</h2>
+
+            <p class="form-subtitle">
+                Enter the details of your new product below.
+            </p>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input
+                        type="text"
+                        id="productName"
+                        name="name"
+                        placeholder="Enter product name"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Price (₹)</label>
+                    <input
+                        type="number"
+                        id="productPrice"
+                        name="price"
+                        placeholder="Enter product price"
+                        min="0"
+                        step="0.01"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productImage">Product Image</label>
+                    <input
+                        type="file"
+                        id="productImage"
+                        name="image"
+                        accept="image/*"
+                        required>
+                </div>
+                <div class="form-group">
+    <label for="category">Product Category</label>
+
+    <select name="category" id="category" required>
+        <option value="">Select Category</option>
+
+        {% for category in categories %}
+            <option value="{{ category.id }}">
+                {{ category.name }}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+                <div class="form-group">
+                    <label for="productStock">Available Stock</label>
+                    <input
+                        type="number"
+                        id="productStock"
+                        name="stock"
+                        placeholder="Enter stock quantity"
+                        min="0"
+                        required>
+                </div>
+            
+<!-- OFFER PRICE -->
+<div class="form-group">
+    <label for="offerPrice">Offer Price (₹) — Optional</label>
+
+    <input
+        type="number"
+        id="offerPrice"
+        name="offer_price"
+        placeholder="Enter offer price"
+        min="0"
+        step="0.01">
+</div>
+
+<!-- OFFER START DATE -->
+<div class="form-group">
+    <label for="offerStartDate">Offer Start Date — Optional</label>
+
+    <input
+        type="datetime-local"
+        id="offerStartDate"
+        name="offer_start_date">
+</div>
+
+<!-- OFFER END DATE -->
+<div class="form-group">
+    <label for="offerEndDate">Offer End Date — Optional</label>
+
+    <input
+        type="datetime-local"
+        id="offerEndDate"
+        name="offer_end_date">
+</div>
+
+
+                <button type="submit" class="add-btn">
+                    + &nbsp; Add Product
+                </button>
+
+            </form>
+
+            <p class="form-footer">
+                JD ELEGANCE · BEAUTY COLLECTION
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

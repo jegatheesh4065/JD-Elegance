@@ -1,0 +1,1551 @@
+{% extends 'nav_bar.html' %}
+{% load static %}
+
+{% block extra_css %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<style>
+
+.bt-page {
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+    padding: 25px 5% 60px;
+    font-family: 'DM Sans', Arial, sans-serif;
+    color: #382936;
+}
+
+.bt-page * {
+    box-sizing: border-box;
+}
+
+.bt-page a {
+    text-decoration: none;
+}
+
+
+/* HERO */
+
+.bt-hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 30px;
+    min-height: 470px;
+    padding: 55px 7%;
+    background: linear-gradient(
+        125deg,
+        #fff7f1,
+        #f8e8e6 55%,
+        #eee4ee
+    );
+    border-radius: 5px;
+    overflow: hidden;
+    animation: heroReveal 1s ease-out both;
+}
+
+.bt-hero-content {
+    max-width: 580px;
+     animation: slideFromLeft 1s ease-out both;
+}
+
+.bt-eyebrow,
+.bt-section-label {
+    display: inline-block;
+    color: #a45d70;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    animation: fadeIn 1s ease-out 0.2s both;
+}
+
+.bt-hero-content h1 {
+    margin: 22px 0;
+    color: #402a39;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(38px, 4.5vw, 62px);
+    font-weight: 500;
+    line-height: 1.15;
+    animation: slideFromLeft 1s ease-out 0.3s both;
+}
+
+.bt-hero-content h1 span {
+    color: #a45d70;
+    font-style: italic;
+}
+
+.bt-hero-content > p {
+    max-width: 440px;
+    margin-bottom: 28px;
+    color: #786b76;
+    font-size: 14px;
+    line-height: 1.9;
+    animation: slideFromLeft 1s ease-out 0.5s both;
+
+}
+
+.bt-primary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 16px 23px;
+    background: #472e40;
+    color: #fff !important;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+     animation: fadeIn 1s ease-out 0.7s both;
+    transition: transform 0.3s ease,
+                background 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.bt-primary-btn:hover {
+    background: #a45d70;
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(164, 93, 112, 0.25);
+}
+
+.bt-primary-btn span {
+    font-size: 17px;
+}
+
+.bt-hero-benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 30px;
+    color: #786779;
+    font-size: 11px;
+}
+
+
+/* HERO VISUAL */
+
+.bt-hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 340px;
+    animation: visualReveal 1.2s ease-out 0.3s both;
+}
+
+.bt-hero-circle {
+    position: absolute;
+    width: min(310px, 90%);
+    aspect-ratio: 1;
+    border: 1px solid rgba(164, 93, 112, 0.3);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    animation: circleRotate 18s linear infinite;
+}
+
+.bt-hero-product {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 245px;
+    min-height: 295px;
+    padding: 25px;
+    text-align: center;
+    background: linear-gradient(145deg, #fff, #f4e4e8);
+    border: 5px solid rgba(255, 255, 255, 0.7);
+    border-radius: 130px 130px 8px 8px;
+    box-shadow: 0 20px 50px rgba(74, 45, 62, 0.12);
+    transform: rotate(3deg);
+    animation: floatingCard 4s ease-in-out infinite;
+    transition: box-shadow 0.4s ease;
+}
+.bt-hero-product:hover {
+    box-shadow: 0 25px 55px rgba(74, 45, 62, 0.2);
+}
+
+.bt-visual-star {
+    color: #a45d70;
+    font-size: 32px;
+    animation: starGlow 2s ease-in-out infinite;
+}
+@keyframes heroReveal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-45px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes visualReveal {
+    from {
+        opacity: 0;
+        transform: translateX(45px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes circleRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes floatingCard {
+    0%,
+    100% {
+        transform: translateY(0) rotate(3deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(1deg);
+    }
+}
+
+@keyframes floatText {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -10px;
+    }
+}
+
+@keyframes starGlow {
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+
+/* ==============================
+   MOBILE RESPONSIVE
+============================== */
+
+@media (max-width: 600px) {
+
+    .bt-hero-content h1 {
+        animation-duration: 0.8s;
+    }
+
+    .bt-hero-circle {
+        animation-duration: 25s;
+    }
+
+}
+
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .bt-hero,
+    .bt-hero-content,
+    .bt-eyebrow,
+    .bt-hero-content h1,
+    .bt-hero-content > p,
+    .bt-primary-btn,
+    .bt-hero-benefits,
+    .bt-hero-visual,
+    .bt-hero-circle,
+    .bt-hero-product,
+    .bt-floating-one,
+    .bt-floating-two,
+    .bt-visual-star {
+        animation: none !important;
+        transition: none !important;
+    }
+
+}
+
+.bt-visual-label {
+    margin-top: 10px;
+    color: #a45d70;
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+.bt-brush-illustration {
+    margin: 8px 0;
+    color: #c68c9a;
+    font-size: 45px;
+}
+
+.bt-hero-product h2 {
+    margin: 0;
+    color: #472e40;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.bt-visual-bottom {
+    margin-top: 20px;
+    color: #a45d70;
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+.bt-floating-text {
+    position: absolute;
+    color: #a45d70;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.bt-floating-one {
+    top: 40px;
+    right: 0;
+    transform: rotate(8deg);
+    animation: floatText 3s ease-in-out infinite;
+}
+
+.bt-floating-two {
+    bottom: 35px;
+    left: 0;
+    transform: rotate(-8deg);
+    animation: floatText 3.5s ease-in-out infinite reverse;
+}
+
+
+/* BENEFITS */
+
+.bt-benefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 28px 10px;
+    border-bottom: 1px solid #eee4e9;
+}
+
+.bt-benefit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    animation: fadeIn 1s ease-out 0.9s both;
+}
+
+.bt-benefit > span {
+    color: #a45d70;
+    font-size: 27px;
+}
+
+.bt-benefit strong,
+.bt-benefit small {
+    display: block;
+}
+
+.bt-benefit strong {
+    color: #493544;
+    font-size: 12px;
+}
+
+.bt-benefit small {
+    margin-top: 5px;
+    color: #958590;
+    font-size: 10px;
+}
+
+
+/* SECTION HEADING */
+
+.bt-category-section {
+    padding: 70px 0 55px;
+}
+
+.bt-section-heading {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.bt-section-heading h2,
+.bt-products-heading h2 {
+    margin: 12px 0;
+    color: #402a39;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 3vw, 38px);
+    font-weight: 500;
+}
+
+.bt-section-heading p,
+.bt-products-heading p {
+    color: #8b7d88;
+    font-size: 13px;
+}
+
+
+/* CATEGORY CARDS */
+
+.bt-category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.bt-category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 15px;
+    text-align: center;
+    background: #fffaf7;
+    border: 1px solid #f0e4e6;
+    transition: 0.3s;
+}
+
+.bt-category-card:hover {
+    background: #f7e9eb;
+    border-color: #d9b7c1;
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(64, 42, 57, 0.08);
+}
+
+.bt-category-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 18px;
+    background: #f5e6e9;
+    border-radius: 50%;
+    font-size: 30px;
+}
+
+.bt-category-card h3 {
+    margin-bottom: 8px;
+    color: #493544;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.bt-category-card p {
+    margin-bottom: 18px;
+    color: #91828e;
+    font-size: 11px;
+}
+
+.bt-category-card > span {
+    color: #a45d70;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+
+/* PRODUCTS */
+
+.bt-products-section {
+    padding: 35px 0 60px;
+    scroll-margin-top: 30px;
+}
+
+.bt-products-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.bt-products-heading h2 {
+    margin-bottom: 8px;
+}
+
+.bt-collection-tag {
+    padding: 12px 15px;
+    color: #a45d70;
+    border: 1px solid #e8d2d9;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+
+/* FILTER FORM */
+
+.bt-filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+    padding: 18px;
+    background: #fffaf8;
+    border: 1px solid #f0e5e8;
+}
+
+.bt-search-box {
+    display: flex;
+    flex: 1 1 250px;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 0 13px;
+    background: white;
+    border: 1px solid #e9dce1;
+}
+
+.bt-search-box > span {
+    color: #a45d70;
+    font-size: 25px;
+}
+
+.bt-search-box input {
+    width: 100%;
+    min-width: 0;
+    padding: 13px 0;
+    color: #493544;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.bt-filter-form select {
+    flex: 0 1 180px;
+    min-width: 0;
+    padding: 13px;
+    color: #493544;
+    background: white;
+    border: 1px solid #e9dce1;
+    outline: none;
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.bt-filter-btn,
+.bt-reset-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 17px;
+    border: none;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.bt-filter-btn {
+    color: white;
+    background: #472e40;
+}
+
+.bt-filter-btn:hover {
+    background: #a45d70;
+}
+
+.bt-reset-btn {
+    color: #7d6575;
+    background: #f1e5e9;
+}
+
+.bt-reset-btn:hover {
+    background: #e8d2d9;
+}
+
+
+/* PRODUCT GRID */
+
+.bt-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 23px;
+}
+
+.bt-product-card {
+    min-width: 0;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #eee5e9;
+    transition: 0.3s;
+}
+
+.bt-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(64, 42, 57, 0.1);
+}
+
+.bt-product-image {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+    background: #faf4f5;
+}
+
+.bt-product-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.bt-product-card:hover .bt-product-image img {
+    transform: scale(1.06);
+}
+
+.bt-no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #a45d70;
+    font-size: 12px;
+}
+
+.bt-sale-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 8px 10px;
+    color: white;
+    background: #a45d70;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.bt-wishlist-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    color: #a45d70;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.bt-wishlist-btn:hover {
+    color: white;
+    background: #a45d70;
+}
+
+.bt-sold-out {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: rgba(45, 31, 42, 0.55);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.bt-stock-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    padding: 7px 10px;
+    color: #63424e;
+    background: #fff6e9;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* PRODUCT INFO */
+
+.bt-product-info {
+    padding: 18px;
+}
+
+.bt-product-category {
+    display: block;
+    margin-bottom: 9px;
+    color: #a45d70;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.bt-product-info h3 {
+    min-height: 42px;
+    margin: 0 0 13px;
+    color: #493544;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.bt-product-prices {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.bt-current-price {
+    color: #a45d70;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.bt-old-price {
+    color: #a99ca5;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+
+.bt-buy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px;
+    color: white !important;
+    background: #472e40;
+    border: none;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.bt-buy-btn:hover {
+    background: #a45d70;
+}
+
+.bt-buy-btn span {
+    font-size: 17px;
+}
+
+.bt-disabled-btn {
+    justify-content: center;
+    color: #827580;
+    background: #e7e0e4;
+    cursor: not-allowed;
+}
+
+.bt-disabled-btn:hover {
+    background: #e7e0e4;
+}
+
+
+/* EMPTY PRODUCTS */
+
+.bt-empty-products {
+    grid-column: 1 / -1;
+    padding: 65px 20px;
+    text-align: center;
+    background: #fffaf8;
+    border: 1px solid #f0e5e8;
+}
+
+.bt-empty-products > span {
+    color: #a45d70;
+    font-size: 40px;
+}
+
+.bt-empty-products h3 {
+    margin: 15px 0;
+    color: #493544;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 27px;
+    font-weight: 500;
+}
+
+.bt-empty-products p {
+    max-width: 440px;
+    margin: 0 auto 22px;
+    color: #8b7d88;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.bt-empty-products a {
+    display: inline-block;
+    padding: 13px 18px;
+    color: white;
+    background: #472e40;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+/* BOTTOM BANNER */
+
+.bt-bottom-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 45px 7%;
+    background: linear-gradient(120deg, #f5e5e8, #fcf4ef);
+}
+
+.bt-bottom-banner > div > span {
+    color: #a45d70;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.bt-bottom-banner h2 {
+    margin: 13px 0;
+    color: #402a39;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.bt-bottom-banner p {
+    color: #827481;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.bt-bottom-banner > a {
+    flex-shrink: 0;
+    padding: 15px 20px;
+    color: white;
+    background: #472e40;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.bt-bottom-banner > a:hover {
+    background: #a45d70;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+
+    .bt-product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bt-filter-form select {
+        flex: 1 1 150px;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .bt-hero {
+        grid-template-columns: 1fr;
+        padding: 45px 7%;
+    }
+
+    .bt-hero-content {
+        max-width: 100%;
+    }
+
+    .bt-hero-visual {
+        min-height: 330px;
+    }
+
+    .bt-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bt-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .bt-product-image {
+        height: 230px;
+    }
+
+    .bt-benefits {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .bt-benefit {
+        justify-content: flex-start;
+        max-width: 280px;
+        margin: auto;
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .bt-page {
+        padding: 15px 4% 35px;
+    }
+
+    .bt-hero {
+        padding: 35px 22px;
+    }
+
+    .bt-hero-content h1 {
+        font-size: 38px;
+    }
+
+    .bt-hero-content > p {
+        font-size: 12px;
+    }
+
+    .bt-hero-benefits {
+        gap: 10px;
+        font-size: 9px;
+    }
+
+    .bt-hero-visual {
+        min-height: 300px;
+    }
+
+    .bt-hero-product {
+        width: 220px;
+        min-height: 265px;
+    }
+
+    .bt-category-section {
+        padding: 50px 0 35px;
+    }
+
+    .bt-category-card {
+        padding: 23px 8px;
+    }
+
+    .bt-category-card h3 {
+        font-size: 15px;
+    }
+
+    .bt-category-card p {
+        font-size: 10px;
+    }
+
+    .bt-products-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .bt-filter-form {
+        flex-direction: column;
+        padding: 12px;
+    }
+
+    .bt-search-box,
+    .bt-filter-form select,
+    .bt-filter-btn,
+    .bt-reset-btn {
+        width: 100%;
+        min-height: 44px;
+    }
+
+    .bt-filter-btn,
+    .bt-reset-btn {
+        flex: auto;
+    }
+
+    .bt-product-grid {
+        gap: 10px;
+    }
+
+    .bt-product-image {
+        height: 175px;
+    }
+
+    .bt-product-info {
+        padding: 12px;
+    }
+
+    .bt-product-info h3 {
+        font-size: 14px;
+    }
+
+    .bt-current-price {
+        font-size: 14px;
+    }
+
+    .bt-old-price {
+        font-size: 10px;
+    }
+
+    .bt-product-category {
+        font-size: 7px;
+    }
+
+    .bt-buy-btn {
+        padding: 12px 9px;
+        font-size: 9px;
+    }
+
+    .bt-bottom-banner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 35px 23px;
+    }
+
+    .bt-bottom-banner h2 {
+        font-size: 32px;
+    }
+
+}
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<main class="bt-page">
+
+    <!-- HERO SECTION -->
+
+    <section class="bt-hero">
+
+        <div class="bt-hero-content">
+
+            <span class="bt-eyebrow">
+                THE JD ELEGANCE COLLECTION
+            </span>
+
+            <h1>
+                Beauty begins<br>
+                with the <span>perfect touch.</span>
+            </h1>
+
+            <p>
+                Discover your beauty essentials, professional makeup
+                brushes and must-have tools designed for your
+                everyday beauty routine.
+            </p>
+
+            <a href="#bt-products" class="bt-primary-btn">
+                EXPLORE COLLECTION
+                <span>→</span>
+            </a>
+
+            <div class="bt-hero-benefits">
+
+                <span>✦ Everyday Essentials</span>
+                <span>✦ Beauty Must-Haves</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="bt-hero-visual">
+
+            <div class="bt-hero-circle"></div>
+
+            <div class="bt-hero-product">
+
+                <span class="bt-visual-star">✦</span>
+
+                <span class="bt-visual-label">
+                    THE BEAUTY TOOL EDIT
+                </span>
+
+                <div class="bt-brush-illustration">
+                    ♡
+                </div>
+
+                <h2>
+                    Blend.<br>
+                    Define.<br>
+                    Glow.
+                </h2>
+
+                <span class="bt-visual-bottom">
+                    JD ELEGANCE
+                </span>
+
+            </div>
+
+            <span class="bt-floating-text bt-floating-one">
+                YOUR BEAUTY
+            </span>
+
+            <span class="bt-floating-text bt-floating-two">
+                YOUR RULES
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- BENEFITS STRIP -->
+
+    <section class="bt-benefits">
+
+        <div class="bt-benefit">
+            <span>✧</span>
+            <div>
+                <strong>Beauty Essentials</strong>
+                <small>Made for your routine</small>
+            </div>
+        </div>
+
+        <div class="bt-benefit">
+            <span>♡</span>
+            <div>
+                <strong>Your Beauty Favourites</strong>
+                <small>Explore the collection</small>
+            </div>
+        </div>
+
+        <div class="bt-benefit">
+            <span>✦</span>
+            <div>
+                <strong>Special Offers</strong>
+                <small>Discover selected deals</small>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORY SECTION -->
+
+    <section class="bt-category-section">
+
+        <div class="bt-section-heading">
+
+            <span class="bt-section-label">
+                FIND YOUR BEAUTY ESSENTIALS
+            </span>
+
+            <h2>
+                Explore the Collection
+            </h2>
+
+            <p>
+                The little tools that make a beautiful difference.
+            </p>
+
+        </div>
+
+
+        <div class="bt-category-grid">
+
+    <a href="?category=Makeup Brushes#bt-products"
+       class="bt-category-card">
+
+        <div class="bt-category-icon">🖌️</div>
+        <h3>Makeup Brushes</h3>
+        <p>Precise application</p>
+        <span>EXPLORE →</span>
+
+    </a>
+
+    <a href="?category=Beauty Sponges#bt-products"
+       class="bt-category-card">
+
+        <div class="bt-category-icon">◉</div>
+        <h3>Beauty Sponges</h3>
+        <p>Seamless blending</p>
+        <span>EXPLORE →</span>
+
+    </a>
+
+    <a href="?category=Brush Sets#bt-products"
+       class="bt-category-card">
+
+        <div class="bt-category-icon">✧</div>
+        <h3>Brush Sets</h3>
+        <p>Your complete kit</p>
+        <span>EXPLORE →</span>
+
+    </a>
+
+    <a href="?category=Beauty Tools#bt-products"
+       class="bt-category-card">
+
+        <div class="bt-category-icon">♡</div>
+        <h3>Beauty Tools</h3>
+        <p>Everyday essentials</p>
+        <span>EXPLORE →</span>
+
+    </a>
+
+</div>
+
+    </section>
+
+
+    <!-- PRODUCTS SECTION -->
+
+    <section class="bt-products-section" id="bt-products">
+
+        <div class="bt-products-heading">
+
+            <div>
+
+                <span class="bt-section-label">
+                    YOUR BEAUTY TOOLKIT
+                </span>
+
+                <h2>Brushes & Tools</h2>
+
+                <p>
+                    Find the perfect essentials for your beauty routine.
+                </p>
+
+            </div>
+
+            <span class="bt-collection-tag">
+                JD ELEGANCE ✦
+            </span>
+
+        </div>
+
+
+        <!-- SEARCH AND FILTER -->
+
+        <form method="GET"
+              action="{% url 'brushes_tools' %}"
+              class="bt-filter-form">
+
+            <div class="bt-search-box">
+
+                <span>⌕</span>
+
+                <input
+                    type="search"
+                    name="search"
+                    placeholder="Search brushes, sponges and tools..."
+                    value="{{ search_query }}"
+                >
+
+            </div>
+
+
+            <select name="category" onchange="this.form.submit()">
+    <option value="">All Categories</option>
+
+    {% for category in categories %}
+        <option value="{{ category.name }}"
+            {% if selected_category == category.name %}selected{% endif %}>
+            {{ category.name }}
+        </option>
+    {% endfor %}
+</select>
+
+
+            <select name="sort"
+                    aria-label="Sort products">
+
+                <option value="">Sort By</option>
+
+                <option value="new"
+                    {% if sort_by == "new" %}selected{% endif %}>
+                    New Arrivals
+                </option>
+
+                <option value="low"
+                    {% if sort_by == "low" %}selected{% endif %}>
+                    Price: Low to High
+                </option>
+
+                <option value="high"
+                    {% if sort_by == "high" %}selected{% endif %}>
+                    Price: High to Low
+                </option>
+
+            </select>
+
+
+            <button type="submit" class="bt-filter-btn">
+                APPLY
+            </button>
+
+
+            <a href="{% url 'brushes_tools' %}"
+               class="bt-reset-btn">
+                RESET
+            </a>
+
+        </form>
+
+
+        <!-- PRODUCT GRID -->
+
+        <div class="bt-product-grid">
+
+            {% for product in products %}
+
+                <article class="bt-product-card">
+
+                    <div class="bt-product-image">
+
+                        {% if product.image %}
+
+                            <img
+                                src="{{ product.image.url }}"
+                                alt="{{ product.name }}"
+                                loading="lazy"
+                            >
+
+                        {% else %}
+
+                            <div class="bt-no-image">
+                                No Image
+                            </div>
+
+                        {% endif %}
+
+
+                        {% if product.is_offer_active %}
+
+                            <span class="bt-sale-badge">
+                                {{ product.discount_percentage }}% OFF
+                            </span>
+
+                        {% endif %}
+
+
+                        <button
+                            type="button"
+                            class="bt-wishlist-btn"
+                            onclick="addOfferToWishlist(this)"
+                            data-id="{{ product.id }}"
+                            data-name="{{ product.name|escape }}"
+                            data-price="{{ product.get_display_price }}"
+                            data-image="{% if product.image %}{{ product.image.url }}{% endif %}"
+                            aria-label="Add {{ product.name }} to wishlist">
+
+                            ♡
+
+                        </button>
+
+
+                        {% if product.stock == 0 %}
+
+                            <div class="bt-sold-out">
+                                SOLD OUT
+                            </div>
+
+                        {% elif product.stock <= 3 %}
+
+                            <span class="bt-stock-badge">
+                                Only {{ product.stock }} left
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="bt-product-info">
+
+                        <span class="bt-product-category">
+                            BEAUTY ESSENTIALS
+                        </span>
+
+                        <h3>{{ product.name }}</h3>
+
+
+                        <div class="bt-product-prices">
+
+                            {% if product.is_offer_active %}
+
+                                <span class="bt-current-price">
+                                    ₹{{ product.offer_price|floatformat:2 }}
+                                </span>
+
+                                <span class="bt-old-price">
+                                    ₹{{ product.price|floatformat:2 }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="bt-current-price">
+                                    ₹{{ product.price|floatformat:2 }}
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        {% if product.stock > 0 %}
+
+                            <a href="{% url 'checkout' %}"
+                               class="bt-buy-btn">
+
+                                BUY NOW
+                                <span>→</span>
+
+                            </a>
+
+                        {% else %}
+
+                            <button
+                                type="button"
+                                class="bt-buy-btn bt-disabled-btn"
+                                disabled>
+
+                                SOLD OUT
+
+                            </button>
+
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="bt-empty-products">
+
+                    <span>✧</span>
+
+                    <h3>No products found</h3>
+
+                    <p>
+                        We couldn't find any products matching your search.
+                        Try another name or reset your filters.
+                    </p>
+
+                    <a href="{% url 'brushes_tools' %}">
+                        VIEW ALL PRODUCTS →
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM BANNER -->
+
+    <section class="bt-bottom-banner">
+
+        <div>
+
+            <span>YOUR BEAUTY, YOUR WAY</span>
+
+            <h2>
+                Small tools.<br>
+                Beautiful results.
+            </h2>
+
+            <p>
+                Discover the essentials that complete your routine.
+            </p>
+
+        </div>
+
+        <a href="#bt-products">
+            SHOP THE COLLECTION →
+        </a>
+
+    </section>
+
+</main>
+
+
+<!-- CATEGORY CARD SEARCH -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const categoryCards = document.querySelectorAll(".bt-category-card");
+    const searchInput = document.querySelector(".bt-search-box input");
+
+    categoryCards.forEach(function (card) {
+
+        card.addEventListener("click", function () {
+
+            const keyword = card.dataset.search;
+
+            if (searchInput) {
+                searchInput.value = keyword;
+            }
+
+            const filterForm = document.querySelector(".bt-filter-form");
+
+            if (filterForm) {
+                filterForm.querySelector('[name="category"]').value = "";
+                filterForm.querySelector('[name="sort"]').value = "";
+                filterForm.submit();
+            }
+
+        });
+
+    });
+
+});
+</script>
+
+{% endblock %}

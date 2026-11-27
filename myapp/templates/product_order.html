@@ -1,0 +1,1056 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ product.name }} | JD ELEGANCE</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: #49352f;
+            background:
+                radial-gradient(circle at 5% 5%, #f4e4db, transparent 35%),
+                linear-gradient(135deg, #fffaf7, #f6e9df);
+            min-height: 100vh;
+        }
+
+        .order-page {
+            padding: 45px 6%;
+            min-height: 100vh;
+        }
+
+        /* BREADCRUMB */
+
+        .order-breadcrumb {
+            max-width: 1120px;
+            margin: 0 auto 25px;
+            color: #927e74;
+            font-size: 13px;
+        }
+
+        .order-breadcrumb a {
+            color: #927e74;
+            text-decoration: none;
+        }
+
+        .order-breadcrumb a:hover {
+            color: #a56b51;
+        }
+
+        .order-breadcrumb span {
+            color: #a56b51;
+            font-weight: 700;
+        }
+
+        /* MAIN CONTAINER */
+
+        .order-wrapper {
+            max-width: 1120px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #fff;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 18px 55px rgba(73, 53, 47, 0.12);
+        }
+
+        /* IMAGE SECTION */
+
+        .order-image-section {
+            position: relative;
+            min-height: 650px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #f1dfd3, #fff5ed);
+        }
+
+        .product-label {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: #49352f;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 460px;
+            height: 460px;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            transition: transform 0.4s ease;
+        }
+
+        .product-image:hover {
+            transform: scale(1.06);
+        }
+
+        .image-caption {
+            margin-top: 22px;
+            color: #80634e;
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            letter-spacing: 1.5px;
+            text-align: center;
+        }
+
+        .image-note {
+            margin-top: 12px;
+            color: #927e74;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* PRODUCT DETAILS */
+
+        .order-info {
+            padding: 45px 40px;
+        }
+
+        .brand-name {
+            color: #a56b51;
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .order-info h1 {
+            color: #49352f;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            line-height: 1.35;
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            color: #8a7770;
+            line-height: 1.8;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        /* FEATURES */
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 27px;
+        }
+
+        .feature {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 11px;
+            border: 1px solid #eee0d7;
+            border-radius: 20px;
+            background: #fffaf7;
+            color: #80634e;
+            font-size: 11px;
+        }
+
+        .feature i {
+            color: #a56b51;
+        }
+
+        /* PRICE */
+
+        .price-card {
+            background: linear-gradient(135deg, #fff8f3, #f8ede5);
+            border: 1px solid #f0ded2;
+            border-radius: 13px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .price-label {
+            color: #927e74;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+        }
+
+        .product-price {
+            color: #a56b51;
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            font-weight: 700;
+        }
+
+        /* FORM LABEL */
+
+        .form-label {
+            display: block;
+            color: #49352f;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* VARIANT DROPDOWN */
+
+        .ml-dropdown {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #dfcabe;
+            border-radius: 10px;
+            background: #fffaf7;
+            color: #49352f;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .ml-dropdown:focus {
+            border-color: #a56b51;
+            box-shadow: 0 0 0 3px rgba(165, 107, 81, 0.12);
+        }
+
+        .ml-help {
+            color: #9b8980;
+            font-size: 11px;
+            margin-top: 9px;
+            line-height: 1.6;
+        }
+
+        /* QUANTITY */
+
+        .quantity-section {
+            margin-top: 22px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 145px;
+            border: 1px solid #dfcabe;
+            border-radius: 9px;
+            overflow: hidden;
+            background: #fffaf7;
+        }
+
+        .quantity-control button {
+            width: 42px;
+            height: 42px;
+            border: none;
+            background: transparent;
+            color: #49352f;
+            font-size: 19px;
+            cursor: pointer;
+        }
+
+        .quantity-control button:hover {
+            background: #f3e3d9;
+        }
+
+        .quantity-control input {
+            width: 45px;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #49352f;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* STOCK */
+
+        .stock-message {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 22px 0;
+            font-size: 12px;
+            color: #39834b;
+        }
+
+        .stock-dot {
+            width: 8px;
+            height: 8px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: #39834b;
+        }
+
+        .stock-message.unavailable {
+            color: #c0392b;
+        }
+
+        .stock-message.unavailable .stock-dot {
+            background: #c0392b;
+        }
+
+        /* TOTAL */
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 0;
+            margin-top: 5px;
+            border-top: 1px solid #eee0d7;
+        }
+
+        .total-label {
+            color: #80634e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .total-price {
+            color: #49352f;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        /* PLACE ORDER */
+
+        .place-order-btn {
+            display: block;
+            width: 100%;
+            padding: 17px;
+            margin-top: 8px;
+            background: linear-gradient(120deg, #49352f, #805643);
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .place-order-btn:hover:not(:disabled) {
+            background: linear-gradient(120deg, #a56b51, #bc896b);
+            box-shadow: 0 8px 20px rgba(165, 107, 81, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .place-order-btn:disabled {
+            background: #b9aaa2;
+            cursor: not-allowed;
+        }
+
+        /* MESSAGE */
+
+        .secure-message {
+            text-align: center;
+            color: #9b8980;
+            font-size: 11px;
+            margin-top: 16px;
+        }
+
+        .secure-message i {
+            margin-right: 5px;
+            color: #39834b;
+        }
+
+        .no-variants,
+        .order-error {
+            color: #c0392b;
+            background: #fff0ed;
+            padding: 16px;
+            border-radius: 9px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .order-error {
+            margin-bottom: 18px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 768px) {
+
+            .order-page {
+                padding: 25px 14px;
+            }
+
+            .order-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .order-image-section {
+                min-height: 350px;
+                padding: 35px 20px;
+            }
+
+            .product-image {
+                width: 100%;
+                max-width: 350px;
+                height: 320px;
+                object-fit: contain;
+            }
+
+            .order-info {
+                padding: 30px 22px;
+            }
+
+            .order-info h1 {
+                font-size: 26px;
+            }
+
+            .product-price {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="order-page">
+
+    <!-- BREADCRUMB -->
+
+    <div class="order-breadcrumb">
+
+        <a href="/">Home</a>
+
+        &nbsp; / &nbsp; Beauty
+
+        &nbsp; / &nbsp;
+
+        <span>Product Details</span>
+
+    </div>
+
+
+    <div class="order-wrapper">
+
+        <!-- LEFT IMAGE SECTION -->
+
+        <div class="order-image-section">
+
+            <div class="product-label">
+                JD ELEGANCE
+            </div>
+
+            {% if product.image %}
+
+                <img class="product-image"
+                     src="{{ product.image.url }}"
+                     alt="{{ product.name }}">
+
+            {% endif %}
+
+            <p class="image-caption">
+                YOUR BEAUTY, YOUR WAY
+            </p>
+
+            <p class="image-note">
+                Choose the option that suits you.
+            </p>
+
+        </div>
+
+
+        <!-- RIGHT PRODUCT DETAILS -->
+
+        <div class="order-info">
+
+            <p class="brand-name">
+                JD ELEGANCE
+            </p>
+
+            <h1>{{ product.name }}</h1>
+
+            <p class="product-description">
+                Discover your favourite product.
+                Select your preferred shade or size
+                to see its price and availability.
+            </p>
+
+
+            <!-- FEATURES -->
+
+            <div class="feature-list">
+
+                <span class="feature">
+                    <i class="fa-solid fa-spa"></i>
+                    Beauty
+                </span>
+
+                <span class="feature">
+                    <i class="fa-solid fa-box"></i>
+                    Product Options
+                </span>
+
+                <span class="feature">
+                    <i class="fa-solid fa-heart"></i>
+                    JD Elegance
+                </span>
+
+            </div>
+
+
+            <!-- PRICE CARD -->
+
+            <div class="price-card">
+
+                {% if variants %}
+
+                    <p class="price-label">
+                        PRICE PER SELECTED OPTION
+                    </p>
+
+                    <p class="product-price" id="product-price">
+                        Select an option
+                    </p>
+
+                {% else %}
+
+                    <p class="price-label">
+                        PRODUCT PRICE
+                    </p>
+
+                    <p class="product-price">
+                        ₹{{ product.price|floatformat:2 }}
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- PRODUCT WITH VARIANTS -->
+
+            {% if variants %}
+
+                <form method="POST" id="order-form">
+
+                    {% csrf_token %}
+
+
+                    {% if stock_error %}
+
+                        <div class="order-error">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            {{ stock_error }}
+                        </div>
+
+                    {% endif %}
+
+
+                    <label for="variant" class="form-label">
+
+    {% if has_shades %}
+
+        <i class="fa-solid fa-palette"></i>
+        &nbsp; Choose Your Shade
+
+    {% else %}
+
+        <i class="fa-solid fa-box"></i>
+        &nbsp; Choose Your Variant / Size
+
+    {% endif %}
+
+</label>
+
+
+                    <!-- SHADE / SIZE DROPDOWN -->
+
+                    <select name="variant_id"
+                            id="variant"
+                            class="ml-dropdown"
+                            required>
+
+                        <option value=""
+                                data-price=""
+                                data-stock="0"
+                                data-image="">
+
+                            Select your preferred option
+
+                        </option>
+
+
+                        {% for variant in variants %}
+
+                            <option
+                                value="{{ variant.id }}"
+                                data-price="{{ variant.price }}"
+                                data-stock="{{ variant.stock }}"
+                                data-image="{% if variant.shade_image %}{{ variant.shade_image.url }}{% endif %}"
+
+                                {% if variant.stock <= 0 %}
+                                    disabled
+                                {% endif %}>
+
+                                {{ variant.size }} — ₹{{ variant.price }}
+
+                                {% if variant.stock <= 0 %}
+
+                                    (Sold Out)
+
+                                {% else %}
+
+                                    ({{ variant.stock }} available)
+
+                                {% endif %}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+
+                    <p class="ml-help">
+                        Select an option to see its price and availability.
+                    </p>
+
+
+                    <!-- QUANTITY -->
+
+                    <div class="quantity-section">
+
+                        <label for="quantity" class="form-label">
+                            Quantity
+                        </label>
+
+                        <div class="quantity-control">
+
+                            <button type="button"
+                                    onclick="changeQuantity(-1)"
+                                    aria-label="Decrease quantity">
+
+                                −
+
+                            </button>
+
+                            <input type="number"
+                                   id="quantity"
+                                   name="quantity"
+                                   value="1"
+                                   min="1"
+                                   max="1"
+                                   readonly>
+
+                            <button type="button"
+                                    onclick="changeQuantity(1)"
+                                    aria-label="Increase quantity">
+
+                                +
+
+                            </button>
+
+                        </div>
+
+                        <p class="ml-help" id="quantity-help">
+                            Select an option before choosing quantity.
+                        </p>
+
+                    </div>
+
+
+                    <!-- STOCK MESSAGE -->
+
+                    <div class="stock-message"
+                         id="stock-message">
+
+                        <span class="stock-dot"></span>
+
+                        <span id="stock-text">
+                            Please select an option.
+                        </span>
+
+                    </div>
+
+
+                    <!-- TOTAL -->
+
+                    <div class="total-row">
+
+                        <span class="total-label">
+                            TOTAL AMOUNT
+                        </span>
+
+                        <span class="total-price"
+                              id="total-price">
+
+                            ₹0.00
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- PLACE ORDER -->
+
+                    <button type="submit"
+                            class="place-order-btn"
+                            id="place-order-btn"
+                            disabled>
+
+                        <i class="fa-solid fa-bag-shopping"></i>
+
+                        &nbsp; PLACE ORDER
+
+                        &nbsp;
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <p class="secure-message">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Your selected option and quantity will be sent to checkout.
+
+                    </p>
+
+                </form>
+
+
+            <!-- PRODUCT WITHOUT VARIANTS -->
+
+            {% else %}
+
+                {% if product.stock > 0 %}
+
+                    {% if stock_error %}
+
+                        <div class="order-error">
+                            {{ stock_error }}
+                        </div>
+
+                    {% endif %}
+
+                    <form method="POST" id="normal-order-form">
+
+                        {% csrf_token %}
+
+                        <input type="hidden"
+                               name="quantity"
+                               value="1">
+
+
+                        <div class="stock-message">
+
+                            <span class="stock-dot"></span>
+
+                            <span>
+                                In Stock — {{ product.stock }} available
+                            </span>
+
+                        </div>
+
+
+                        <div class="total-row">
+
+                            <span class="total-label">
+                                TOTAL AMOUNT
+                            </span>
+
+                            <span class="total-price">
+                                ₹{{ product.price|floatformat:2 }}
+                            </span>
+
+                        </div>
+
+
+                        <button type="submit"
+                                class="place-order-btn">
+
+                            <i class="fa-solid fa-bag-shopping"></i>
+
+                            &nbsp; PLACE ORDER
+
+                            &nbsp;
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+
+                        <p class="secure-message">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                            Your product is ready to order.
+
+                        </p>
+
+                    </form>
+
+                {% else %}
+
+                    <p class="no-variants">
+
+                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                        This product is currently SOLD OUT.
+
+                    </p>
+
+                    <button type="button"
+                            class="place-order-btn"
+                            disabled>
+
+                        SOLD OUT
+
+                    </button>
+
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const variantSelect = document.getElementById("variant");
+
+const quantityInput = document.getElementById("quantity");
+
+const priceElement = document.getElementById("product-price");
+
+const totalElement = document.getElementById("total-price");
+
+const stockMessage = document.getElementById("stock-message");
+
+const stockText = document.getElementById("stock-text");
+
+const quantityHelp = document.getElementById("quantity-help");
+
+const orderButton = document.getElementById("place-order-btn");
+
+const productImage = document.querySelector(".product-image");
+
+const originalProductImage = productImage
+    ? productImage.src
+    : "";
+
+let selectedPrice = 0;
+
+let availableStock = 0;
+
+
+// UPDATE VARIANT PRICE, IMAGE AND STOCK
+
+function updateOrderDetails() {
+
+    if (!variantSelect) {
+        return;
+    }
+
+    const option = variantSelect.options[variantSelect.selectedIndex];
+
+    selectedPrice = Number(option.dataset.price) || 0;
+
+    availableStock = Number(option.dataset.stock) || 0;
+
+
+    // CHANGE PRODUCT IMAGE
+
+    const selectedImage = option.dataset.image;
+
+    if (productImage) {
+
+        productImage.src = selectedImage || originalProductImage;
+
+    }
+
+
+    // NO SELECTION OR SOLD OUT
+
+    if (!option.value || selectedPrice <= 0 || availableStock <= 0) {
+
+        priceElement.textContent = "Select an option";
+
+        totalElement.textContent = "₹0.00";
+
+        quantityInput.value = 1;
+
+        quantityInput.max = 1;
+
+        stockMessage.classList.add("unavailable");
+
+        stockText.textContent = option.value
+            ? "This option is currently unavailable."
+            : "Please select an option.";
+
+        quantityHelp.textContent =
+            "Select an available option before choosing quantity.";
+
+        orderButton.disabled = true;
+
+        return;
+
+    }
+
+
+    // AVAILABLE VARIANT
+
+    quantityInput.value = 1;
+
+    quantityInput.max = availableStock;
+
+    priceElement.textContent =
+        "₹" + selectedPrice.toFixed(2);
+
+    stockMessage.classList.remove("unavailable");
+
+    stockText.textContent =
+        "In stock — " + availableStock + " available";
+
+    quantityHelp.textContent =
+        "You can order up to " + availableStock + " units.";
+
+    orderButton.disabled = false;
+
+    updateTotal();
+
+}
+
+
+// UPDATE TOTAL AMOUNT
+
+function updateTotal() {
+
+    let quantity = Number(quantityInput.value) || 1;
+
+    quantity = Math.max(
+        1,
+        Math.min(quantity, availableStock)
+    );
+
+    quantityInput.value = quantity;
+
+    const total = selectedPrice * quantity;
+
+    totalElement.textContent =
+        "₹" + total.toFixed(2);
+
+}
+
+
+// CHANGE QUANTITY
+
+function changeQuantity(change) {
+
+    if (availableStock <= 0) {
+        return;
+    }
+
+    let quantity = Number(quantityInput.value) || 1;
+
+    quantity += change;
+
+    if (quantity < 1) {
+        quantity = 1;
+    }
+
+    if (quantity > availableStock) {
+        quantity = availableStock;
+    }
+
+    quantityInput.value = quantity;
+
+    updateTotal();
+
+}
+
+
+// VARIANT SELECTION
+
+if (variantSelect) {
+
+    variantSelect.addEventListener(
+        "change",
+        updateOrderDetails
+    );
+
+
+    // FORM VALIDATION
+
+    document.getElementById("order-form").addEventListener(
+        "submit",
+        function(event) {
+
+            const option =
+                variantSelect.options[variantSelect.selectedIndex];
+
+            if (!option.value || availableStock <= 0) {
+
+                event.preventDefault();
+
+                alert("Please select an available shade or size.");
+
+                return;
+
+            }
+
+            if (Number(quantityInput.value) > availableStock) {
+
+                event.preventDefault();
+
+                alert("Selected quantity exceeds available stock.");
+
+            }
+
+        }
+    );
+
+
+    updateOrderDetails();
+
+}
+
+</script>
+
+</body>
+</html>

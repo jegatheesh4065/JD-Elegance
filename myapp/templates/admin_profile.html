@@ -1,0 +1,860 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+.profile-page,
+.profile-page * {
+    box-sizing: border-box;
+}
+
+.profile-page {
+    background: #fcf7f5;
+    color: #38242d;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 35px 5%;
+}
+
+.profile-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.profile-header small {
+    color: #b85c70;
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.profile-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    color: #572638;
+    margin: 8px 0;
+}
+
+.profile-header p {
+    font-size: 13px;
+    color: #8b7b80;
+    margin: 0;
+}
+
+.back-link {
+    padding: 12px 18px;
+    border: 1px solid #eadde1;
+    border-radius: 30px;
+    color: #572638;
+    background: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.back-link:hover {
+    background: #572638;
+    color: white;
+}
+
+.profile-banner {
+    background: linear-gradient(120deg, #572638, #a94f68);
+    padding: 35px;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 500;
+    margin: 12px 0;
+}
+
+.profile-banner p {
+    color: #f5e5ea;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+.banner-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #f4cbd6;
+    text-transform: uppercase;
+}
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 25px;
+    align-items: start;
+}
+
+.profile-sidebar,
+.profile-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+.profile-card,
+.profile-menu,
+.profile-content {
+    background: white;
+    border: 1px solid #f0e3e6;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(87, 38, 56, .04);
+}
+
+.profile-card {
+    padding: 28px 20px;
+    text-align: center;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #f8e7ec;
+    border: 4px solid #e6b7c4;
+    color: #572638;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.profile-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    color: #572638;
+    margin: 0 0 8px;
+    overflow-wrap: anywhere;
+}
+
+.profile-email {
+    color: #8b7b80;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.role-badge {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 15px;
+    border-radius: 25px;
+    background: #f9e9ed;
+    color: #87384d;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.divider {
+    height: 1px;
+    background: #f0e3e6;
+    margin: 22px 0;
+}
+
+.mini-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 10px;
+    margin: 15px 0;
+    font-size: 12px;
+}
+
+.mini-info span {
+    color: #8b7b80;
+}
+
+.mini-info strong {
+    color: #572638;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.profile-menu {
+    padding: 14px;
+}
+
+.menu-heading {
+    padding: 10px;
+    color: #aa939a;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.menu-link {
+    display: block;
+    padding: 14px 12px;
+    margin: 4px 0;
+    border-radius: 10px;
+    color: #79676e;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.menu-link:hover,
+.menu-link.active {
+    background: #f9e9ed;
+    color: #572638;
+}
+
+.profile-content {
+    padding: 28px;
+    scroll-margin-top: 25px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.section-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    color: #572638;
+    margin: 0 0 8px;
+}
+
+.section-heading p {
+    font-size: 12px;
+    color: #8b7b80;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.section-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    background: #f9e9ed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    min-width: 0;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 9px;
+    color: #5d454e;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.form-group input {
+    display: block;
+    width: 100%;
+    height: 48px;
+    border: 1px solid #eadde1;
+    border-radius: 10px;
+    padding: 0 13px;
+    background: #fffdfc;
+    color: #38242d;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #b85c70;
+    box-shadow: 0 0 0 3px rgba(184, 92, 112, .09);
+}
+
+.form-group input[readonly] {
+    background: #f5f1f0;
+    color: #96868c;
+}
+
+.field-hint {
+    display: block;
+    margin-top: 7px;
+    font-size: 10px;
+    color: #9b8b90;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid #f0e3e6;
+}
+
+.save-btn {
+    border: none;
+    border-radius: 9px;
+    background: #572638;
+    color: white;
+    padding: 14px 23px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background: #b85c70;
+}
+
+.cancel-btn {
+    display: inline-block;
+    padding: 13px 22px;
+    border: 1px solid #eadde1;
+    border-radius: 9px;
+    color: #79676e;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.cancel-btn:hover {
+    background: #f9e9ed;
+    color: #572638;
+}
+
+.messages {
+    margin-bottom: 20px;
+}
+
+.message {
+    padding: 13px 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.message.success {
+    background: #eaf7ee;
+    color: #246b3d;
+}
+
+.message.error {
+    background: #fff0f0;
+    color: #a52a2a;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.info-box {
+    padding: 18px;
+    background: #fffaf8;
+    border: 1px solid #f0e3e6;
+    border-radius: 12px;
+    min-width: 0;
+}
+
+.info-box span {
+    display: block;
+    font-size: 10px;
+    color: #8b7b80;
+    margin-bottom: 10px;
+}
+
+.info-box strong {
+    color: #572638;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.security-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 17px 0;
+    border-bottom: 1px solid #f0e3e6;
+}
+
+.security-link:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.security-link strong {
+    display: block;
+    font-size: 12px;
+    color: #572638;
+    margin-bottom: 6px;
+}
+
+.security-link p {
+    margin: 0;
+    color: #8b7b80;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.security-btn {
+    text-decoration: none;
+    color: #87384d;
+    border: 1px solid #e8cbd3;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.security-btn:hover {
+    background: #572638;
+    color: white;
+}
+
+.profile-footer {
+    padding: 25px 0 5px;
+    text-align: center;
+    color: #aa969d;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 850px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+    }
+}
+
+@media (max-width: 560px) {
+    .profile-page {
+        padding: 22px 13px;
+    }
+
+    .profile-header h1 {
+        font-size: 32px;
+    }
+
+    .profile-banner {
+        padding: 25px 20px;
+    }
+
+    .profile-banner h2 {
+        font-size: 26px;
+    }
+
+    .profile-sidebar {
+        display: flex;
+    }
+
+    .profile-content {
+        padding: 20px 16px;
+    }
+
+    .form-grid,
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .security-link {
+        align-items: flex-start;
+    }
+
+    .security-btn {
+        white-space: normal;
+        text-align: center;
+    }
+}
+</style>
+</head>
+<body>
+<div class="profile-page">
+    <div class="profile-container">
+
+        <header class="profile-header">
+            <div>
+                <small>JD ELEGANCE · ADMIN PANEL</small>
+                <h1>My Profile</h1>
+                <p>Manage your personal details and account security.</p>
+            </div>
+
+            <a href="{% url 'home' %}" class="back-link">
+                ← Back to Website
+            </a>
+        </header>
+
+
+        <section class="profile-banner">
+            <span class="banner-label">Your personal space</span>
+
+            <h2>
+                Welcome back,
+                {{ admin_user.first_name|default:admin_user.username }}!
+            </h2>
+
+            <p>
+                Keep your account information updated.<br>
+                Manage your JD Elegance administrator profile here.
+            </p>
+        </section>
+
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+        <div class="profile-layout">
+
+            <!-- LEFT SIDEBAR -->
+            <aside class="profile-sidebar">
+
+                <section class="profile-card">
+
+                    <div class="avatar">
+                        {% if admin_user.first_name %}
+                            {{ admin_user.first_name|slice:":1"|upper }}
+                        {% else %}
+                            {{ admin_user.username|slice:":1"|upper }}
+                        {% endif %}
+                    </div>
+
+                    <h3>
+                        {{ admin_user.get_full_name|default:admin_user.username }}
+                    </h3>
+
+                    <div class="profile-email">
+                        {{ admin_user.email|default:"Email not added" }}
+                    </div>
+
+                    <span class="role-badge">
+                        {% if admin_user.is_superuser %}
+                            SUPER ADMIN
+                        {% elif admin_user.is_staff %}
+                            ADMIN
+                        {% else %}
+                            USER
+                        {% endif %}
+                    </span>
+
+                    <div class="divider"></div>
+
+                    <div class="mini-info">
+                        <span>Username</span>
+                        <strong>{{ admin_user.username }}</strong>
+                    </div>
+
+                    <div class="mini-info">
+                        <span>Account status</span>
+                        <strong>
+                            {% if admin_user.is_active %}
+                                Active
+                            {% else %}
+                                Inactive
+                            {% endif %}
+                        </strong>
+                    </div>
+
+                    <div class="mini-info">
+                        <span>Member since</span>
+                        <strong>{{ admin_user.date_joined|date:"d M Y" }}</strong>
+                    </div>
+
+                </section>
+
+
+                <nav class="profile-menu">
+                    <div class="menu-heading">ACCOUNT MENU</div>
+
+                    <a href="#personal-details" class="menu-link active">
+                        ♙ &nbsp; Personal Details
+                    </a>
+
+                    <a href="#account-information" class="menu-link">
+                        ▤ &nbsp; Account Information
+                    </a>
+
+                    <a href="#security-settings" class="menu-link">
+                        ♧ &nbsp; Security Settings
+                    </a>
+
+                    <a href="{% url 'admin_change_password' %}"
+                       class="menu-link">
+                        🔒 &nbsp; Change Password
+                    </a>
+
+                    <a href="{% url 'admin:index' %}"
+                       class="menu-link">
+                        ⚙ &nbsp; Django Admin
+                    </a>
+                </nav>
+
+            </aside>
+
+
+            <!-- RIGHT CONTENT -->
+            <main class="profile-main">
+
+                <section class="profile-content" id="personal-details">
+
+                    <div class="section-heading">
+                        <div>
+                            <h2>Personal Details</h2>
+                            <p>Edit your personal information below.</p>
+                        </div>
+
+                        <div class="section-icon">♙</div>
+                    </div>
+
+
+                    <form method="POST" action="{% url 'admin_profile' %}">
+                        {% csrf_token %}
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+
+                                <input
+                                    type="text"
+                                    id="first_name"
+                                    name="first_name"
+                                    value="{{ admin_user.first_name }}"
+                                    placeholder="Enter first name"
+                                    required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+
+                                <input
+                                    type="text"
+                                    id="last_name"
+                                    name="last_name"
+                                    value="{{ admin_user.last_name }}"
+                                    placeholder="Enter last name"
+                                    required>
+                            </div>
+
+
+                            <div class="form-group full">
+                                <label for="email">Email Address</label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value="{{ admin_user.email }}"
+                                    placeholder="Enter email address"
+                                    required>
+
+                                <span class="field-hint">
+                                    Enter a valid email address.
+                                </span>
+                            </div>
+
+
+                            <div class="form-group full">
+                                <label for="username">Username</label>
+
+                                <input
+                                    type="text"
+                                    id="username"
+                                    value="{{ admin_user.username }}"
+                                    readonly>
+
+                                <span class="field-hint">
+                                    Username cannot be changed here.
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-actions">
+                            <button type="submit" class="save-btn">
+                                Save Changes →
+                            </button>
+
+                            <a href="{% url 'admin_profile' %}"
+                               class="cancel-btn">
+                                Cancel
+                            </a>
+                        </div>
+
+                    </form>
+
+                </section>
+
+
+                <section class="profile-content" id="account-information">
+
+                    <div class="section-heading">
+                        <div>
+                            <h2>Account Information</h2>
+                            <p>Your account details at a glance.</p>
+                        </div>
+
+                        <div class="section-icon">▤</div>
+                    </div>
+
+                    <div class="info-grid">
+
+                        <div class="info-box">
+                            <span>ACCOUNT CREATED</span>
+                            <strong>
+                                {{ admin_user.date_joined|date:"d F Y" }}
+                            </strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>LAST LOGIN</span>
+                            <strong>
+                                {% if admin_user.last_login %}
+                                    {{ admin_user.last_login|date:"d M Y, h:i A" }}
+                                {% else %}
+                                    First login
+                                {% endif %}
+                            </strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>ACCOUNT TYPE</span>
+                            <strong>
+                                {% if admin_user.is_superuser %}
+                                    Super Administrator
+                                {% elif admin_user.is_staff %}
+                                    Administrator
+                                {% else %}
+                                    Standard User
+                                {% endif %}
+                            </strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>EMAIL</span>
+                            <strong>
+                                {% if admin_user.email %}
+                                    Added
+                                {% else %}
+                                    Not added
+                                {% endif %}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <section class="profile-content" id="security-settings">
+
+                    <div class="section-heading">
+                        <div>
+                            <h2>Security Settings</h2>
+                            <p>Manage your account security.</p>
+                        </div>
+
+                        <div class="section-icon">♧</div>
+                    </div>
+
+
+                    <div class="security-link">
+                        <div>
+                            <strong>Change Password</strong>
+                            <p>Update your account password securely.</p>
+                        </div>
+
+                        <a href="{% url 'admin_change_password' %}"
+                           class="security-btn">
+                            Change Password →
+                        </a>
+                    </div>
+
+
+                    <div class="security-link">
+                        <div>
+                            <strong>Django Administration</strong>
+                            <p>Manage your website from the admin panel.</p>
+                        </div>
+
+                        <a href="{% url 'admin:index' %}"
+                           class="security-btn">
+                            Open Admin →
+                        </a>
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+
+        <footer class="profile-footer">
+            JD ELEGANCE · ADMINISTRATION PANEL
+        </footer>
+
+    </div>
+</div>
+</body>
+</html>

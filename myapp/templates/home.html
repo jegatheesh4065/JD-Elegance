@@ -1,0 +1,2060 @@
+{% extends 'nav_bar.html' %}
+{% load static %}
+{% block extra_css %}
+<style>
+.carousel-indicators button {
+    width: 7px !important;
+    height: 7px !important;
+    padding: 0 !important;
+    margin: 0 7px !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background-color: white !important;
+    opacity: 0.5 !important;
+}
+
+.carousel-indicators button.active {
+    opacity: 1 !important;
+}
+#myCarousel{
+    position: relative;
+    bottom: 49px;
+}
+
+.carousel-item img,
+.carousel-item video {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+    .carousel {
+        /* margin: 30px auto; */
+        width: 100%;
+        max-width: 1400px;
+        /* border-radius: 20px; */
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .carousel-item img,
+    .carousel-item video {
+        width: 100%;
+        height: 550px;
+        object-fit: cover;
+    }
+
+    /* Dark overlay */
+    .carousel-item::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            rgba(0,0,0,0.45),
+            transparent
+        );
+    }
+
+    /* Zoom effect */
+    /* .carousel-item.active img,
+    .carousel-item.active video {
+        animation: zoom 6s ease-in-out;
+    } */
+
+    @keyframes zoom {
+        from {
+            transform: scale(1);
+        }
+
+        to {
+            transform: scale(1.08);
+        }
+    }
+
+    /* Previous / Next buttons */
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 50px;
+        height: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.8);
+        border-radius: 50%;
+        margin: 0 20px;
+        opacity: 1;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        filter: invert(1);
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        background: white;
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        .carousel {
+            width: 100%;
+            border-radius: 0;
+        }
+
+        .carousel-item img,
+        .carousel-item video {
+            height: 350px;
+        }
+    }
+
+ .carousel-caption {
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    text-align: left;
+}
+
+.carousel-caption h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.carousel-caption p {
+    font-size: 20px;
+}
+
+.carousel-caption button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.carousel-caption button:hover {
+    transform: scale(1.05);
+}   
+ 
+/* Arrows */
+
+.slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+    color: #222;
+
+    font-size: 25px;
+    cursor: pointer;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.prev {
+    left: -18px;
+}
+
+.next {
+    right: -18px;
+}
+
+.slide-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .best-sellers h2 {
+        font-size: 30px;
+    }
+
+    .product-slider {
+        width: 92%;
+        padding: 35px 5px;
+    }
+
+    .product-card {
+        flex: 0 0 180px;
+    }
+
+    .product-img {
+        height: 190px;
+    }
+
+    .product-card h3 {
+        font-size: 14px;
+    }
+
+    .product-bottom span {
+        font-size: 14px;
+    }
+
+    .product-bottom button {
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+}
+/* ============================= */
+/* MAKEUP TIPS SECTION */
+/* ============================= */
+
+.tips-section {
+    width: 100%;
+    padding: 75px 4.5% 80px;
+    background: #ffffff;
+    position: relative;
+    top: -50px;
+}
+
+
+/* HEADER */
+
+.tips-header {
+    text-align: center;
+    width: 100%;
+    padding: 55px 20px 65px;
+    margin: 0 auto 15px;
+
+    background: linear-gradient(
+        to bottom,
+        #fff,
+        #fafafa
+    );
+}
+
+
+.tips-small-title {
+    position: relative;
+
+    display: inline-block;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+    color: #555;
+
+    margin: 0 0 18px;
+}
+.tips-small-title::before,
+.tips-small-title::after {
+    content: "";
+
+    display: inline-block;
+
+    width: 35px;
+    height: 1px;
+
+    background: #bdbdbd;
+
+    vertical-align: middle;
+
+    margin: 0 14px;
+}
+
+
+.tips-header h2 {
+    margin: 0;
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #171717;
+
+    line-height: 1.2;
+
+    text-transform: uppercase;
+}
+
+.tips-description {
+    max-width: 650px;
+    margin: 0 auto 25px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
+}
+
+
+/* VIEW ALL BUTTON */
+
+.view-all {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 160px;
+    height: 50px;
+
+    border: 1px solid #cfcfcf;
+
+    background: #fff;
+
+    color: #222;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    transition: all 0.35s ease;
+}
+
+
+.view-all:hover {
+    background: #171717;
+
+    border-color: #171717;
+
+    color: #fff;
+
+    transform: translateY(-2px);
+}
+
+/* FOUR CARDS */
+
+.tips-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+
+    width: 100%;
+}
+
+
+/* CARD */
+
+.tips-card {
+    min-width: 0;
+}
+
+
+/* IMAGE */
+
+.tips-image {
+    position: relative;
+
+    width: 100%;
+    height: 455px;
+
+    overflow: hidden;
+
+    background: #eee;
+}
+
+
+/* IMAGE ITSELF */
+
+.tips-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform 0.5s ease;
+}
+
+
+/* DARK GRADIENT */
+
+.tips-image::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 48%;
+
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.70),
+        rgba(0, 0, 0, 0)
+    );
+
+    z-index: 1;
+}
+
+
+/* TEXT ON IMAGE */
+
+.tips-overlay {
+    position: absolute;
+
+    left: 20px;
+    right: 10px;
+    bottom: 20px;
+
+    z-index: 2;
+}
+
+.tips-overlay h3 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 27px;
+    font-weight: 800;
+
+    line-height: 1.05;
+
+    text-transform: uppercase;
+}
+
+
+/* DESCRIPTION BELOW IMAGE */
+
+.tips-card > p {
+    margin: 14px 5px 0;
+
+    color: #333;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* HOVER */
+
+.tips-card:hover .tips-image img {
+    transform: scale(1.05);
+}
+
+
+/* ============================= */
+/* TABLET */
+/* ============================= */
+
+@media (max-width: 1000px) {
+
+    .tips-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+}
+
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 600px) {
+
+    .tips-section {
+        padding: 50px 20px;
+    }
+
+    .tips-header h2 {
+        font-size: 25px;
+    }
+
+    .tips-container {
+        grid-template-columns: 1fr;
+    }
+
+    .tips-image {
+        height: 480px;
+    }
+
+}
+.sold-image {
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+.sold-out {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #111;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.sold-text {
+    color: #b00020 !important;
+    font-size: 12px !important;
+    font-weight: bold;
+}/* ===== NEW & TRENDING SECTION ===== */
+
+.product-section {
+    width: 94%;
+    margin: 30px auto 50px;
+}
+
+.product-section h2 {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 700;
+    color: #d4a64b;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+/* Product slider container */
+.product-container {
+    display: flex;
+    gap: 25px;
+    padding: 35px 25px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    background: #faf7f5;
+    border-radius: 24px;
+    scrollbar-width: none;
+}
+
+.product-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Product card */
+.product-card {
+    flex: 0 0 220px;
+    min-width: 220px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px;
+    overflow: hidden;
+    border: 1px solid #f0e7e1;
+    box-shadow: 0 4px 15px rgba(80, 50, 30, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(80, 50, 30, 0.13);
+}
+
+/* Product image */
+.product-img {
+    width: 100%;
+    height: 225px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #faf7f5;
+    position: relative;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.05);
+}
+
+/* Product name */
+.product-card h3 {
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 600;
+    color: #292323;
+    margin: 15px 0 10px;
+    min-height: 45px;
+}
+
+/* Price */
+.product-bottom {
+    margin-bottom: 14px;
+}
+
+.product-bottom span {
+    font-size: 17px;
+    font-weight: 700;
+    color: #292323;
+}
+
+/* Product buttons */
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.wishlist-add {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: 1px solid #e8d9d5;
+    border-radius: 50%;
+    background: #fff;
+    color: #514343;
+    font-size: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+/* Liked heart */
+.wishlist-add.liked {
+    background: #fff0f5;
+    color: #ff2780;
+    border-color: #ff2780;
+}
+
+.wishlist-add:hover {
+    border-color: #ff2780;
+    color: #ff2780;
+    transform: scale(1.08);
+}
+
+/* Buy button */
+.buy-btn {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    background: #292323;
+    color: #fff !important;
+    padding: 12px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: background 0.25s ease;
+}
+
+.buy-btn:hover {
+    background: #ff2780;
+}
+
+/* Sold-out products */
+.product-card.out-of-stock .product-img img {
+    filter: grayscale(40%);
+    opacity: 0.6;
+}
+
+/* SOLD OUT text on image */
+.sold-text {
+    color: white !important;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: #fff;
+    border: 1px solid white;
+    padding: 6px 12px;
+    border-radius: 5px;
+}
+
+/* SOLD OUT overlay on image */
+.product-img {
+    position: relative;
+}
+
+/* Black SOLD OUT Badge */
+.product-img .sold-text {
+    position: absolute;
+    top: 15px;
+    right: 12px;
+
+    background: linear-gradient(135deg, #333333, #000000);
+    color: #ffffff !important;
+
+    padding: 9px 14px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    white-space: nowrap;
+}
+
+/* Badge corner */
+.product-img .sold-text::after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    left: 0;
+
+    border-top: 7px solid #ffffff;
+    border-right: 7px solid transparent;
+}
+
+/* SOLD OUT button */
+.product-actions .sold-text {
+    width: 100%;
+    padding: 11px;
+
+    background: #111111;
+    color: #ffffff;
+
+    border: 1px solid #ffffff;
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+
+    cursor: not-allowed;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    .product-section h2 {
+        font-size: 28px;
+    }
+
+    .product-container {
+        gap: 15px;
+        padding: 20px 15px;
+        border-radius: 16px;
+    }
+
+    .product-card {
+        flex-basis: 190px;
+        min-width: 190px;
+    }
+
+    .product-img {
+        height: 190px;
+    }
+}
+/* =================================
+   JD ELEGANCE PREMIUM COUPON SECTION
+================================= */
+
+.jd-coupon-section {
+    padding: 85px 7%;
+    background:
+        radial-gradient(circle at 5% 20%, #f4dfda 0, transparent 30%),
+        radial-gradient(circle at 95% 80%, #f3ded6 0, transparent 30%),
+        #fff9f6;
+    overflow: hidden;
+}
+
+.jd-coupon-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.jd-coupon-heading span {
+    display: inline-block;
+    color: #b77c77;
+    font-size: 11px;
+    letter-spacing: 5px;
+    font-weight: 700;
+    position: relative;
+}
+
+.jd-coupon-heading span::before,
+.jd-coupon-heading span::after {
+    content: "✦";
+    margin: 0 12px;
+    color: #c99a83;
+}
+
+.jd-coupon-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: #49332e;
+    margin: 15px 0 10px;
+}
+
+.jd-coupon-heading p {
+    color: #927c75;
+    font-size: 14px;
+    letter-spacing: .5px;
+}
+
+/* SLIDER */
+
+.jd-coupon-slider {
+    max-width: 1150px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+/* COUPON SLIDE */
+
+.jd-coupon-slide {
+    display: none;
+    min-height: 360px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    background: linear-gradient(
+        115deg,
+        #f0d3cd,
+        #fbe9e2 55%,
+        #f5ddd5
+    );
+    border: 1px solid #e7c4ba;
+    box-shadow: 0 18px 45px rgba(128, 79, 69, .13);
+}
+
+.jd-coupon-slide::before {
+    content: "JD";
+    position: absolute;
+    right: 25%;
+    top: -100px;
+    font-family: 'Playfair Display', serif;
+    font-size: 350px;
+    color: rgba(255,255,255,.20);
+    pointer-events: none;
+}
+
+.jd-coupon-slide::after {
+    content: "✦";
+    position: absolute;
+    left: 48%;
+    top: 35px;
+    font-size: 45px;
+    color: rgba(183,124,119,.25);
+    pointer-events: none;
+}
+
+.jd-coupon-slide.active {
+    display: block;
+    animation: couponReveal .7s ease;
+}
+
+@keyframes couponReveal {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CONTENT */
+
+.jd-coupon-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 360px;
+    padding: 45px 8%;
+    gap: 35px;
+    position: relative;
+    z-index: 1;
+}
+
+.jd-coupon-info {
+    max-width: 520px;
+}
+
+.jd-coupon-small {
+    display: inline-block;
+    color: #a66e68;
+    font-size: 10px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.jd-coupon-info h2 {
+    font-family: 'Playfair Display', serif;
+    color: #543a34;
+    font-size: 48px;
+    line-height: 1.2;
+    margin: 20px 0;
+}
+
+.jd-coupon-info h2 i {
+    color: #b77c77;
+}
+
+.jd-coupon-info p {
+    color: #826a63;
+    font-size: 14px;
+    line-height: 1.9;
+    max-width: 380px;
+}
+
+.jd-coupon-minimum {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 18px;
+    border: 1px solid #d8aaa0;
+    border-radius: 30px;
+    color: #98645d;
+    font-size: 11px;
+    letter-spacing: .5px;
+    background: rgba(255,255,255,.35);
+}
+
+/* OFFER BOX */
+
+.jd-coupon-offer {
+    min-width: 290px;
+    padding: 30px 40px;
+    text-align: center;
+    background: rgba(255, 251, 248, .88);
+    border: 1px solid #dfb8ad;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(111, 66, 57, .12);
+    position: relative;
+    transition: .4s ease;
+}
+
+.jd-coupon-offer:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 20px 40px rgba(111, 66, 57, .18);
+}
+
+.jd-coupon-offer::before,
+.jd-coupon-offer::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 22px;
+    height: 22px;
+    background: #f6e2dc;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.jd-coupon-offer::before {
+    left: -12px;
+}
+
+.jd-coupon-offer::after {
+    right: -12px;
+}
+
+.jd-coupon-offer > span {
+    color: #ae7770;
+    font-size: 10px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.jd-coupon-offer h1 {
+    font-family: 'Playfair Display', serif;
+    color: #ae7770;
+    font-size: 100px;
+    line-height: 1;
+    margin: 15px 0 0;
+}
+
+.jd-coupon-offer h1 sup {
+    font-size: 32px;
+}
+
+.jd-coupon-offer h3 {
+    color: #543a34;
+    letter-spacing: 8px;
+    font-size: 20px;
+    margin: 5px 0 20px;
+}
+
+/* COUPON CODE */
+
+.jd-coupon-code {
+    padding: 14px 5px;
+    border-top: 1px dashed #c99a91;
+    border-bottom: 1px dashed #c99a91;
+}
+
+.jd-coupon-code small {
+    display: block;
+    color: #a47a72;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.jd-coupon-code strong {
+    display: inline-block;
+    color: #744942;
+    font-size: 22px;
+    letter-spacing: 3px;
+    margin-top: 8px;
+}
+
+.jd-coupon-offer > p {
+    color: #9c817a;
+    font-size: 11px;
+    margin: 13px 0 0;
+}
+
+/* SLIDER CONTROLS */
+
+.jd-coupon-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.jd-coupon-controls button {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #d7aaa2;
+    border-radius: 50%;
+    background: #fff;
+    color: #a66e68;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.jd-coupon-controls button:hover {
+    background: #b77c77;
+    color: white;
+    transform: scale(1.1);
+}
+
+#couponDots {
+    display: flex;
+    gap: 9px;
+}
+
+.coupon-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 20px;
+    background: #e3c3bd;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.coupon-dot.active {
+    width: 27px;
+    background: #b77c77;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 768px) {
+
+    .jd-coupon-section {
+        padding: 55px 5%;
+    }
+
+    .jd-coupon-heading h2 {
+        font-size: 30px;
+    }
+
+    .jd-coupon-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 35px 18px;
+        gap: 25px;
+    }
+
+    .jd-coupon-info h2 {
+        font-size: 35px;
+    }
+
+    .jd-coupon-info p {
+        margin: auto;
+    }
+
+    .jd-coupon-offer {
+        width: 100%;
+        max-width: 320px;
+        min-width: 0;
+    }
+
+    .jd-coupon-offer h1 {
+        font-size: 75px;
+    }
+}
+
+@media(max-width: 400px) {
+
+    .jd-coupon-heading h2 {
+        font-size: 26px;
+    }
+
+    .jd-coupon-info h2 {
+        font-size: 30px;
+    }
+
+    .jd-coupon-content {
+        padding: 30px 12px;
+    }
+}
+/* =====================================
+   GLOBAL RESPONSIVE FIX
+===================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+img, video {
+    max-width: 100%;
+}
+/* =====================================
+   CAROUSEL RESPONSIVE
+===================================== */
+
+#myCarousel {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.carousel {
+    width: 100%;
+    max-width: 100%;
+}
+
+.carousel-item img,
+.carousel-item video {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    left: 7%;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-caption h1 {
+    font-size: clamp(25px, 4vw, 50px);
+}
+
+.carousel-caption p {
+    font-size: clamp(13px, 2vw, 20px);
+}
+
+@media (max-width: 768px) {
+
+    .carousel-item img,
+    .carousel-item video {
+        height: 380px;
+    }
+
+    .carousel-caption {
+        left: 6%;
+        right: 6%;
+        text-align: left;
+    }
+
+    .carousel-caption h1 {
+        font-size: 28px;
+    }
+
+    .carousel-caption p {
+        font-size: 14px;
+    }
+
+    .carousel-caption button {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .carousel-item img,
+    .carousel-item video {
+        height: 280px;
+    }
+
+    .carousel-caption h1 {
+        font-size: 22px;
+    }
+
+    .carousel-caption p {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    .carousel-caption button {
+        padding: 8px 16px;
+        font-size: 11px;
+    }
+
+    .carousel-indicators {
+        margin-bottom: 8px;
+    }
+}
+/* =====================================
+   NEW & TRENDING RESPONSIVE
+===================================== */
+
+.product-section {
+    width: 94%;
+    max-width: 1400px;
+    margin: 30px auto 50px;
+}
+
+.product-container {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.product-card {
+    flex: 0 0 220px;
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+
+    .product-section {
+        width: 96%;
+    }
+
+    .product-section h2 {
+        font-size: 30px;
+    }
+
+    .product-container {
+        gap: 15px;
+        padding: 25px 15px;
+    }
+
+    .product-card {
+        flex: 0 0 190px;
+    }
+
+    .product-img {
+        height: 190px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .product-section h2 {
+        font-size: 25px;
+    }
+
+    .product-container {
+        gap: 12px;
+        padding: 20px 10px;
+    }
+
+    .product-card {
+        flex: 0 0 165px;
+        padding: 10px;
+    }
+
+    .product-img {
+        height: 165px;
+    }
+
+    .product-card h3 {
+        font-size: 13px;
+        min-height: 40px;
+    }
+
+    .product-bottom span {
+        font-size: 15px;
+    }
+
+    .wishlist-add {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+
+    .buy-btn {
+        padding: 10px 5px;
+        font-size: 10px;
+    }
+
+}
+/* =====================================
+   BEAUTY INSPIRATION RESPONSIVE
+===================================== */
+
+.tips-section {
+    width: 100%;
+    top: 0;
+    padding: 65px 4%;
+}
+
+.tips-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.tips-image {
+    width: 100%;
+    height: 420px;
+}
+
+.tips-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 992px) {
+
+    .tips-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .tips-image {
+        height: 350px;
+    }
+
+    .tips-header h2 {
+        font-size: 32px;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .tips-section {
+        padding: 40px 18px;
+    }
+
+    .tips-header {
+        padding: 30px 10px 40px;
+    }
+
+    .tips-header h2 {
+        font-size: 24px;
+    }
+
+    .tips-small-title {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .tips-description {
+        font-size: 13px;
+    }
+
+    .tips-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .tips-image {
+        height: 230px;
+    }
+
+    .tips-overlay {
+        left: 10px;
+        bottom: 12px;
+    }
+
+    .tips-overlay h3 {
+        font-size: 17px;
+    }
+
+    .tips-card > p {
+        font-size: 12px;
+        margin: 10px 2px;
+    }
+
+}
+
+@media (max-width: 360px) {
+
+    .tips-container {
+        grid-template-columns: 1fr;
+    }
+
+    .tips-image {
+        height: 350px;
+    }
+
+}
+/* =====================================
+   COUPON RESPONSIVE
+===================================== */
+
+.jd-coupon-section {
+    width: 100%;
+    padding: 70px 5%;
+}
+
+.jd-coupon-slider {
+    width: 100%;
+}
+
+.jd-coupon-content {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+
+    .jd-coupon-section {
+        padding: 45px 4%;
+    }
+
+    .jd-coupon-heading h2 {
+        font-size: 29px;
+    }
+
+    .jd-coupon-slide {
+        min-height: auto;
+    }
+
+    .jd-coupon-content {
+        min-height: auto;
+        flex-direction: column;
+        padding: 35px 20px;
+        gap: 30px;
+    }
+
+    .jd-coupon-info {
+        width: 100%;
+    }
+
+    .jd-coupon-info h2 {
+        font-size: 32px;
+    }
+
+    .jd-coupon-offer {
+        width: 100%;
+        max-width: 300px;
+        min-width: 0;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .jd-coupon-heading h2 {
+        font-size: 24px;
+    }
+
+    .jd-coupon-heading p {
+        font-size: 12px;
+    }
+
+    .jd-coupon-info h2 {
+        font-size: 27px;
+    }
+
+    .jd-coupon-info p {
+        font-size: 12px;
+    }
+
+    .jd-coupon-offer h1 {
+        font-size: 65px;
+    }
+
+    .jd-coupon-offer {
+        padding: 25px 20px;
+    }
+
+    .jd-coupon-code strong {
+        font-size: 18px;
+    }
+
+}
+#myCarousel {
+    bottom: 49px;
+}
+
+.tips-section {
+    top: -50px;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-inner">
+
+        <!-- Image -->
+        <div class="carousel-item active">
+            <img src="{% static 'image/image caro.jpg' %}" class="d-block w-100" alt="Image">
+            <div class="carousel-caption">
+    <h1>Discover Your Beauty</h1>
+    <p>Premium cosmetics for your everyday look</p>
+    <button>Shop Now</button>
+</div>
+        </div>
+
+        <!-- Video -->
+        <div class="carousel-item">
+            <video class="d-block w-100" autoplay muted loop playsinline>
+                <source src="{% static 'video/SaveInta.com_AQPLHXs6fVyihk7pIzavvqq6m_LhJvwJuxKvRwy1itCxJ7HWK_DsfOoHrWtJkhiAR7Ip9zmsxbUGKDZ7eSm3xhIs7Uvg6ohFH3bTfLQ.mp4' %}" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Image -->
+        <div class="carousel-item">
+            <img src="{% static 'image/Top Selling YSL Perfume in Canada.jpg' %}" class="d-block w-100 " alt="Image">
+        </div>
+
+        <!-- Video -->
+        <div class="carousel-item">
+            <video class="d-block w-100" autoplay muted loop playsinline>
+                <source src="{% static 'video/vidssave.com Skin Care Product example commercial 480P.mp4' %}" type="video/mp4">
+            </video>
+        </div>
+
+    </div>
+    
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active">
+            <span></span>
+        </button>
+
+        <button type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="1">
+            <span></span>
+        </button>
+
+        <button type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="2">
+            <span></span>
+        </button>
+        <button type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="3">
+            <span></span>
+        </button>
+
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="category">
+    <section class="product-section">
+
+    <h2>New & Trending</h2>
+
+    <div class="product-container" id="productContainer">
+
+        {% for product in products %}
+
+        <div class="product-card {% if product.stock == 0 %}out-of-stock{% endif %}">
+
+            <div class="product-img">
+
+                {% if product.image %}
+                    <img src="{{ product.image.url }}"
+                         alt="{{ product.name }}">
+                {% endif %}
+
+                {% if product.stock == 0 %}
+                    <span class="sold-text">SOLD OUT</span>
+                {% endif %}
+
+            </div>
+
+            <h3>{{ product.name }}</h3>
+
+            <div class="product-bottom">
+                <span>₹{{ product.price|floatformat:2 }}</span>
+            </div>
+
+            <div class="product-actions">
+
+                {% if product.stock > 0 %}
+
+                    <button
+                        type="button"
+                        class="wishlist-add"
+                        data-name="{{ product.name }}"
+                        onclick="addWishlist(
+                            this,
+                            '{{ product.name|escapejs }}',
+                            '{{ product.price }}',
+                            '{{ product.image.url|escapejs }}'
+                        )">
+                        ♡
+                    </button>
+
+                    <a href="{% url 'product_order' product.id %}"
+                       class="buy-btn">
+                        BUY NOW
+                    </a>
+
+                {% else %}
+
+                    <button type="button"
+                            class="sold-text"
+                            disabled>
+                        SOLD OUT
+                    </button>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+            <p>No products available.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+</div>
+
+<section class="tips-section">
+
+    <div class="tips-header">
+
+        <p class="tips-small-title">MAKEUP TIPS &amp; TRENDS</p>
+
+        <h2>BEAUTY INSPIRATION</h2>
+
+        <p class="tips-description">
+            Discover the latest beauty tips, trends and ideas
+            for your perfect look.
+        </p>
+
+        <a href="#" class="view-all">
+            VIEW ALL
+        </a>
+
+    </div>
+
+
+    <div class="tips-container">
+
+        <!-- CARD 1 -->
+        <div class="tips-card">
+
+            <div class="tips-image">
+
+               <a href="{% url 'brushes_tools' %}"><img src="{% static 'image/eye.jpg' %}"></a> 
+
+                <div class="tips-overlay">
+                    <h3>EYE</h3>
+                </div>
+
+            </div>
+
+            <p>
+                Find everything from smokey eye tutorials
+                to fresh eyeliner looks
+            </p>
+
+        </div>
+
+
+        <!-- CARD 2 -->
+        <div class="tips-card">
+
+            <div class="tips-image">
+
+                <a href="{% url 'skin' %}"><img src="{% static 'image/face.jpg' %}"></a>
+
+                <div class="tips-overlay">
+                    <h3>FACE</h3>
+                </div>
+
+            </div>
+
+            <p>
+                Explore the best concealer hacks and
+                foundation application methods
+            </p>
+
+        </div>
+
+
+        <!-- CARD 3 -->
+        <div class="tips-card">
+
+            <div class="tips-image">
+
+                <a href="{% url 'lip' %}"><img src="{% static 'image/lip.jpg' %}"></a>
+
+                <div class="tips-overlay">
+                    <h3>LIP</h3>
+                </div>
+
+            </div>
+
+            <p>
+                Discover the hottest lipstick colors
+                and top lip liner tips
+            </p>
+
+        </div>
+
+
+        <!-- CARD 4 -->
+        <div class="tips-card">
+
+            <div class="tips-image">
+
+                <img src="{% static 'image/looks.jpg' %}">
+
+                <div class="tips-overlay">
+                    <h3>LOOKS &amp; OCCASIONS</h3>
+                </div>
+
+            </div>
+
+            <p>
+                Discover unique makeup looks
+                for all your favorite occasions
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+{% if available_coupons %}
+<section class="jd-coupon-section">
+
+    <div class="jd-coupon-heading">
+        <span>JD ELEGANCE EXCLUSIVE</span>
+        <h2>Unlock Your Beauty Privileges</h2>
+        <p>Because your beauty favourites deserve special rewards.</p>
+    </div>
+
+    <div class="jd-coupon-slider">
+
+        {% for coupon in available_coupons %}
+
+        <div class="jd-coupon-slide">
+
+            <div class="jd-coupon-content">
+
+                <div class="jd-coupon-info">
+                    <span class="jd-coupon-small">
+                        A SPECIAL GIFT FROM JD ELEGANCE
+                    </span>
+
+                    <h2>It's Time To<br> <i>Treat Yourself!</i></h2>
+
+                    <p>
+                        Enjoy something special on your next
+                        beauty shopping experience.
+                    </p>
+
+                    <div class="jd-coupon-minimum">
+                        On orders above ₹{{ coupon.minimum_amount }}
+                    </div>
+                </div>
+
+                <div class="jd-coupon-offer">
+
+                    <span>EXCLUSIVE OFFER</span>
+
+                    <h1>
+                        {{ coupon.discount_percentage }}<sup>%</sup>
+                    </h1>
+
+                    <h3>OFF</h3>
+
+                    <div class="jd-coupon-code">
+                        <small>USE COUPON CODE</small>
+                        <strong>{{ coupon.code }}</strong>
+                    </div>
+
+                    <p>
+                        Valid till {{ coupon.valid_to|date:"d M Y" }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% if available_coupons|length > 1 %}
+    <div class="jd-coupon-controls">
+        <button type="button" id="couponPrev">❮</button>
+        <div id="couponDots"></div>
+        <button type="button" id="couponNext">❯</button>
+    </div>
+    {% endif %}
+
+</section>
+{% endif %}
+{% endblock %}
+{% block extra_js %}
+<script>
+//     function showWishlist() {
+
+//     let wishlist = JSON.parse(
+//         localStorage.getItem("wishlist")
+//     ) || [];
+
+//     let content = document.getElementById("wishlistContent");
+
+//     if (!content) {
+//         return;
+//     }
+
+//     content.innerHTML = "";
+
+
+//     if (wishlist.length === 0) {
+
+//         content.innerHTML = `
+//             <div class="empty-wishlist">
+
+//                 <div class="heart" style="color: #ff2780;font-size: 70px;">♡</div>
+
+//                 <p>Your wishlist is currently empty</p>
+
+//                 <p>Add your favourite products here.</p>
+
+//                 <button
+//                     class="continue-btn" style="background-color: #ff2780;
+//     color: white;
+//     border: none;
+//     border-radius: 8px;
+//     padding: 12px 20px;
+//     font-weight: bold;
+//     cursor: pointer;"
+//                     onclick="continueShopping()">
+
+//                     CONTINUE SHOPPING
+
+//                 </button>
+
+//             </div>
+//         `;
+
+//         return;
+//     }
+
+
+//     wishlist.forEach(function(product, index) {
+
+//         content.innerHTML += `
+
+//             <div class="wishlist-product">
+
+//                 <img
+//                     src="${product.image}"
+//                     alt="${product.name}"
+//                 >
+
+//                 <div class="wishlist-product-info">
+
+//                     <h4>${product.name}</h4>
+
+//                     <p>₹${product.price}</p>
+
+//                 </div>
+
+//                 <button
+//                     class="remove-wishlist"
+//                     onclick="removeWishlist(${index})">
+
+//                     ×
+
+//                 </button>
+
+//             </div>
+
+//         `;
+
+//     });
+// }
+
+
+// /* REMOVE */
+
+// function removeWishlist(index) {
+
+//     let wishlist = JSON.parse(
+//         localStorage.getItem("wishlist")
+//     ) || [];
+
+//     wishlist.splice(index, 1);
+
+//     localStorage.setItem(
+//         "wishlist",
+//         JSON.stringify(wishlist)
+//     );
+
+//     showWishlist();
+// }
+
+
+// /* PAGE LOAD */
+
+// document.addEventListener("DOMContentLoaded", function() {
+
+//     showWishlist();
+
+// });
+// function updateWishlistCount() {
+
+//     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+//     document.getElementById("wishlistCount").innerText = wishlist.length;
+// }
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     showWishlist();
+//     updateWishlistCount();
+//     updateWishlistHearts();
+// });
+// function updateWishlistHearts() {
+
+//     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+//     let buttons = document.querySelectorAll(".wishlist-add");
+
+//     buttons.forEach(function(button) {
+
+//         let productName = button.getAttribute("data-name");
+
+//         let exists = wishlist.some(function(product) {
+//             return product.name === productName;
+//         });
+
+//         if (exists) {
+//             button.innerHTML = "♥";
+//             button.classList.add("liked");
+//         } else {
+//             button.innerHTML = "♡";
+//             button.classList.remove("liked");
+//         }
+
+//     });
+// }
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const slides = document.querySelectorAll(".jd-coupon-slide");
+    const dotsContainer = document.getElementById("couponDots");
+    const prev = document.getElementById("couponPrev");
+    const next = document.getElementById("couponNext");
+
+    if (!slides.length) return;
+
+    let current = 0;
+    let timer;
+
+    function showSlide(index) {
+
+        slides[current].classList.remove("active");
+
+        current = (index + slides.length) % slides.length;
+
+        slides[current].classList.add("active");
+
+        if (dotsContainer) {
+            dotsContainer.querySelectorAll(".coupon-dot").forEach((dot, i) => {
+                dot.classList.toggle("active", i === current);
+            });
+        }
+    }
+
+    if (dotsContainer) {
+        slides.forEach((slide, index) => {
+            const dot = document.createElement("button");
+
+            dot.type = "button";
+            dot.className = "coupon-dot";
+            dot.setAttribute("aria-label", "Show coupon " + (index + 1));
+
+            dot.addEventListener("click", function () {
+                showSlide(index);
+                startSlider();
+            });
+
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function startSlider() {
+        clearInterval(timer);
+
+        if (slides.length > 1) {
+            timer = setInterval(function () {
+                showSlide(current + 1);
+            }, 4000);
+        }
+    }
+
+    if (prev && next) {
+        prev.addEventListener("click", function () {
+            showSlide(current - 1);
+            startSlider();
+        });
+
+        next.addEventListener("click", function () {
+            showSlide(current + 1);
+            startSlider();
+        });
+    }
+
+    showSlide(0);
+    startSlider();
+
+});
+
+</script>
+{% endblock %}
