@@ -20,13 +20,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^hjh=(r@*%!m961#dl7ch4#wxs#gn!(4(2r2%9vy_x1&j83@d7'
+SECRET_KEY = os.environ.get('django-insecure-^hjh=(r@*%!m961#dl7ch4#wxs#gn!(4(2r2%9vy_x1&j83@d7')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+render_host = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 
+if render_host:
+    ALLOWED_HOSTS.append(render_host)
 
 # Application definition
 
@@ -136,10 +139,14 @@ MEDIA_URL='media/'
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
-EMAIL_HOST_USER='jegatheesh4065@gmail.com'
-EMAIL_HOST_PASSWORD='iacd eaqx cujn fhbk'
+EMAIL_HOST_USER = os.environ.get('jegatheesh4065@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('iacd eaqx cujn fhbk')
+# EMAIL_HOST_USER='jegatheesh4065@gmail.com'
+# EMAIL_HOST_PASSWORD='iacd eaqx cujn fhbk'
 EMAIL_USE_TLS=True
 
 LOGIN_URL = '/login/'
-RAZORPAY_KEY_ID = "rzp_test_Tvy5FW3VIPRDFF"
-RAZORPAY_KEY_SECRET = "4Kkh80lvYeGk6NEFOJ3guqg3" 
+RAZORPAY_KEY_ID = os.environ.get('rzp_test_Tvy5FW3VIPRDFF')
+RAZORPAY_KEY_SECRET = os.environ.get('4Kkh80lvYeGk6NEFOJ3guqg3')
+# RAZORPAY_KEY_ID = "rzp_test_Tvy5FW3VIPRDFF"
+# RAZORPAY_KEY_SECRET = "4Kkh80lvYeGk6NEFOJ3guqg3" 
