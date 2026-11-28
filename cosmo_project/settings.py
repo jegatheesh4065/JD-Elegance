@@ -137,8 +137,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-MEDIA_ROOT=os.path.join(BASE_DIR,'Media')
-MEDIA_URL='media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
+MEDIA_URL = '/media/'
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
