@@ -157,7 +157,9 @@ RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET', '4Kkh80lvYeGk6NEFOJ3
 
 import dj_database_url
 # DATABASE_URL = os.environ.get('DATABASE_URL')
-DATABASE_URL = os.environ.get('postgresql://jd_elegance_user:1z1zeh7KooirItkpwBDje0PTeLwarKWz@dpg-dc4j1p49v7es73f5k240-a/jd_elegance')
+# DATABASE_URL = os.environ.get('postgresql://jd_elegance_user:1z1zeh7KooirItkpwBDje0PTeLwarKWz@dpg-dc4j1p49v7es73f5k240-a/jd_elegance')
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if DATABASE_URL:
     DATABASES = {
