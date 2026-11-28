@@ -21,3 +21,5 @@ env/
 # System files
 .DS_Store
 Thumbs.db
+
+jd_backup.json
